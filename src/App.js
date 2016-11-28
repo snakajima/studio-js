@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 
+// This is a super-simplified Redux
 function createStore(reducer) {
     var state = reducer()
     var app;
@@ -16,8 +16,7 @@ function createStore(reducer) {
     return { dispatch, setApplication };
 }
 
-var dragger = {}
-
+// Create the store with a reducer
 var store = createStore((state, action)=> {
   if (typeof state === "undefined") {
     return {
@@ -72,28 +71,28 @@ var store = createStore((state, action)=> {
   return state
 });
 
+// Global variable to store dragging state
+var dragger = {}
+
 class Element extends Component {
   constructor(props) {
     super();
-    this.id = props.element.id;
     this.onDragStart = this.onDragStart.bind(this);
   }
   
   onDragStart(e) {
-    dragger = {pageIndex:this.props.pageIndex, id:this.id, x:e.clientX, y:e.clientY};
+    dragger = { pageIndex:this.props.pageIndex, id:this.props.element.id, x:e.clientX, y:e.clientY };
   }
   
   render() {
     return (
       <div className='element' style={{
-        left:this.props.element.x,
-        top:this.props.element.y,
-        width:this.props.element.w,
-        height:this.props.element.h,
-        background:this.props.element.bc
-      }}
-      draggable = {true}
-      onDragStart = {this.onDragStart}
+          left:this.props.element.x, top:this.props.element.y,
+          width:this.props.element.w, height:this.props.element.h,
+          background:this.props.element.bc
+        }}
+        draggable = {true}
+        onDragStart = {this.onDragStart}
       />
     );
   }
@@ -107,11 +106,10 @@ class Scene extends Component {
   }
   
   onDrop(e) {
-    console.log('drop ' + dragger.x + "," + dragger.y);
-    store.dispatch({type:'moveSceneElement', dx:e.clientX-dragger.x, dy:e.clientY-dragger.y, id:dragger.id});
+    store.dispatch({type:'moveSceneElement', id:dragger.id,
+                    dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
   onDragOver(e) {
-    console.log('dragOver' + dragger.pageIndex);
     if (dragger.pageIndex == -1) {
         e.preventDefault();
     }
@@ -119,10 +117,12 @@ class Scene extends Component {
   render() {
     return (
       <div>
-        <div className="scene" onDrop={this.onDrop} onDragOver={this.onDragOver}>
-          {this.props.elements.map((element, index)=>{ return <Element key={index} pageIndex={-1} element={element} />})}
-        </div>
-        <button onClick={()=>{store.dispatch({type:'duplicateScene'})}} >Duplicate</button>
+        <div className="scene" onDrop={this.onDrop} onDragOver={this.onDragOver}>{
+          this.props.elements.map((element, index)=>{
+            return <Element key={index} pageIndex={-1} element={element} />
+          })
+        }</div>
+        <button onClick={()=>{store.dispatch({type:'duplicateScene'})}} >New Page</button>
       </div>
     );
   }
