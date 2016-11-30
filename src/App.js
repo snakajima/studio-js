@@ -103,6 +103,12 @@ class Scene extends Component {
     super();
     this.onDrop = this.onDrop.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
+    this.elementMap = (typeof props.elements === 'object') ?
+        props.elements.reduce((map, element)=> {
+            map[element.id] = element
+            return map
+        }, {}) : {};
+    console.log("elementMap:", this.elementMap);
   }
   
   onDrop(e) {
@@ -139,9 +145,9 @@ class Page extends Component {
             return map
         }, {}) : {};
     this.sceneElements = props.sceneElements.map((e0) => {
-      var element = Object.assign({}, e0); 
+      var element = Object.assign({}, e0);
       var e = elementMap[element.id];
-      if (typeof e == 'object' && e.to.length===2) {
+      if (typeof e === 'object' && e.to.length===2) {
         element.x += e.to[0];
         element.y += e.to[1];
       }
