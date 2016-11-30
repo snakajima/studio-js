@@ -133,17 +133,17 @@ class Page extends Component {
     super();
     this.onDrop = this.onDrop.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
+    var elementMap = (typeof props.page.elements === 'object') ?
+        props.page.elements.reduce((map, element)=> {
+            map[element.id] = element
+            return map
+        }, {}) : {};
     this.sceneElements = props.sceneElements.map((e0) => {
-      var element = Object.assign({}, e0); //{ id:e0.id, x:e0.x, y:e0.y, w:e0.w, h:e0.h, bc:e0.bc };
-      if (typeof props.page.elements !== 'undefined') {
-        console.log(props.page.elements);
-        for (var index in props.page.elements) {
-          var e = props.page.elements[index]
-          if (element.id === e.id && e.to.length===2) {
-            element.x += e.to[0];
-            element.y += e.to[1];
-          }
-        }
+      var element = Object.assign({}, e0); 
+      var e = elementMap[element.id];
+      if (typeof e == 'object' && e.to.length===2) {
+        element.x += e.to[0];
+        element.y += e.to[1];
       }
       return element;
     });
