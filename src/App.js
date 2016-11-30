@@ -63,7 +63,9 @@ var store = createStore((state, action)=> {
     })
     break;
   case 'movePageElement':
-    //console.log('moveSceneElement');
+    console.log('movePageElement', action);
+    var page = state.pages[action.pageIndex];
+    console.log('movePageElement', page);
     break;
   default:
     break;
@@ -103,12 +105,6 @@ class Scene extends Component {
     super();
     this.onDrop = this.onDrop.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
-    this.elementMap = (typeof props.elements === 'object') ?
-        props.elements.reduce((map, element)=> {
-            map[element.id] = element
-            return map
-        }, {}) : {};
-    console.log("elementMap:", this.elementMap);
   }
   
   onDrop(e) {
@@ -156,7 +152,8 @@ class Page extends Component {
   }
 
   onDrop(e) {
-    store.dispatch({type:'movePageElement', x:100, y:100, pageIndex:dragger.pageIndex, id:dragger.id});
+    store.dispatch({type:'movePageElement', pageIndex:dragger.pageIndex, id:dragger.id,
+                    dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
   onDragOver(e) {
     if (dragger.pageIndex === this.props.pageIndex) {
@@ -165,6 +162,7 @@ class Page extends Component {
   }
 
   render() {
+    //console.log("elementMap:", this.props.elementMap);
     return (
       <div>
         <div className="page" onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -178,11 +176,20 @@ class Page extends Component {
 }
 
 class Pages extends Component {
+  constructor(props) {
+    super();
+    this.elementMap = (typeof props.elements === 'object') ?
+        props.elements.reduce((map, element)=> {
+            map[element.id] = element
+            return map
+        }, {}) : {};
+  }
+    
     render() {
       return (
         <div>
         {
-            this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements }/>} )
+            this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } elementMap={ this.elementMap }/> } )
         }
         </div>
       )
