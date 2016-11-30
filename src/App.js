@@ -91,8 +91,8 @@ class Element extends Component {
           width:this.props.element.w, height:this.props.element.h,
           background:this.props.element.bc
         }}
-        draggable = {true}
-        onDragStart = {this.onDragStart}
+        draggable={true}
+        onDragStart={this.onDragStart}
       />
     );
   }
@@ -110,7 +110,7 @@ class Scene extends Component {
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
   onDragOver(e) {
-    if (dragger.pageIndex == -1) {
+    if (dragger.pageIndex === -1) {
         e.preventDefault();
     }
   }
@@ -150,12 +150,10 @@ class Page extends Component {
   }
 
   onDrop(e) {
-    console.log('drop ');
     store.dispatch({type:'movePageElement', x:100, y:100, pageIndex:dragger.pageIndex, id:dragger.id});
   }
   onDragOver(e) {
-    console.log('dragOver' + dragger.pageIndex);
-    if (dragger.pageIndex == this.props.pageIndex) {
+    if (dragger.pageIndex === this.props.pageIndex) {
         e.preventDefault();
     }
   }
