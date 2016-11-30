@@ -83,7 +83,7 @@ class Element extends Component {
   }
   
   onDragStart(e) {
-    dragger = { pageIndex:this.props.pageIndex, id:this.props.element.id, x:e.clientX, y:e.clientY };
+    dragger = { element:this.props.element, pageIndex:this.props.pageIndex, id:this.props.element.id, x:e.clientX, y:e.clientY };
   }
   
   render() {
@@ -135,23 +135,10 @@ class Page extends Component {
     super();
     this.onDrop = this.onDrop.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
-    var elementMap = (typeof props.page.elements === 'object') ?
-        props.page.elements.reduce((map, element)=> {
-            map[element.id] = element
-            return map
-        }, {}) : {};
-    this.sceneElements = props.sceneElements.map((e0) => {
-      var element = Object.assign({}, e0);
-      var e = elementMap[element.id];
-      if (typeof e === 'object' && e.to.length===2) {
-        element.x += e.to[0];
-        element.y += e.to[1];
-      }
-      return element;
-    });
   }
 
   onDrop(e) {
+    console.log("Page:OnDrop:", dragger.element);
     store.dispatch({type:'movePageElement', pageIndex:dragger.pageIndex, id:dragger.id,
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
@@ -163,6 +150,21 @@ class Page extends Component {
 
   render() {
     //console.log("elementMap:", this.props.elementMap);
+    var elementMap = (typeof this.props.page.elements === 'object') ?
+        this.props.page.elements.reduce((map, element)=> {
+            map[element.id] = element
+            return map
+        }, {}) : {};
+    this.sceneElements = this.props.sceneElements.map((sceneElement) => {
+      var element = Object.assign({}, sceneElement);
+      var e = elementMap[element.id];
+      if (typeof e === 'object' && e.to.length===2) {
+        element.x += e.to[0];
+        element.y += e.to[1];
+      }
+      element.sceneElement = sceneElement;
+      return element;
+    });
     return (
       <div>
         <div className="page" onDrop={this.onDrop} onDragOver={this.onDragOver}>
