@@ -30,13 +30,13 @@ var store = createStore((_state, action)=> {
        pages:[{
        },{
          elements:[{
-           id:"i1", to:[10,10]
+           id:"i1", to:{translate:[10,10]}
          },{
-           id:"i2", to:[40,-20]
+           id:"i2", to:{translate:[40,-20]}
          }]
        },{
          elements:[{
-           id:"i0", to:[0,70]
+           id:"i0", to:{translate:[0,70]}
          }]
        },{
        }]
@@ -69,10 +69,10 @@ var store = createStore((_state, action)=> {
     //console.log('movePageElement', page);
     var elements = page.elements || [];
     console.log('movePageElement 2', elements);
-    var element = {id:action.id, to:[action.dx, action.dy]};
+    var element = {id:action.id, to:{translate:[action.dx, action.dy]}};
     elements = elements.filter((e) => {
         if (e.id === action.id) {
-            element.to = [e.to[0] + action.dx, e.to[1] + action.dy];
+            element.to.translate = [e.to.translate[0] + action.dx, e.to.translate[1] + action.dy];
             return false
         }
         return true;
@@ -173,9 +173,9 @@ class Page extends Component {
     this.sceneElements = this.props.sceneElements.map((sceneElement) => {
       var element = Object.assign({}, sceneElement);
       var e = elementMap[element.id];
-      if (typeof e === 'object' && e.to.length===2) {
-        element.x += e.to[0];
-        element.y += e.to[1];
+      if (typeof e === 'object' && e.to.translate.length===2) {
+        element.x += e.to.translate[0];
+        element.y += e.to.translate[1];
       }
       element.sceneElement = sceneElement;
       return element;
