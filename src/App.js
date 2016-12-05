@@ -31,20 +31,16 @@ var store = createStore((_state, action)=> {
          id:"i2", x:80, y:50, h:30, w:50, bc:'#0f0'
        }],
        pages:[{
-       },{
-         i1:{
-           translate:[10, 40]
-         }
        }]
     };
   }
   var state = Object.assign({}, _state);
   switch(action.type) {
   case 'duplicateScene':
-    state.pages.push({});
+    state.pages.unshift({});
     break;
   case 'duplicatePage':
-    state.pages.push({});
+    state.pages.splice(action.pageIndex, 0, Object.assign({}, action.page));
     break;
   case 'deletePage':
     state.pages = state.pages.filter((p) => {return p!==action.page});
@@ -63,7 +59,7 @@ var store = createStore((_state, action)=> {
     //console.log('movePageElement 1', action);
     var page = Object.assign({}, state.pages[action.pageIndex]);
     //console.log('movePageElement', page);
-    var element = page[action.id] || {};
+    var element = Object.assign({}, page[action.id] || {});
     var tx = element.translate || [0,0];
     tx = [tx[0] + action.dx, tx[1] + action.dy];
     element.translate = tx;
@@ -169,7 +165,7 @@ class Page extends Component {
           {this.sceneElements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} />})}
         </div>
         <button onClick={()=>{store.dispatch({type:'deletePage', page:this.props.page})}} >Delete</button>
-        <button onClick={()=>{store.dispatch({type:'duplicatePage', page:this.props.page})}} >Duplicate</button>
+        <button onClick={()=>{store.dispatch({type:'duplicatePage', page:this.props.page, pageIndex:this.props.pageIndex})}} >Duplicate</button>
       </div>
     );
   }
