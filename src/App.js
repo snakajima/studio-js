@@ -56,11 +56,11 @@ var store = createStore((_state, action)=> {
     })
     break;
   case 'movePageElement':
-    console.log('movePageElement 1', action);
+    //console.log('movePageElement 1', action);
     var page = Object.assign({}, state.pages[action.pageIndex]);
     //console.log('movePageElement', page);
     var elements = page.elements || [];
-    console.log('movePageElement 2', elements);
+    //console.log('movePageElement 2', elements);
     var element = {id:action.id, to:{translate:[action.dx, action.dy]}};
     elements = elements.filter((e) => {
         if (e.id === action.id) {
@@ -70,7 +70,7 @@ var store = createStore((_state, action)=> {
         return true;
     });
     elements.push(element)
-    console.log('movePageElement 3', elements);
+    //console.log('movePageElement 3', elements);
     page.elements = elements;
     state.pages[action.pageIndex] = page;
     break;
@@ -209,14 +209,23 @@ class Publisher {
   constructor(store) {
     var state = store.getState();
     this.script = {
-        templates:{
-           elements: state.elements
-        },
-        pages: state.pages
+      type:"net.swipe.swipe",
+      templates:{
+        pages:{
+          s0:{
+            elements: state.elements
+          }
+        }
+      },
+      pages: state.pages.map((page) => {
+        return Object.assign({scene:"s0"}, page);
+      })
     };
   }
   swipe() {
-    return JSON.stringify(this.script, undefined, 2);
+    var json = JSON.stringify(this.script, undefined, 2);
+    console.log(json);
+    return json;
   }
 }
 
