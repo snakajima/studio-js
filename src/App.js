@@ -31,6 +31,10 @@ var store = createStore((_state, action)=> {
          id:"i2", x:80, y:50, h:30, w:50, bc:'#0f0'
        }],
        pages:[{
+       },{
+         i1:{
+           translate:[10, 40]
+         }
        }]
     };
   }
@@ -59,19 +63,11 @@ var store = createStore((_state, action)=> {
     //console.log('movePageElement 1', action);
     var page = Object.assign({}, state.pages[action.pageIndex]);
     //console.log('movePageElement', page);
-    var elements = page.elements || [];
-    //console.log('movePageElement 2', elements);
-    var element = {id:action.id, to:{translate:[action.dx, action.dy]}};
-    elements = elements.filter((e) => {
-        if (e.id === action.id) {
-            element.to.translate = [e.to.translate[0] + action.dx, e.to.translate[1] + action.dy];
-            return false
-        }
-        return true;
-    });
-    elements.push(element)
-    //console.log('movePageElement 3', elements);
-    page.elements = elements;
+    var element = page[action.id] || {};
+    var tx = element.translate || [0,0];
+    tx = [tx[0] + action.dx, tx[1] + action.dy];
+    element.translate = tx;
+    page[action.id] = element;
     state.pages[action.pageIndex] = page;
     break;
   default:
@@ -156,18 +152,13 @@ class Page extends Component {
   }
 
   render() {
-    //console.log("elementMap:", this.props.elementMap);
-    var elementMap = (typeof this.props.page.elements === 'object') ?
-        this.props.page.elements.reduce((map, element)=> {
-            map[element.id] = element
-            return map
-        }, {}) : {};
     this.sceneElements = this.props.sceneElements.map((sceneElement) => {
       var element = Object.assign({}, sceneElement);
-      var e = elementMap[element.id];
-      if (typeof e === 'object' && e.to.translate.length===2) {
-        element.x += e.to.translate[0];
-        element.y += e.to.translate[1];
+      var e = this.props.page[element.id];
+      if (typeof e === 'object' && e.translate.length===2) {
+        console.log(e);
+        element.x += e.translate[0];
+        element.y += e.translate[1];
       }
       element.sceneElement = sceneElement;
       return element;
@@ -187,18 +178,13 @@ class Page extends Component {
 class Pages extends Component {
   constructor(props) {
     super();
-    this.elementMap = (typeof props.elements === 'object') ?
-        props.elements.reduce((map, element)=> {
-            map[element.id] = element
-            return map
-        }, {}) : {};
   }
     
     render() {
       return (
         <div>
         {
-            this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } elementMap={ this.elementMap }/> } )
+            this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
         }
         </div>
       )
@@ -222,7 +208,9 @@ class Publisher {
         }
       },
       pages: state.pages.map((page) => {
-        return Object.assign({scene:"s0"}, page);
+        return {scene:"s0", elements:Object.keys(page).map((id) => {
+            return Object.assign({id:id}, {to:page[id]});
+        })};
       })
     };
   }
