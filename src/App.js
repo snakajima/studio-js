@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-// This is a super-simplified Redux
+// Super-simplified Redux
 function createStore(reducer) {
     var state = reducer()
     var app;
@@ -17,8 +17,8 @@ function createStore(reducer) {
 }
 
 // Create the store with a reducer
-var store = createStore((state, action)=> {
-  if (typeof state === "undefined") {
+var store = createStore((_state, action)=> {
+  if (typeof _state === "undefined") {
     return {
        elements:[{
          id:"i0", x:10, y:30, h:20, w:50, bc:'#f00'
@@ -42,6 +42,7 @@ var store = createStore((state, action)=> {
        }]
     };
   }
+  var state = Object.assign({}, _state);
   switch(action.type) {
   case 'duplicateScene':
     state.pages.push({});
@@ -63,9 +64,23 @@ var store = createStore((state, action)=> {
     })
     break;
   case 'movePageElement':
-    console.log('movePageElement', action);
-    var page = state.pages[action.pageIndex];
-    console.log('movePageElement', page);
+    console.log('movePageElement 1', action);
+    var page = Object.assign({}, state.pages[action.pageIndex]);
+    //console.log('movePageElement', page);
+    var elements = page.elements || [];
+    console.log('movePageElement 2', elements);
+    var element = {id:action.id, to:[action.dx, action.dy]};
+    elements = elements.filter((e) => {
+        if (e.id === action.id) {
+            element.to = [e.to[0] + action.dx, e.to[1] + action.dy];
+            return false
+        }
+        return true;
+    });
+    elements.push(element)
+    console.log('movePageElement 3', elements);
+    page.elements = elements;
+    state.pages[action.pageIndex] = page;
     break;
   default:
     break;
