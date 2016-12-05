@@ -13,7 +13,10 @@ function createStore(reducer) {
       app = obj;
       app.states = state;
     }
-    return { dispatch, setApplication };
+    function getState() {
+      return state;
+    }
+    return { dispatch, setApplication, getState };
 }
 
 // Create the store with a reducer
@@ -28,17 +31,6 @@ var store = createStore((_state, action)=> {
          id:"i2", x:80, y:50, h:30, w:50, bc:'#0f0'
        }],
        pages:[{
-       },{
-         elements:[{
-           id:"i1", to:{translate:[10,10]}
-         },{
-           id:"i2", to:{translate:[40,-20]}
-         }]
-       },{
-         elements:[{
-           id:"i0", to:{translate:[0,70]}
-         }]
-       },{
        }]
     };
   }
@@ -213,6 +205,20 @@ class Pages extends Component {
     }
 }
 
+class Publisher {
+  constructor(store) {
+    var state = store.getState();
+    this.script = {
+        templates:{
+           elements: state.elements
+        },
+        pages: state.pages
+    };
+  }
+  swipe() {
+    return JSON.stringify(this.script, undefined, 2);
+  }
+}
 
 class App extends Component {
   constructor() {
@@ -222,6 +228,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <button onClick={(e)=>{alert((new Publisher(store)).swipe())}}>Show</button>
         <Scene elements={ this.states.elements }/>
         <Pages pages={ this.states.pages } elements={ this.states.elements }/>
       </div>

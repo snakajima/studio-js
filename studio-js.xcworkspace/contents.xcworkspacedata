@@ -4,4 +4,10 @@
    <FileRef
       location = "group:src">
    </FileRef>
+   <FileRef
+      location = "group:node_modules">
+   </FileRef>
+   <FileRef
+      location = "group:public">
+   </FileRef>
 </Workspace>
