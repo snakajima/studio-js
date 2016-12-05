@@ -145,7 +145,7 @@ class Page extends Component {
   }
 
   onDrop(e) {
-    console.log("Page:OnDrop:", dragger.element);
+    //console.log("Page:OnDrop:", dragger.element);
     store.dispatch({type:'movePageElement', pageIndex:dragger.pageIndex, id:dragger.id,
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
@@ -210,9 +210,13 @@ class Publisher {
     var state = store.getState();
     this.script = {
       type:"net.swipe.swipe",
+      dimension:[240,135],
+      paging:"leftToRight",
+      orientation:"landscape",
       templates:{
         pages:{
           s0:{
+            play: "scroll",
             elements: state.elements
           }
         }
