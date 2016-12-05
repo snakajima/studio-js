@@ -40,10 +40,11 @@ var store = createStore((_state, action)=> {
     state.pages.unshift({});
     break;
   case 'duplicatePage':
-    state.pages.splice(action.pageIndex, 0, Object.assign({}, action.page));
+    state.pages.splice(action.pageIndex + 1, 0, Object.assign({}, action.page));
     break;
   case 'deletePage':
-    state.pages = state.pages.filter((p) => {return p!==action.page});
+    state.pages.splice(action.pageIndex, 1);
+    //state.pages = state.pages.filter((p) => {return p!==action.page});
     break;
   case 'moveSceneElement':
     //console.log('moveSceneElement');
@@ -123,7 +124,7 @@ class Scene extends Component {
             return <Element key={index} pageIndex={-1} element={element} />
           })
         }</div>
-        <button onClick={()=>{store.dispatch({type:'duplicateScene'})}} >New Page</button>
+        <button onClick={()=>{store.dispatch({type:'duplicateScene'})}} >Insert</button>
       </div>
     );
   }
@@ -152,7 +153,6 @@ class Page extends Component {
       var element = Object.assign({}, sceneElement);
       var e = this.props.page[element.id];
       if (typeof e === 'object' && e.translate.length===2) {
-        console.log(e);
         element.x += e.translate[0];
         element.y += e.translate[1];
       }
@@ -164,7 +164,7 @@ class Page extends Component {
         <div className="page" onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {this.sceneElements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} />})}
         </div>
-        <button onClick={()=>{store.dispatch({type:'deletePage', page:this.props.page})}} >Delete</button>
+        <button onClick={()=>{store.dispatch({type:'deletePage', pageIndex:this.props.pageIndex})}} >Delete</button>
         <button onClick={()=>{store.dispatch({type:'duplicatePage', page:this.props.page, pageIndex:this.props.pageIndex})}} >Duplicate</button>
       </div>
     );
