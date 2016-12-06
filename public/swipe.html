@@ -20,12 +20,12 @@
     </style>
     <script>
 $(document).ready(function () {
-    window.template = $('#swipe_back').html();
-    $('#swipe_back').html('')
+    window.template = $('#root').html();
+    $('#root').html('')
 });
 function present(json) {
     location.hash = '';
-    $('#swipe_back').html(window.template)
+    $('#root').html(window.template)
     var swipe = JSON.parse(json);
     SwipeUtil.initSwipe(swipe, "#swipe", "#swipe_back");
     var swipe_book = SwipeUtil.getSwipeBook();
@@ -37,11 +37,13 @@ $(document).ready(function () {
     </script>
   </head>
   <body>
-      <div id="swipe_back">
+      <div id="root">
+        <div id="swipe_back">
           <img src='https://js.swipe.net/images/ArrowLeft.png' id='arrowleft'>
           <div id='swipe'>
           </div>
           <img src='https://js.swipe.net/images/ArrowRight.png' id='arrowright'>
+        </div>
       </div>
   </body>
 </html>
