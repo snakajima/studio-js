@@ -1,4 +1,4 @@
-class Publisher {
+class Generator {
   constructor(store) {
     var state = store.getState();
     this.script = {
@@ -21,11 +21,11 @@ class Publisher {
       })
     };
   }
-  swipe() {
+  generate() {
     var json = JSON.stringify(this.script, undefined, 2);
     console.log(json);
     return json;
   }
 }
 
-export default Publisher;
+export default Generator;

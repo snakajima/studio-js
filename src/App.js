@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Publisher from './Publisher';
+import Generator from './Generator';
 import createStore from './SimpleRedux';
 import Scene from './Scene';
 import Pages from './Pages';
@@ -61,7 +61,7 @@ class App extends Component {
   }
   
   showSwipe() {
-    alert((new Publisher(window.store)).swipe());
+    alert((new Generator(window.store)).generate());
   }
   
   render() {
