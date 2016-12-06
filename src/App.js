@@ -60,14 +60,14 @@ class App extends Component {
     window.store.setApplication(this);
   }
   
-  showSwipe() {
+  generate() {
     alert((new Generator(window.store)).generate());
   }
   
   render() {
     return (
       <div className="App">
-        <button onClick={ this.showSwipe }>Show</button>
+        <button onClick={ this.generate }>Generate</button>
         <Scene elements={ this.states.elements }/>
         <Pages pages={ this.states.pages }
                sceneElements={ this.states.elements }/>
