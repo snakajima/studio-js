@@ -1,24 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Publisher from './Publisher';
-
-// Super-simplified Redux
-function createStore(reducer) {
-    var state = reducer()
-    var app;
-    function dispatch(action) {
-      state = reducer(state, action)
-      app.setState(state)
-    }
-    function setApplication(obj) {
-      app = obj;
-      app.states = state;
-    }
-    function getState() {
-      return state;
-    }
-    return { dispatch, setApplication, getState };
-}
+import createStore from './SimpleRedux';
 
 // Create the store with a reducer
 var store = createStore((_state, action)=> {
@@ -131,6 +114,21 @@ class Scene extends Component {
   }
 }
 
+class Pages extends Component {
+  constructor(props) {
+    super();
+  }
+    
+  render() {
+    return (
+      <div>{
+        this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
+      }</div>
+    )
+  }
+}
+
+
 class Page extends Component {
   constructor(props) {
     super();
@@ -171,19 +169,6 @@ class Page extends Component {
   }
 }
 
-class Pages extends Component {
-  constructor(props) {
-    super();
-  }
-    
-  render() {
-    return (
-      <div>{
-        this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
-      }</div>
-    )
-  }
-}
 
 class App extends Component {
   constructor() {
