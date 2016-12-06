@@ -14,16 +14,19 @@ class Generator {
         pages:{
           s0:{
             play: "scroll",
-            transition: "fadeIn",
             elements: this.state.elements
           }
         }
       },
       pages: this.state.pages.map((page) => {
-        var obj = {template:"s0", elements:Object.keys(page).map((id) => {
+        var obj = {template:"s0"}
+        var ids = Object.keys(page);
+        if (ids.length > 0) {
+          obj.elements = ids.map((id) => {
             var element = Object.assign({id:id}, prev[id] || {});
             return Object.assign(element, {to:page[id]});
-        })};
+          })
+        };
         prev = page;
         return obj;
       })
