@@ -138,7 +138,6 @@ class Page extends Component {
   }
 
   onDrop(e) {
-    //console.log("Page:OnDrop:", dragger.element);
     store.dispatch({type:'movePageElement', pageIndex:dragger.pageIndex, id:dragger.id,
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
@@ -176,15 +175,13 @@ class Pages extends Component {
     super();
   }
     
-    render() {
-      return (
-        <div>
-        {
-            this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
-        }
-        </div>
-      )
-    }
+  render() {
+    return (
+      <div>{
+        this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
+      }</div>
+    )
+  }
 }
 
 class Publisher {
