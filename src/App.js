@@ -61,7 +61,8 @@ class App extends Component {
   }
   
   generate() {
-    alert((new Generator(window.store)).generate());
+    var swipe = new Generator(window.store).generate();
+    console.log(swipe);
   }
   
   render() {
