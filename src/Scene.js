@@ -10,13 +10,12 @@ class Scene extends Component {
   }
   
   onDrop(e) {
-    var dragger = DragContext.getContext();
-    window.store.dispatch({type:'moveSceneElement', id:dragger.id,
-                    dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
+    var cotext = DragContext.getContext();
+    window.store.dispatch({type:'moveSceneElement', id:cotext.id,
+                    dx:e.clientX-cotext.x, dy:e.clientY-cotext.y});
   }
   onDragOver(e) {
-    var dragger = DragContext.getContext();
-    if (dragger.pageIndex === -1) {
+    if (DragContext.getContext().pageIndex === -1) {
         e.preventDefault();
     }
   }
