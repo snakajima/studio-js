@@ -4,7 +4,7 @@ import Page from './Page';
 class Pages extends Component {
   render() {
     return (
-      <div>{
+      <div className='canvasPages'>{
         this.props.pages.map((page, index) => {
            return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.sceneElements } />
         })

@@ -70,7 +70,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button onClick={ this.play }>Play</button>
+        <button onClick={ this.play }>Preview</button>
         <Scene elements={ this.states.elements }/>
         <Pages pages={ this.states.pages }
                sceneElements={ this.states.elements }/>

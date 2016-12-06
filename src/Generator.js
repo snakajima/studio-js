@@ -14,7 +14,6 @@ class Generator {
         pages:{
           s0:{
             play: "scroll",
-            x_transition: "fadeIn",
             elements: this.state.elements
           }
         }
