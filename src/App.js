@@ -55,6 +55,7 @@ window.store = createStore((_state, action)=> {
 });
 
 var $ = window.$;
+var SwipeUtil = window.SwipeUtil;
 
 class App extends Component {
   constructor() {
@@ -65,7 +66,10 @@ class App extends Component {
   play() {
     var swipe = new Generator(window.store).generate();
     console.log(JSON.stringify(swipe, undefined, 2));
-    $('#preview').text(JSON.stringify(swipe, undefined, 2));
+    SwipeUtil.initSwipe(swipe, "#swipe", "#swipe_back");
+    var swipe_book = SwipeUtil.getSwipeBook();
+    $("#arrowleft").on("click", function() { swipe_book.back(); });
+    $("#arrowright").on("click", function() { swipe_book.next(); });
   }
   
   render() {
