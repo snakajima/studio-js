@@ -3,6 +3,7 @@ import './App.css';
 import Publisher from './Publisher';
 import createStore from './SimpleRedux';
 import DragContext from './DragContext';
+import Element from './Element';
 
 // Create the store with a reducer
 var store = createStore((_state, action)=> {
@@ -57,30 +58,6 @@ var store = createStore((_state, action)=> {
   }
   return state
 });
-
-class Element extends Component {
-  constructor(props) {
-    super();
-    this.onDragStart = this.onDragStart.bind(this);
-  }
-  
-  onDragStart(e) {
-    DragContext.setContext({ element:this.props.element, pageIndex:this.props.pageIndex, id:this.props.element.id, x:e.clientX, y:e.clientY });
-  }
-  
-  render() {
-    return (
-      <div className='element' style={{
-          left:this.props.element.x, top:this.props.element.y,
-          width:this.props.element.w, height:this.props.element.h,
-          background:this.props.element.bc
-        }}
-        draggable={true}
-        onDragStart={this.onDragStart}
-      />
-    );
-  }
-}
 
 class Scene extends Component {
   constructor(props) {
