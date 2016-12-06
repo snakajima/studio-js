@@ -1,12 +1,12 @@
 
-var dragger = {}
+window.dragger = {}
 
 function getContext() {
-    return dragger;
+    return window.dragger;
 }
 
 function setContext(context) {
-    dragger = context;
+    window.dragger = context;
 }
 
 module.exports = { getContext, setContext };

@@ -6,7 +6,7 @@ import DragContext from './DragContext';
 import Element from './Element';
 
 // Create the store with a reducer
-var store = createStore((_state, action)=> {
+window.store = createStore((_state, action)=> {
   if (typeof _state === "undefined") {
     return {
        elements:[{
@@ -68,7 +68,7 @@ class Scene extends Component {
   
   onDrop(e) {
     var dragger = DragContext.getContext();
-    store.dispatch({type:'moveSceneElement', id:dragger.id,
+    window.store.dispatch({type:'moveSceneElement', id:dragger.id,
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
   onDragOver(e) {
@@ -85,7 +85,7 @@ class Scene extends Component {
             return <Element key={index} pageIndex={-1} element={element} />
           })
         }</div>
-        <button onClick={()=>{store.dispatch({type:'duplicateScene'})}} >Insert</button>
+        <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
       </div>
     );
   }
@@ -115,7 +115,7 @@ class Page extends Component {
 
   onDrop(e) {
     var dragger = DragContext.getContext();
-    store.dispatch({type:'movePageElement', pageIndex:dragger.pageIndex, id:dragger.id,
+    window.store.dispatch({type:'movePageElement', pageIndex:dragger.pageIndex, id:dragger.id,
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
   onDragOver(e) {
@@ -141,8 +141,8 @@ class Page extends Component {
         <div className="page" onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {this.sceneElements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} />})}
         </div>
-        <button onClick={()=>{store.dispatch({type:'deletePage', pageIndex:this.props.pageIndex})}} >Delete</button>
-        <button onClick={()=>{store.dispatch({type:'duplicatePage', page:this.props.page, pageIndex:this.props.pageIndex})}} >Duplicate</button>
+        <button onClick={()=>{window.store.dispatch({type:'deletePage', pageIndex:this.props.pageIndex})}} >Delete</button>
+        <button onClick={()=>{window.store.dispatch({type:'duplicatePage', page:this.props.page, pageIndex:this.props.pageIndex})}} >Duplicate</button>
       </div>
     );
   }
@@ -152,12 +152,12 @@ class Page extends Component {
 class App extends Component {
   constructor() {
     super();
-    store.setApplication(this);
+    window.store.setApplication(this);
   }
   render() {
     return (
       <div className="App">
-        <button onClick={(e)=>{alert((new Publisher(store)).swipe())}}>Show</button>
+        <button onClick={(e)=>{alert((new Publisher(window.store)).swipe())}}>Show</button>
         <Scene elements={ this.states.elements }/>
         <Pages pages={ this.states.pages } elements={ this.states.elements }/>
       </div>
