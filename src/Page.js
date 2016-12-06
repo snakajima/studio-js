@@ -14,6 +14,7 @@ class Page extends Component {
     window.store.dispatch({type:'movePageElement', pageIndex:context.pageIndex, id:context.id,
                     dx:e.clientX-context.x, dy:e.clientY-context.y});
   }
+  
   onDragOver(e) {
     if (DragContext.getContext().pageIndex === this.props.pageIndex) {
         e.preventDefault();

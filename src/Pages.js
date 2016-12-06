@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import Page from './Page';
 
 class Pages extends Component {
-  constructor(props) {
-    super();
-  }
-    
   render() {
     return (
       <div>{
