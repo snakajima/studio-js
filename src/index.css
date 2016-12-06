@@ -25,6 +25,12 @@ body {
 
 #editor {
   width:240px;
+  float:left;
+}
+
+#preview {
+  width:400px;
+  height:300px;
 }
 
 

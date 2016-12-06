@@ -9,11 +9,11 @@ window.store = createStore((_state, action)=> {
   if (typeof _state === "undefined") {
     return {
        elements:[{
-         id:"i0", x:10, y:30, h:20, w:50, bc:'#f00'
+         id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
        },{
-         id:"i1", x:50, y:60, h:30, w:50, bc:'#00f'
+         id:"i1", x:50, y:60, h:30, w:50, bc:'#0000ff'
        },{
-         id:"i2", x:80, y:50, h:30, w:50, bc:'#0f0'
+         id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00'
        }],
        pages:[{
        }]
