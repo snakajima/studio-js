@@ -7,7 +7,7 @@ class Generator {
     var prev = {};
     return {
       type:"net.swipe.swipe",
-      dimension:[240,135],
+      dimension:[600,600],
       paging:"leftToRight",
       orientation:"landscape",
       templates:{
