@@ -5,7 +5,6 @@ import createStore from './SimpleRedux';
 import Scene from './Scene';
 import Pages from './Pages';
 
-// Create the store with a reducer
 window.store = createStore((_state, action)=> {
   if (typeof _state === "undefined") {
     return {
@@ -30,10 +29,8 @@ window.store = createStore((_state, action)=> {
     break;
   case 'deletePage':
     state.pages.splice(action.pageIndex, 1);
-    //state.pages = state.pages.filter((p) => {return p!==action.page});
     break;
   case 'moveSceneElement':
-    //console.log('moveSceneElement');
     state.elements = state.elements.map((element)=>{
        if (element.id === action.id) {
            element.x += action.dx;
@@ -43,9 +40,7 @@ window.store = createStore((_state, action)=> {
     })
     break;
   case 'movePageElement':
-    //console.log('movePageElement 1', action);
     var page = Object.assign({}, state.pages[action.pageIndex]);
-    //console.log('movePageElement', page);
     var element = Object.assign({}, page[action.id] || {});
     var tx = element.translate || [0,0];
     tx = [tx[0] + action.dx, tx[1] + action.dy];
@@ -64,12 +59,18 @@ class App extends Component {
     super();
     window.store.setApplication(this);
   }
+  
+  showSwipe() {
+    alert((new Publisher(window.store)).swipe());
+  }
+  
   render() {
     return (
       <div className="App">
-        <button onClick={(e)=>{alert((new Publisher(window.store)).swipe())}}>Show</button>
+        <button onClick={ this.showSwipe }>Show</button>
         <Scene elements={ this.states.elements }/>
-        <Pages pages={ this.states.pages } elements={ this.states.elements }/>
+        <Pages pages={ this.states.pages }
+               sceneElements={ this.states.elements }/>
       </div>
     );
   }

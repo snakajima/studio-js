@@ -9,7 +9,7 @@ class Pages extends Component {
   render() {
     return (
       <div>{
-        this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
+        this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.sceneElements } /> } )
       }</div>
     )
   }
