@@ -19,7 +19,13 @@
 }
     </style>
     <script>
+$(document).ready(function () {
+    window.template = $('#swipe_back').html();
+    $('#swipe_back').html('')
+});
 function present(json) {
+    location.hash = '';
+    $('#swipe_back').html(window.template)
     var swipe = JSON.parse(json);
     SwipeUtil.initSwipe(swipe, "#swipe", "#swipe_back");
     var swipe_book = SwipeUtil.getSwipeBook();
