@@ -54,6 +54,8 @@ window.store = createStore((_state, action)=> {
   return state
 });
 
+var $ = window.$;
+
 class App extends Component {
   constructor() {
     super();
@@ -63,6 +65,7 @@ class App extends Component {
   play() {
     var swipe = new Generator(window.store).generate();
     console.log(JSON.stringify(swipe, undefined, 2));
+    $('#preview').text(JSON.stringify(swipe, undefined, 2));
   }
   
   render() {

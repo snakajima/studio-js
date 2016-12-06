@@ -21,3 +21,15 @@ body {
   height:135px;
   border: 1px solid gray;
 }
+
+#editor {
+  width:240px;
+  float:left;
+}
+
+#preview {
+  width:240px;
+  height: 240px;
+  background: #ccc;
+  float:left;
+}
