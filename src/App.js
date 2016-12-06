@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Publisher from './Publisher';
 
 // Super-simplified Redux
 function createStore(reducer) {
@@ -181,36 +182,6 @@ class Pages extends Component {
         this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
       }</div>
     )
-  }
-}
-
-class Publisher {
-  constructor(store) {
-    var state = store.getState();
-    this.script = {
-      type:"net.swipe.swipe",
-      dimension:[240,135],
-      paging:"leftToRight",
-      orientation:"landscape",
-      templates:{
-        pages:{
-          s0:{
-            play: "scroll",
-            elements: state.elements
-          }
-        }
-      },
-      pages: state.pages.map((page) => {
-        return {scene:"s0", elements:Object.keys(page).map((id) => {
-            return Object.assign({id:id}, {to:page[id]});
-        })};
-      })
-    };
-  }
-  swipe() {
-    var json = JSON.stringify(this.script, undefined, 2);
-    console.log(json);
-    return json;
   }
 }
 
