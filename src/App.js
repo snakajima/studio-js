@@ -64,46 +64,7 @@ class App extends Component {
     var swipe = new Generator(window.store).generate();
     console.log(JSON.stringify(swipe, undefined, 2));
     var preview = document.getElementById('preview');
-    //alert(preview.contentWindow.foo);
-      var json = {
-        "paging": "leftToRight",
-        "dimension":[600,600],
-        "templates": {
-            "pages": {
-                "photo": {
-                    "elements":[
-                        { "h":600, "x":0, "img":"http://www.swipejs.net/sample3/1.jpg", "w":600, "y":0, "id": "1" }
-                    ],
-                    "transition": "fadeIn"
-                }
-            }
-        },
-        "title":"photo gallery",
-        "pages":[
-            {
-                "template":"photo",
-                "elements":[ {"id":"1"} ]
-            },
-            {
-                "template":"photo",
-                "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/2.jpg"} ]
-            },
-            {
-                "template":"photo",
-                "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/3.jpg"} ]
-            },
-            {
-                "template":"photo",
-                "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/4.jpg"} ]
-            },
-            {
-                "template":"photo",
-                "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/5.jpg"} ]
-            }
-        ],
-        "type":"net.swipe.swipe"
-      };
-      preview.contentWindow.present(JSON.stringify(json, undefined, 2));
+    preview.contentWindow.present(JSON.stringify(swipe, undefined, 2));
   }
   
   render() {

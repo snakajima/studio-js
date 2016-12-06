@@ -7,19 +7,20 @@ class Generator {
     var prev = {};
     return {
       type:"net.swipe.swipe",
-      dimension:[600,600],
+      dimension:[240,240],
       paging:"leftToRight",
       orientation:"landscape",
       templates:{
         pages:{
           s0:{
             play: "scroll",
+            x_transition: "fadeIn",
             elements: this.state.elements
           }
         }
       },
       pages: this.state.pages.map((page) => {
-        var foo = {scene:"s0", elements:Object.keys(page).map((id) => {
+        var foo = {template:"s0", elements:Object.keys(page).map((id) => {
             var element = Object.assign({id:id}, prev[id] || {});
             return Object.assign(element, {to:page[id]});
         })};
