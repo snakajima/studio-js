@@ -6,6 +6,16 @@ body {
 
 .canvasElement {
   position:absolute;
+  overflow:hidden;
+}
+
+.canvasImage {
+  width:100%;
+  height:auto;
+  position:absolute;
+  transform:translate(-50%,-50%);
+  left:50%;
+  top:50%;
 }
 
 .canvasScene {
@@ -35,7 +45,7 @@ body {
 
 #preview {
   width:400px;
-  height:300px;
+  height:500px;
 }
 
 

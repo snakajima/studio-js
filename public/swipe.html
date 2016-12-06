@@ -7,15 +7,15 @@
     <script type="text/javascript" src="https://js.swipe.net/js/swipe.js"></script>
     <style>
 #arrowleft {
-  top: 50%;   
+  bottom: 20px;
   position: absolute;
-  left: 10px;
+  left: 20px;
 }
 
 #arrowright {
-  top: 50%;
+  bottom: 20px;
   position: absolute;
-  right: 10px;
+  right: 20px;
 }
     </style>
     <script>
@@ -36,13 +36,15 @@ $(document).ready(function () {
 });
     </script>
   </head>
-  <body>
+  <body style="overflow:hidden">
       <div id="root">
-        <div id="swipe_back">
-          <img src='https://js.swipe.net/images/ArrowLeft.png' id='arrowleft'>
+        <div id="swipe_back" style="width:400;height:400">
           <div id='swipe'>
           </div>
+        </div>
+        <div style="width:400;height:100;background:#ffc">
           <img src='https://js.swipe.net/images/ArrowRight.png' id='arrowright'>
+          <img src='https://js.swipe.net/images/ArrowLeft.png' id='arrowleft'>
         </div>
       </div>
   </body>

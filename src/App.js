@@ -11,9 +11,9 @@ window.store = createStore((_state, action)=> {
        elements:[{
          id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
        },{
-         id:"i1", x:50, y:60, h:30, w:50, bc:'#0000ff'
+         id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "img":"http://satoshi.blogs.com/swipe/movie.png"
        },{
-         id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00'
+         id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
        }],
        pages:[{
        }]

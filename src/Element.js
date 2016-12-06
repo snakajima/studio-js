@@ -20,7 +20,12 @@ class Element extends Component {
         }}
         draggable={true}
         onDragStart={this.onDragStart}
-      />
+      >
+      {
+        (typeof this.props.element.img == 'string') ?
+            <img className='canvasImage' alt='' src={this.props.element.img}/>: ""
+      }
+      </div>
     );
   }
 }
