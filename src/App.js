@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Publisher from './Publisher';
 import createStore from './SimpleRedux';
-import DragContext from './DragContext';
-import Element from './Element';
+import Scene from './Scene';
 import Pages from './Pages';
 
 // Create the store with a reducer
@@ -59,38 +58,6 @@ window.store = createStore((_state, action)=> {
   }
   return state
 });
-
-class Scene extends Component {
-  constructor(props) {
-    super();
-    this.onDrop = this.onDrop.bind(this);
-    this.onDragOver = this.onDragOver.bind(this);
-  }
-  
-  onDrop(e) {
-    var dragger = DragContext.getContext();
-    window.store.dispatch({type:'moveSceneElement', id:dragger.id,
-                    dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
-  }
-  onDragOver(e) {
-    var dragger = DragContext.getContext();
-    if (dragger.pageIndex === -1) {
-        e.preventDefault();
-    }
-  }
-  render() {
-    return (
-      <div>
-        <div className="scene" onDrop={this.onDrop} onDragOver={this.onDragOver}>{
-          this.props.elements.map((element, index)=>{
-            return <Element key={index} pageIndex={-1} element={element} />
-          })
-        }</div>
-        <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
-      </div>
-    );
-  }
-}
 
 class App extends Component {
   constructor() {
