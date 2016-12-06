@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Publisher from './Publisher';
 import createStore from './SimpleRedux';
+import DragContext from './DragContext';
 
 // Create the store with a reducer
 var store = createStore((_state, action)=> {
@@ -57,9 +58,6 @@ var store = createStore((_state, action)=> {
   return state
 });
 
-// Global variable to store dragging state
-var dragger = {}
-
 class Element extends Component {
   constructor(props) {
     super();
@@ -67,7 +65,7 @@ class Element extends Component {
   }
   
   onDragStart(e) {
-    dragger = { element:this.props.element, pageIndex:this.props.pageIndex, id:this.props.element.id, x:e.clientX, y:e.clientY };
+    DragContext.setContext({ element:this.props.element, pageIndex:this.props.pageIndex, id:this.props.element.id, x:e.clientX, y:e.clientY });
   }
   
   render() {
@@ -92,10 +90,12 @@ class Scene extends Component {
   }
   
   onDrop(e) {
+    var dragger = DragContext.getContext();
     store.dispatch({type:'moveSceneElement', id:dragger.id,
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
   onDragOver(e) {
+    var dragger = DragContext.getContext();
     if (dragger.pageIndex === -1) {
         e.preventDefault();
     }
@@ -137,10 +137,12 @@ class Page extends Component {
   }
 
   onDrop(e) {
+    var dragger = DragContext.getContext();
     store.dispatch({type:'movePageElement', pageIndex:dragger.pageIndex, id:dragger.id,
                     dx:e.clientX-dragger.x, dy:e.clientY-dragger.y});
   }
   onDragOver(e) {
+    var dragger = DragContext.getContext();
     if (dragger.pageIndex === this.props.pageIndex) {
         e.preventDefault();
     }
