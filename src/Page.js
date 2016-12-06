@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DragContext from './DragContext';
+import Element from './Element';
 
 class Page extends Component {
   constructor(props) {
