@@ -4,7 +4,7 @@ import Publisher from './Publisher';
 import createStore from './SimpleRedux';
 import DragContext from './DragContext';
 import Element from './Element';
-import Page from './Page';
+import Pages from './Pages';
 
 // Create the store with a reducer
 window.store = createStore((_state, action)=> {
@@ -89,20 +89,6 @@ class Scene extends Component {
         <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
       </div>
     );
-  }
-}
-
-class Pages extends Component {
-  constructor(props) {
-    super();
-  }
-    
-  render() {
-    return (
-      <div>{
-        this.props.pages.map((page, index)=>{ return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.elements } /> } )
-      }</div>
-    )
   }
 }
 
