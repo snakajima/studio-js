@@ -1,0 +1,76 @@
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://js.swipe.net/lib/jQueryRotate.js"></script>
+    <script type="text/javascript" src="https://js.swipe.net/lib/mediaelement/mediaelement-and-player.min.js"></script>
+    <script type="text/javascript" src="https://js.swipe.net/lib/snap.svg.js"></script>
+    <script type="text/javascript" src="https://js.swipe.net/js/swipe.js"></script>
+    <style>
+#arrowleft {
+  top: 50%;   
+  position: absolute;
+  left: 20px;
+}
+
+#arrowright {
+  top: 50%;
+  position: absolute;
+  right: 20px; 
+}
+    </style>
+    <script>
+$(document).ready(function () {
+  var json = {
+    "paging": "leftToRight",
+    "dimension":[600,600],
+    "templates": {
+        "pages": {
+            "photo": {
+                "elements":[
+                    { "h":600, "x":0, "img":"http://www.swipejs.net/sample3/1.jpg", "w":600, "y":0, "id": "1" }
+                ],
+                "transition": "fadeIn"
+            }
+        }
+    },
+    "title":"photo gallery",
+    "pages":[
+        {
+            "template":"photo",
+            "elements":[ {"id":"1"} ]
+        },
+        {
+            "template":"photo",
+            "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/2.jpg"} ]
+        },
+        {
+            "template":"photo",
+            "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/3.jpg"} ]
+        },
+        {
+            "template":"photo",
+            "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/4.jpg"} ]
+        },
+        {
+            "template":"photo",
+            "elements":[{"id":"1", "img": "http://www.swipejs.net/sample3/5.jpg"} ]
+        }
+    ],
+    "type":"net.swipe.swipe"
+  };
+  SwipeUtil.initSwipe(json, "#swipe", "#swipe_back");
+  var swipe_book = SwipeUtil.getSwipeBook();
+  $("#arrowleft").on("click", function() { swipe_book.back(); });
+  $("#arrowright").on("click", function() { swipe_book.next(); });
+});
+    </script>
+  </head>
+  <body>
+      <div id="swipe_back">
+          <img src="https://js.swipe.net/images/ArrowLeft.png" id="arrowleft">
+          <div id="swipe">
+          </div>
+          <img src="https://js.swipe.net/images/ArrowRight.png" id="arrowright">
+      </div>
+  </body>
+</html>

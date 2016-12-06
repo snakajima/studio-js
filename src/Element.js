@@ -13,7 +13,7 @@ class Element extends Component {
   
   render() {
     return (
-      <div className='element' style={{
+      <div className='canvasElement' style={{
           left:this.props.element.x, top:this.props.element.y,
           width:this.props.element.w, height:this.props.element.h,
           background:this.props.element.bc

@@ -31,7 +31,7 @@ class Page extends Component {
     });
     return (
       <div>
-        <div className="page" onDrop={this.onDrop} onDragOver={this.onDragOver}>
+        <div className="canvasPage" onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} />})}
         </div>
         <button onClick={()=>{window.store.dispatch({type:'deletePage', pageIndex:this.props.pageIndex})}} >Delete</button>

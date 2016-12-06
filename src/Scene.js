@@ -22,7 +22,7 @@ class Scene extends Component {
   render() {
     return (
       <div>
-        <div className="scene" onDrop={this.onDrop} onDragOver={this.onDragOver}>{
+        <div className="canvasScene" onDrop={this.onDrop} onDragOver={this.onDragOver}>{
           this.props.elements.map((element, index)=>{
             return <Element key={index} pageIndex={-1} element={element} />
           })

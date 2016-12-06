@@ -4,18 +4,19 @@ body {
   font-family: sans-serif;
 }
 
-.element {
+.canvasElement {
   position:absolute;
 }
 
-.scene {
+.canvasScene {
   position:relative;
   width:240px;
   height:135px;
   border: 1px solid gray;
   background: #ffc;
 }
-.page {
+
+.canvasPage {
   position:relative;
   width:240px;
   height:135px;
@@ -27,21 +28,3 @@ body {
 }
 
 
-
-#swipe_back {
-  position:relative;
-  width:240px;
-  height:240px;
-}
-
-#arrowleft {
-  top: 50%;   
-  position: absolute;
-  left: 20px;
-}
-
-#arrowright {
-  top: 50%;
-  position: absolute;
-  right: 20px; 
-}
