@@ -1,8 +1,11 @@
 class Generator {
   constructor(store) {
-    var state = store.getState();
+    this.state = store.getState();
+  }
+  
+  generate() {
     var prev = {};
-    this.script = {
+    return {
       type:"net.swipe.swipe",
       dimension:[240,135],
       paging:"leftToRight",
@@ -11,11 +14,11 @@ class Generator {
         pages:{
           s0:{
             play: "scroll",
-            elements: state.elements
+            elements: this.state.elements
           }
         }
       },
-      pages: state.pages.map((page) => {
+      pages: this.state.pages.map((page) => {
         var foo = {scene:"s0", elements:Object.keys(page).map((id) => {
             var element = Object.assign({id:id}, prev[id] || {});
             return Object.assign(element, {to:page[id]});
@@ -24,10 +27,6 @@ class Generator {
         return foo;
       })
     };
-  }
-  generate() {
-    var json = JSON.stringify(this.script, undefined, 2);
-    return json;
   }
 }
 
