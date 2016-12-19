@@ -60,11 +60,33 @@ window.store = createStore((_state, action)=> {
     state.screen.height = action.height;
     //console.log('resize:' + state.width + ',' + state.height);
     break;
+  case 'preview':
+   state.screen.preview = action.preview;
+   break;
   default:
+    console.log("unknown type:" + action.type);
     break;
   }
   return state
 });
+
+
+class Preview extends Component {
+    render() {
+        return(
+           <div className="previewFrame" onClick={()=>{window.store.dispatch({type:'preview', preview:false})}}>
+               <iframe src="./preview.html" className='preview'
+                       ref={(iframe)=>{ this.iframe = iframe; }} />
+          </div>
+        )
+    }
+    componentDidMount() {
+        const previewWindow = this.iframe.contentWindow;
+        console.log("Preview:DidMount:" + this.iframe.contentWindow)
+        var swipe = new Generator(window.store).generate();
+        previewWindow.swipe = JSON.stringify(swipe, undefined, 2);
+    }
+}
 
 class App extends Component {
   constructor() {
@@ -91,12 +113,14 @@ class App extends Component {
   */
   
   render() {
-    console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
+    //console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
     var leftWidth = this.states.screen.width/3;
+    var preview = (this.states.screen.preview) ? <Preview /> : "";
     return (
       <div className="App">
         <div id="left">
             <button onClick={ this.play }>Preview</button>
+            <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Preview2</button>
             <Scene elements={ this.states.elements }
                    dimension={ this.states.dimension }
                    width={ leftWidth } />
@@ -111,6 +135,7 @@ class App extends Component {
                   width={ this.states.screen.width - leftWidth - 8 }
                   sceneElements={ this.states.elements} />
         </div>
+        { preview }
       </div>
     );
   }

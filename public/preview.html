@@ -33,10 +33,14 @@ function present(json) {
     $("#arrowright").on("click", function() { swipe_book.next(); });
 }
 $(document).ready(function () {
+  console.log("previewDoc:ready:" + typeof window.swipe);
+  if (typeof window.swipe === 'string') {
+      window.present(window.swipe);
+  }
 });
     </script>
   </head>
-  <body style="overflow:hidden">
+  <body style="overflow:hidden;background:yellow">
       <div id="root">
         <div id="swipe_back" style="width:400;height:400">
           <div id='swipe'>
