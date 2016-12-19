@@ -12,8 +12,22 @@
 #editor {
 }
 
+#preview_frame {
+  position:fixed;
+  left:0;
+  top:0;
+  background:rgba(0,0,0,0.5);
+  width:100%;
+  height:100%;
+  visibility:hidden;
+}
+
 #preview {
+  position:absolute;
+  left:100px;
+  top:100px;
   width:400px;
   height:500px;
+  background:#fff;
 }
 

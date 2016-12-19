@@ -76,6 +76,8 @@ class App extends Component {
   play() {
     var swipe = new Generator(window.store).generate();
     console.log(JSON.stringify(swipe, undefined, 2));
+    var frame = document.getElementById('preview_frame');
+    frame.style.visibility = 'visible';
     var preview = document.getElementById('preview');
     console.log("preview=" + preview.contentWindow.present);
     preview.contentWindow.present(JSON.stringify(swipe, undefined, 2));
