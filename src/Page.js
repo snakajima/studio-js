@@ -23,6 +23,7 @@ class Page extends Component {
   }
 
   render() {
+    var height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const elements = this.props.sceneElements.map((sceneElement) => {
       var element = Object.assign({}, sceneElement);
       var e = this.props.page[element.id] || { translate:[0,0] };
@@ -34,7 +35,7 @@ class Page extends Component {
     return (
       <div>
         <div className="canvasPage"
-             style={{ width:this.props.width }}
+             style={{ width:this.props.width, height:height }}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element}
               scale={scale} />})}

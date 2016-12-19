@@ -8,6 +8,7 @@ class Pages extends Component {
         this.props.pages.map((page, index) => {
            return <Page key={index} pageIndex={index} page={page}
                width={ this.props.width }
+               dimension={ this.props.dimension }
                sceneElements={ this.props.sceneElements }
                scale={0.5} />
         })

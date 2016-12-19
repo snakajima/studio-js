@@ -12,6 +12,9 @@ window.store = createStore((_state, action)=> {
        screen:{
           width:100, height:100
        },
+       dimension:{
+          width:480, height:320
+       },
        elements:[{
          id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
        },{
@@ -93,13 +96,16 @@ class App extends Component {
             <button onClick={ this.updateDimensions }>Test</button>
             <button onClick={ this.play }>Preview</button>
             <Scene elements={ this.states.elements }
+                   dimension={ this.states.dimension }
                    width={ leftWidth } />
             <Pages pages={ this.states.pages }
+                   dimension={ this.states.dimension }
                    width={ leftWidth }
                    sceneElements={ this.states.elements }/>
         </div>
         <div id="center">
             <Page pageIndex={0} page={this.states.pages[0]}
+                  dimension={ this.states.dimension }
                   width={ this.states.screen.width - leftWidth - 8 }
                   sceneElements={ this.states.elements} scale={1.0} />
         </div>

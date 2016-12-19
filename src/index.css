@@ -20,19 +20,16 @@ body {
 
 .canvasScene {
   position:relative;
-  height:135px;
   border: 1px solid gray;
   background: #ffc;
 }
 
 .canvasPages {
-  height: 400px;
   overflow:scroll;
 }
 
 .canvasPage {
   position:relative;
-  height:135px;
   border: 1px solid gray;
 }
 
