@@ -1,33 +1,22 @@
 .App {
 }
 
+.toolbar {
+  padding-top:4px;
+  height:24px;
+  background: #ccc;
+}
+.subToolbar {
+    height:22px;
+    background: #eee;
+    margin-bottom: 4px;
+}
+
 #left {
   float:left;
 }
 
 #center {
   float:left;
-}
-
-#editor {
-}
-
-#preview_frame {
-  position:fixed;
-  left:0;
-  top:0;
-  background:rgba(0,0,0,0.5);
-  width:100%;
-  height:100%;
-  visibility:hidden;
-}
-
-#preview {
-  position:absolute;
-  left:100px;
-  top:100px;
-  width:400px;
-  height:500px;
-  background:#fff;
 }
 

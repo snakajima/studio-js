@@ -32,7 +32,9 @@ class Scene extends Component {
             return <Element key={index} pageIndex={-1} element={element} scale={scale}/>
           })
         }</div>
-        <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
+        <div className="subToolbar">
+          <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
+        </div>
       </div>
     );
   }

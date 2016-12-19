@@ -20,7 +20,7 @@ body {
 
 .canvasScene {
   position:relative;
-  border: 1px solid gray;
+  border: 1px solid #aaa;
   background: #ffc;
 }
 
@@ -30,7 +30,7 @@ body {
 
 .canvasPage {
   position:relative;
-  border: 1px solid gray;
+  border: 1px solid #aaa;
 }
 
 .previewFrame {

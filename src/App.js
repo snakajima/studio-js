@@ -81,12 +81,14 @@ class App extends Component {
     
   render() {
     //console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
-    var leftWidth = this.states.screen.width/3;
+    var leftWidth = this.states.screen.width/4;
     var preview = (this.states.screen.preview) ? <Preview /> : "";
     return (
       <div className="App">
         <div id="left">
+            <div className="toolbar">
             <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Preview</button>
+            </div>
             <Scene elements={ this.states.elements }
                    dimension={ this.states.dimension }
                    width={ leftWidth } />
@@ -96,6 +98,8 @@ class App extends Component {
                    sceneElements={ this.states.elements }/>
         </div>
         <div id="center">
+            <div className="toolbar">
+            </div>
             <Page pageIndex={0} page={this.states.pages[0]}
                   dimension={ this.states.dimension }
                   width={ this.states.screen.width - leftWidth - 8 }

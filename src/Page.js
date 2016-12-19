@@ -41,8 +41,10 @@ class Page extends Component {
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element}
               scale={scale} />})}
         </div>
+        <div className="subToolbar">
         <button onClick={()=>{window.store.dispatch({type:'deletePage', pageIndex:this.props.pageIndex})}} >Delete</button>
         <button onClick={()=>{window.store.dispatch({type:'duplicatePage', page:this.props.page, pageIndex:this.props.pageIndex})}} >Duplicate</button>
+        </div>
       </div>
     );
   }
