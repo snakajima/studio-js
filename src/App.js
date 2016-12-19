@@ -36,6 +36,9 @@ window.store = createStore((_state, action)=> {
     break;
   case 'deletePage':
     state.pages.splice(action.pageIndex, 1);
+    if (state.screen.pageIndex >=state.pages.length) {
+      state.screen.pageIndex = state.pages.length-1;
+    }
     break;
   case 'moveSceneElement':
     state.elements = state.elements.map((element)=>{
