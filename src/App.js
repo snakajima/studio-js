@@ -4,6 +4,7 @@ import Generator from './Generator';
 import createStore from './SimpleRedux';
 import Scene from './Scene';
 import Pages from './Pages';
+import Page from './Page';
 
 window.store = createStore((_state, action)=> {
   if (typeof _state === "undefined") {
@@ -11,9 +12,9 @@ window.store = createStore((_state, action)=> {
        elements:[{
          id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
        },{
-         id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "img":"http://satoshi.blogs.com/swipe/movie.png"
+         id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "imgx":"http://satoshi.blogs.com/swipe/movie.png"
        },{
-         id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
+         id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "imgx":"http://satoshi.blogs.com/swipe/shuttlex.png"
        }],
        pages:[{
        }]
@@ -33,8 +34,8 @@ window.store = createStore((_state, action)=> {
   case 'moveSceneElement':
     state.elements = state.elements.map((element)=>{
        if (element.id === action.id) {
-           element.x += action.dx;
-           element.y += action.dy;
+           element.x += action.dx / action.scale;
+           element.y += action.dy / action.scale;
        }
        return element
     })
@@ -43,7 +44,7 @@ window.store = createStore((_state, action)=> {
     var page = Object.assign({}, state.pages[action.pageIndex]);
     var element = Object.assign({}, page[action.id] || {});
     var tx = element.translate || [0,0];
-    tx = [tx[0] + action.dx, tx[1] + action.dy];
+    tx = [tx[0] + action.dx / action.scale, tx[1] + action.dy / action.scale];
     element.translate = tx;
     page[action.id] = element;
     state.pages[action.pageIndex] = page;
@@ -70,10 +71,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button onClick={ this.play }>Preview</button>
-        <Scene elements={ this.states.elements }/>
-        <Pages pages={ this.states.pages }
-               sceneElements={ this.states.elements }/>
+        <div id="left">
+            <button onClick={ this.play }>Preview</button>
+            <Scene elements={ this.states.elements }/>
+            <Pages pages={ this.states.pages }
+                   sceneElements={ this.states.elements }/>
+        </div>
+        <div id="center">
+            <Page pageIndex={0} page={this.states.pages[0]} sceneElements={ this.states.elements} scale={1.0} />
+        </div>
       </div>
     );
   }

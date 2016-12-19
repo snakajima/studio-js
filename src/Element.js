@@ -12,17 +12,18 @@ class Element extends Component {
   }
   
   render() {
+    const scale = this.props.scale;
     return (
       <div className='canvasElement' style={{
-          left:this.props.element.x, top:this.props.element.y,
-          width:this.props.element.w, height:this.props.element.h,
+          left:this.props.element.x * scale, top:this.props.element.y * scale,
+          width:this.props.element.w * scale, height:this.props.element.h * scale,
           background:this.props.element.bc
         }}
         draggable={true}
         onDragStart={this.onDragStart}
       >
       {
-        (typeof this.props.element.img == 'string') ?
+        (typeof this.props.element.img === 'string') ?
             <img className='canvasImage' alt='' src={this.props.element.img}/>: ""
       }
       </div>

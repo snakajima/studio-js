@@ -38,14 +38,4 @@ body {
   border: 1px solid gray;
 }
 
-#editor {
-  width:240px;
-  float:left;
-}
-
-#preview {
-  width:400px;
-  height:500px;
-}
-
 

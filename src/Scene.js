@@ -12,6 +12,7 @@ class Scene extends Component {
   onDrop(e) {
     var cotext = DragContext.getContext();
     window.store.dispatch({type:'moveSceneElement', id:cotext.id,
+                    scale:0.5,
                     dx:e.clientX-cotext.x, dy:e.clientY-cotext.y});
   }
   onDragOver(e) {
@@ -24,7 +25,7 @@ class Scene extends Component {
       <div>
         <div className="canvasScene" onDrop={this.onDrop} onDragOver={this.onDragOver}>{
           this.props.elements.map((element, index)=>{
-            return <Element key={index} pageIndex={-1} element={element} />
+            return <Element key={index} pageIndex={-1} element={element} scale={0.5}/>
           })
         }</div>
         <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
