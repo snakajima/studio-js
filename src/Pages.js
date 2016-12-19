@@ -6,7 +6,9 @@ class Pages extends Component {
     return (
       <div className='canvasPages'>{
         this.props.pages.map((page, index) => {
-           return <Page key={index} pageIndex={index} page={page} sceneElements={ this.props.sceneElements }
+           return <Page key={index} pageIndex={index} page={page}
+               width={ this.props.width }
+               sceneElements={ this.props.sceneElements }
                scale={0.5} />
         })
       }</div>

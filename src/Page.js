@@ -33,7 +33,9 @@ class Page extends Component {
     const scale = this.props.scale;
     return (
       <div>
-        <div className="canvasPage" onDrop={this.onDrop} onDragOver={this.onDragOver}>
+        <div className="canvasPage"
+             style={{ width:this.props.width }}
+             onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element}
               scale={scale} />})}
         </div>

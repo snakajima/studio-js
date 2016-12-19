@@ -86,17 +86,22 @@ class App extends Component {
   
   render() {
     console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
+    var leftWidth = this.states.screen.width/3;
     return (
       <div className="App">
         <div id="left">
             <button onClick={ this.updateDimensions }>Test</button>
             <button onClick={ this.play }>Preview</button>
-            <Scene elements={ this.states.elements }/>
+            <Scene elements={ this.states.elements }
+                   width={ leftWidth } />
             <Pages pages={ this.states.pages }
+                   width={ leftWidth }
                    sceneElements={ this.states.elements }/>
         </div>
         <div id="center">
-            <Page pageIndex={0} page={this.states.pages[0]} sceneElements={ this.states.elements} scale={1.0} />
+            <Page pageIndex={0} page={this.states.pages[0]}
+                  width={ this.states.screen.width - leftWidth - 8 }
+                  sceneElements={ this.states.elements} scale={1.0} />
         </div>
       </div>
     );

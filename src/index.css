@@ -20,7 +20,6 @@ body {
 
 .canvasScene {
   position:relative;
-  width:240px;
   height:135px;
   border: 1px solid gray;
   background: #ffc;
@@ -33,7 +32,6 @@ body {
 
 .canvasPage {
   position:relative;
-  width:240px;
   height:135px;
   border: 1px solid gray;
 }
