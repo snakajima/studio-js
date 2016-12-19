@@ -12,7 +12,8 @@ class Page extends Component {
 
   onDrop(e) {
     var context = DragContext.getContext();
-    window.store.dispatch({type:'movePageElement', pageIndex:context.pageIndex, id:context.id, scale:this.props.scale,
+    const scale = this.props.width / this.props.dimension.width;
+    window.store.dispatch({type:'movePageElement', pageIndex:context.pageIndex, id:context.id, scale:scale,
                     dx:e.clientX-context.x, dy:e.clientY-context.y});
   }
   

@@ -93,7 +93,6 @@ class App extends Component {
     return (
       <div className="App">
         <div id="left">
-            <button onClick={ this.updateDimensions }>Test</button>
             <button onClick={ this.play }>Preview</button>
             <Scene elements={ this.states.elements }
                    dimension={ this.states.dimension }
