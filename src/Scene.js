@@ -21,14 +21,15 @@ class Scene extends Component {
     }
   }
   render() {
-    var height = this.props.dimension.height * this.props.width / this.props.dimension.width;
+    const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
+    const scale = this.props.width / this.props.dimension.width;
     return (
       <div>
         <div className="canvasScene"
              style={{width:this.props.width, height:height}}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>{
           this.props.elements.map((element, index)=>{
-            return <Element key={index} pageIndex={-1} element={element} scale={0.5}/>
+            return <Element key={index} pageIndex={-1} element={element} scale={scale}/>
           })
         }</div>
         <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>

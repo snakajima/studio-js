@@ -10,7 +10,7 @@ class Pages extends Component {
                width={ this.props.width }
                dimension={ this.props.dimension }
                sceneElements={ this.props.sceneElements }
-               scale={0.5} />
+               />
         })
       }</div>
     )

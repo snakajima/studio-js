@@ -23,7 +23,6 @@ class Page extends Component {
   }
 
   render() {
-    var height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const elements = this.props.sceneElements.map((sceneElement) => {
       var element = Object.assign({}, sceneElement);
       var e = this.props.page[element.id] || { translate:[0,0] };
@@ -31,7 +30,8 @@ class Page extends Component {
       element.y += e.translate[1];
       return element;
     });
-    const scale = this.props.scale;
+    const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
+    const scale = this.props.width / this.props.dimension.width;
     return (
       <div>
         <div className="canvasPage"

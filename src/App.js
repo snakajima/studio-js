@@ -107,7 +107,7 @@ class App extends Component {
             <Page pageIndex={0} page={this.states.pages[0]}
                   dimension={ this.states.dimension }
                   width={ this.states.screen.width - leftWidth - 8 }
-                  sceneElements={ this.states.elements} scale={1.0} />
+                  sceneElements={ this.states.elements} />
         </div>
       </div>
     );
