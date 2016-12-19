@@ -100,7 +100,7 @@ class App extends Component {
                    width={ leftWidth } />
             <Pages pages={ this.states.pages }
                    dimension={ this.states.dimension }
-                   width={ leftWidth }
+                   width={ leftWidth } height={ this.states.screen.height - 60 }
                    sceneElements={ this.states.elements }/>
         </div>
         <div id="center">
