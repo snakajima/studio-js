@@ -7,7 +7,7 @@ class Page extends Component {
     super();
     this.onDrop = this.onDrop.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
-    console.log("scale=" + this.scale);
+    //console.log("Page:width=" + props.width);
   }
 
   onDrop(e) {

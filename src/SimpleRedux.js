@@ -4,6 +4,7 @@ function createStore(reducer) {
     var app;
     function dispatch(action) {
       state = reducer(state, action)
+      //console.log("store:dispatch width=", state.screen.width);
       app.setState(state)
     }
     function setApplication(obj) {

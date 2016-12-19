@@ -9,6 +9,9 @@ import Page from './Page';
 window.store = createStore((_state, action)=> {
   if (typeof _state === "undefined") {
     return {
+       screen:{
+          width:100, height:100
+       },
        elements:[{
          id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
        },{
@@ -50,7 +53,9 @@ window.store = createStore((_state, action)=> {
     state.pages[action.pageIndex] = page;
     break;
   case 'resize':
-    console.log('resize' + action.width + ',' + action.height);
+    state.screen.width = action.width;
+    state.screen.height = action.height;
+    //console.log('resize:' + state.width + ',' + state.height);
     break;
   default:
     break;
@@ -60,6 +65,7 @@ window.store = createStore((_state, action)=> {
 
 class App extends Component {
   constructor() {
+    //console.log("App:constructor");
     super();
     window.store.setApplication(this);
   }
@@ -71,10 +77,19 @@ class App extends Component {
     preview.contentWindow.present(JSON.stringify(swipe, undefined, 2));
   }
   
+  /*
+  setState(state) {
+    console.log("App:setState width=", state.width);
+    super.setState(state);
+  }
+  */
+  
   render() {
+    console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
     return (
       <div className="App">
         <div id="left">
+            <button onClick={ this.updateDimensions }>Test</button>
             <button onClick={ this.play }>Preview</button>
             <Scene elements={ this.states.elements }/>
             <Pages pages={ this.states.pages }
@@ -88,21 +103,24 @@ class App extends Component {
   }
   
   updateDimensions() {
-    console.log("updateDimensions");
     var w = window,
         d = document,
         documentElement = d.documentElement,
         body = d.getElementsByTagName('body')[0],
         width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
         height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
+    //console.log("updateDimensions:" + width + "," + height);
     window.store.dispatch({type:'resize', width:width, height:height});
   }
+  componentWillMount() {
+    this.updateDimensions();
+  }
   componentDidMount() {
-    console.log("didMount");
+    //console.log("didMount");
     window.addEventListener("resize", this.updateDimensions);
   }
   componentWillUnmount() {
-    console.log("willUnmount");
+    //console.log("willUnmount");
     window.removeEventListener("resize", this.updateDimensions);
   }
 }
