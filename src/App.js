@@ -94,24 +94,7 @@ class App extends Component {
     super();
     window.store.setApplication(this);
   }
-  
-  play() {
-    var swipe = new Generator(window.store).generate();
-    console.log(JSON.stringify(swipe, undefined, 2));
-    var frame = document.getElementById('preview_frame');
-    frame.style.visibility = 'visible';
-    var preview = document.getElementById('preview');
-    console.log("preview=" + preview.contentWindow.present);
-    preview.contentWindow.present(JSON.stringify(swipe, undefined, 2));
-  }
-  
-  /*
-  setState(state) {
-    console.log("App:setState width=", state.width);
-    super.setState(state);
-  }
-  */
-  
+    
   render() {
     //console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
     var leftWidth = this.states.screen.width/3;
@@ -119,8 +102,7 @@ class App extends Component {
     return (
       <div className="App">
         <div id="left">
-            <button onClick={ this.play }>Preview</button>
-            <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Preview2</button>
+            <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Preview</button>
             <Scene elements={ this.states.elements }
                    dimension={ this.states.dimension }
                    width={ leftWidth } />
