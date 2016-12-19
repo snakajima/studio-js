@@ -37,6 +37,7 @@ class Page extends Component {
       <div>
         <div className="canvasPage"
              style={{ width:this.props.width, height:height }}
+            onClick={()=>{window.store.dispatch({type:'select', pageIndex:this.props.pageIndex})}}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element}
               scale={scale} />})}

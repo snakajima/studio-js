@@ -10,7 +10,7 @@ window.store = createStore((_state, action)=> {
   if (typeof _state === "undefined") {
     return {
        screen:{
-          width:100, height:100
+         width:100, height:100, pageIndex:0
        },
        dimension:{
           width:480, height:320
@@ -18,9 +18,9 @@ window.store = createStore((_state, action)=> {
        elements:[{
          id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
        },{
-         id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "imgx":"http://satoshi.blogs.com/swipe/movie.png"
+         id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "img":"http://satoshi.blogs.com/swipe/movie.png"
        },{
-         id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "imgx":"http://satoshi.blogs.com/swipe/shuttlex.png"
+         id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
        }],
        pages:[{
        }]
@@ -62,7 +62,10 @@ window.store = createStore((_state, action)=> {
     break;
   case 'preview':
    state.screen.preview = action.preview;
-   break;
+    break;
+  case 'select':
+    state.screen.pageIndex = action.pageIndex;
+    break;
   default:
     console.log("unknown type:" + action.type);
     break;
@@ -100,7 +103,7 @@ class App extends Component {
         <div id="center">
             <div className="toolbar">
             </div>
-            <Page pageIndex={0} page={this.states.pages[0]}
+            <Page pageIndex={this.states.screen.pageIndex} page={this.states.pages[this.states.screen.pageIndex]}
                   dimension={ this.states.dimension }
                   width={ this.states.screen.width - leftWidth - 8 }
                   sceneElements={ this.states.elements} />

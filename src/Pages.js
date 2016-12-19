@@ -8,7 +8,7 @@ class Pages extends Component {
       <div className='canvasPages'
            style={{height:this.props.height - height}}>{
         this.props.pages.map((page, index) => {
-           return (<div key={index}>
+             return (<div key={index} >
                 <Page pageIndex={index} page={page}
                   width={ this.props.width }
                   dimension={ this.props.dimension }
