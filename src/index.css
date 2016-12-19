@@ -33,6 +33,11 @@ body {
   border: 1px solid #aaa;
 }
 
+.canvasPageSelected {
+    position:relative;
+    border: 1px solid #00f;
+}
+
 .previewFrame {
     position:fixed;
     left:0;

@@ -13,6 +13,7 @@ class Pages extends Component {
                   width={ this.props.width }
                   dimension={ this.props.dimension }
                   sceneElements={ this.props.sceneElements }
+                  selected={ index===this.props.selectedPageIndex }
                 />
                 <div className="subToolbar">
                   <button onClick={()=>{window.store.dispatch({type:'deletePage', pageIndex:index})}} >Delete</button>

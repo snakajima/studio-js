@@ -35,7 +35,7 @@ class Page extends Component {
     const scale = this.props.width / this.props.dimension.width;
     return (
       <div>
-        <div className="canvasPage"
+            <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
              style={{ width:this.props.width, height:height }}
             onClick={()=>{window.store.dispatch({type:'select', pageIndex:this.props.pageIndex})}}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
