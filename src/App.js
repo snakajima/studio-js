@@ -101,6 +101,9 @@ class App extends Component {
                    dimension={ this.states.dimension }
                    selected={ pageIndex===-1 }
                    width={ leftWidth } />
+            <div className="subToolbar">
+            <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
+            </div>
             <Pages pages={ this.states.pages }
                    dimension={ this.states.dimension }
                    selectedPageIndex={ pageIndex }

@@ -24,7 +24,6 @@ class Scene extends Component {
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const scale = this.props.width / this.props.dimension.width;
     return (
-      <div>
         <div className={this.props.selected ? "canvasSceneSelected" : "canvasScene"}
              style={{width:this.props.width, height:height}}
             onClick={()=>{window.store.dispatch({type:'select', pageIndex:-1})}}
@@ -33,10 +32,6 @@ class Scene extends Component {
             return <Element key={index} pageIndex={-1} element={element} scale={scale}/>
           })
         }</div>
-        <div className="subToolbar">
-          <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
-        </div>
-      </div>
     );
   }
 }
