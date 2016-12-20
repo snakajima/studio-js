@@ -18,6 +18,7 @@ class Pages extends Component {
                   width={ this.props.width }
                   dimension={ this.props.dimension }
                   sceneElements={ this.props.sceneElements }
+                  main={false}
                   selected={ index===this.props.selectedPageIndex }
                 />
                 <div className="subToolbar">

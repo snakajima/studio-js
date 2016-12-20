@@ -12,6 +12,15 @@ class Scene extends Component {
     super();
     this.onDrop = this.onDrop.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(e) {
+    if (!this.props.main) {
+      window.store.dispatch({type:'select', pageIndex:-1});
+    } else {
+        console.log("Scene.onClick");
+    }
   }
   
   onDrop(e) {
@@ -32,10 +41,11 @@ class Scene extends Component {
     return (
         <div className={this.props.selected ? "canvasSceneSelected" : "canvasScene"}
              style={{width:this.props.width, height:height}}
-            onClick={()=>{window.store.dispatch({type:'select', pageIndex:-1})}}
+            onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>{
           this.props.elements.map((element, index)=>{
-            return <Element key={index} pageIndex={-1} element={element} scale={scale}/>
+             return <Element key={index} pageIndex={-1} element={element}
+                                  scale={scale} main={this.props.main} />
           })
         }</div>
     );

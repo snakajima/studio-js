@@ -12,7 +12,15 @@ class Page extends Component {
     super();
     this.onDrop = this.onDrop.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
-    //console.log("Page:width=" + props.width);
+    this.onClick = this.onClick.bind(this);
+  }
+    
+  onClick(e) {
+    if (!this.props.main) {
+      window.store.dispatch({type:'select', pageIndex:this.props.pageIndex});
+    } else {
+      console.log("Page.onClick");
+    }
   }
 
   onDrop(e) {
@@ -42,9 +50,9 @@ class Page extends Component {
       <div>
             <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
              style={{ width:this.props.width, height:height }}
-            onClick={()=>{window.store.dispatch({type:'select', pageIndex:this.props.pageIndex})}}
+            onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
-          {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element}
+          {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
         </div>
       </div>

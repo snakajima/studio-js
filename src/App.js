@@ -43,6 +43,7 @@ class App extends Component {
             <Scene elements={ this.state.elements }
                    dimension={ this.state.dimension }
                    selected={ pageIndex===-1 }
+                   main={false}
                    width={ leftWidth } />
             <div className="subToolbar">
                <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
@@ -62,9 +63,11 @@ class App extends Component {
                     page={this.state.pages[pageIndex]}
                     dimension={ this.state.dimension }
                     width={ rightWidth }
+                    main={true}
                     sceneElements={ this.state.elements} />
             : <Scene elements={ this.state.elements }
                      dimension={ this.state.dimension }
+                     main={true}
                      width={ rightWidth } />
             }
         </div>

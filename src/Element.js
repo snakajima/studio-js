@@ -10,11 +10,19 @@ class Element extends Component {
   constructor(props) {
     super();
     this.onDragStart = this.onDragStart.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
   
   onDragStart(e) {
     DragContext.setContext({ pageIndex:this.props.pageIndex, id:this.props.element.id,
                              x:e.clientX, y:e.clientY });
+  }
+    
+  onClick(e) {
+    if (this.props.main) {
+      console.log("Element.onClick:" + this.props.element.id);
+      e.stopPropagation();
+    }
   }
   
   render() {
@@ -27,6 +35,7 @@ class Element extends Component {
         }}
         draggable={true}
         onDragStart={this.onDragStart}
+        onClick={this.onClick}
       >
       {
         (typeof this.props.element.img === 'string') ?
