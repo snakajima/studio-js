@@ -18,12 +18,15 @@ function reducer(_state, action) {
     var state = Object.assign({}, _state);
     switch(action.type) {
         case 'duplicateScene':
+            state.pages = state.pages.map((page) => page);
             state.pages.unshift({});
             break;
         case 'duplicatePage':
+            state.pages = state.pages.map((page) => page);
             state.pages.splice(action.pageIndex + 1, 0, Object.assign({}, action.page));
             break;
         case 'deletePage':
+            state.pages = state.pages.map((page) => page);
             state.pages.splice(action.pageIndex, 1);
             if (state.screen.pageIndex >=state.pages.length) {
                 state.screen.pageIndex = state.pages.length-1;
@@ -41,21 +44,26 @@ function reducer(_state, action) {
         case 'movePageElement':
             var page = Object.assign({}, state.pages[action.pageIndex]);
             var element = Object.assign({}, page[action.id] || {});
-            var tx = element.translate || [0,0];
-            tx[0] = MathEx.round(tx[0] + action.dx / action.scale);
-            tx[1] = MathEx.round(tx[1] + action.dy / action.scale);
-            element.translate = tx;
+            const tx = element.translate || [0,0];
+            element.translate = [
+              MathEx.round(tx[0] + action.dx / action.scale),
+              MathEx.round(tx[1] + action.dy / action.scale)
+            ];
             page[action.id] = element;
+            state.pages = state.pages.map((page) => page);
             state.pages[action.pageIndex] = page;
             break;
         case 'resize':
+            state.screen = Object.assign({}, state.screen);
             state.screen.width = action.width;
             state.screen.height = action.height;
             break;
         case 'preview':
+            state.screen = Object.assign({}, state.screen);
             state.screen.preview = action.preview;
             break;
         case 'select':
+            state.screen = Object.assign({}, state.screen);
             state.screen.pageIndex = action.pageIndex;
             break;
         default:
