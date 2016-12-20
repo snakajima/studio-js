@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2016 Satoshi Nakajima (https://github.com/snakajima)
+// License: The MIT License
+//
+
 import React, { Component } from 'react';
 import './App.css';
 import createStore from './SimpleRedux';
@@ -25,7 +30,7 @@ class App extends Component {
         body = d.getElementsByTagName('body')[0],
         width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
         height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
-    const leftWidth = width/4;
+    const leftWidth = Math.max(width/4, 140);
     const rightWidth = width - leftWidth - 8;
     const pageIndex = this.state.pageIndex;
     return (

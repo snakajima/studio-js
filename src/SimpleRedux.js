@@ -1,10 +1,15 @@
+//
 // Super-simplified Redux
+//
+// Copyright (c) 2016 Satoshi Nakajima (https://github.com/snakajima)
+// License: The MIT License
+//
+
 function createStore(reducer) {
     var state = reducer()
     var app;
     function dispatch(action) {
       state = reducer(state, action)
-      //console.log("store:dispatch width=", state.screen.width);
       app.setState(state)
     }
     function setApplication(obj) {

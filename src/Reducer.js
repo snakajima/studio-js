@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2016 Satoshi Nakajima (https://github.com/snakajima)
+// License: The MIT License
+//
+
 import MathEx from './MathEx';
 
 function reducer(_state, action) {

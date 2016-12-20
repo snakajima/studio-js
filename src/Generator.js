@@ -1,10 +1,15 @@
+//
+// Copyright (c) 2016 Satoshi Nakajima (https://github.com/snakajima)
+// License: The MIT License
+//
+
 function generate(store) {
     const state = store.getState();
     var prev = {};
     const idsAll = state.elements.map((element) => element.id);
     return {
       type:"net.swipe.swipe",
-      dimension:[240,240],
+      dimension:[state.dimension.width, state.dimension.height],
       paging:"leftToRight",
       orientation:"landscape",
       templates:{
