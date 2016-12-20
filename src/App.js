@@ -45,6 +45,8 @@ window.store = createStore((_state, action)=> {
        if (element.id === action.id) {
            element.x += action.dx / action.scale;
            element.y += action.dy / action.scale;
+           element.x = Math.floor(element.x * 10) / 10;
+           element.y = Math.floor(element.y * 10) / 10;
        }
        return element
     })
@@ -54,6 +56,8 @@ window.store = createStore((_state, action)=> {
     var element = Object.assign({}, page[action.id] || {});
     var tx = element.translate || [0,0];
     tx = [tx[0] + action.dx / action.scale, tx[1] + action.dy / action.scale];
+    tx[0] = Math.floor(tx[0] * 10) / 10;
+    tx[1] = Math.floor(tx[1] * 10) / 10;
     element.translate = tx;
     page[action.id] = element;
     state.pages[action.pageIndex] = page;
