@@ -27,7 +27,7 @@ class App extends Component {
         height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
     const leftWidth = width/4;
     const rightWidth = width - leftWidth - 8;
-    const pageIndex = this.state.screen.pageIndex;
+    const pageIndex = this.state.pageIndex;
     return (
       <div className="App">
         <div id="left">
@@ -54,7 +54,7 @@ class App extends Component {
             </div>
             {
             (pageIndex >=0) ?
-              <Page pageIndex={this.state.screen.pageIndex}
+              <Page pageIndex={this.state.pageIndex}
                     page={this.state.pages[pageIndex]}
                     dimension={ this.state.dimension }
                     width={ rightWidth }
@@ -64,7 +64,7 @@ class App extends Component {
                      width={ rightWidth } />
             }
         </div>
-        { this.state.screen.preview ? <Preview /> : "" }
+        { this.state.preview ? <Preview /> : "" }
       </div>
     );
   }

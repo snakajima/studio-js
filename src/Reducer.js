@@ -3,7 +3,8 @@ import MathEx from './MathEx';
 function reducer(_state, action) {
     if (typeof _state === "undefined") {
       const initialState = {
-        screen:{ pageIndex:0 },
+        pageIndex:0,
+        preview:false,
         dimension:{ width:480, height:320 },
         elements:[{
             id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
@@ -31,8 +32,8 @@ function reducer(_state, action) {
         case 'deletePage':
             state.pages = state.pages.map((page) => page);
             state.pages.splice(action.pageIndex, 1);
-            if (state.screen.pageIndex >=state.pages.length) {
-                state.screen.pageIndex = state.pages.length-1;
+            if (state.pageIndex >=state.pages.length) {
+                state.pageIndex = state.pages.length-1;
             }
             break;
         case 'moveSceneElement':
@@ -60,13 +61,11 @@ function reducer(_state, action) {
             undoable = false;
             break;
         case 'preview':
-            state.screen = Object.assign({}, state.screen);
-            state.screen.preview = action.preview;
+            state.preview = action.preview;
             undoable = false;
             break;
         case 'select':
-            state.screen = Object.assign({}, state.screen);
-            state.screen.pageIndex = action.pageIndex;
+            state.pageIndex = action.pageIndex;
             undoable = false;
             break;
         case 'setState':
