@@ -8,9 +8,12 @@ import Generator from './Generator';
 
 class Preview extends Component {
     render() {
+        const width = this.props.width-200;
+        const height = this.props.dimension.height * width / this.props.dimension.width;
         return(
                <div className="previewFrame" onClick={()=>{window.store.dispatch({type:'preview', preview:false})}}>
                <iframe src="./preview.html" className='preview'
+               style={{width:width, height:height + 100,left:100,top:100}}
                ref={(iframe)=>{ this.iframe = iframe; }} />
                </div>
                )

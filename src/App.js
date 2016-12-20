@@ -69,7 +69,7 @@ class App extends Component {
                      width={ rightWidth } />
             }
         </div>
-        { this.state.preview ? <Preview /> : "" }
+            { this.state.preview ? <Preview width={width} dimension={this.state.dimension} /> : "" }
       </div>
     );
   }
