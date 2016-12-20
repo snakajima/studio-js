@@ -9,10 +9,6 @@ class UndoStack {
         this.index = -1;
     }
     
-    setStore(store) {
-        this.store = store;
-    }
-    
     undoable() {
         return this.index > 0;
     }
@@ -27,19 +23,19 @@ class UndoStack {
         this.index++;
     }
     
-    undo() {
+    undo(store) {
         if (this.undoable()) {
             this.index--;
             const state = this.states[this.index];
-            this.store.dispatch({type:'setState', state:state});
+            store.dispatch({type:'setState', state:state});
         }
     }
     
-    redo() {
+    redo(store) {
         if (this.redoable()) {
             this.index++;
             const state = this.states[this.index];
-            this.store.dispatch({type:'setState', state:state});
+            store.dispatch({type:'setState', state:state});
         }
     }
 }

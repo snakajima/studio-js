@@ -15,7 +15,6 @@ import UndoStack from './UndoStack';
 
 window.stack = new UndoStack();
 window.store = createStore(Reducer.reducer);
-window.stack.setStore(window.store);
 
 class App extends Component {
   constructor() {
@@ -38,8 +37,8 @@ class App extends Component {
         <div id="left">
             <div className="toolbar">
               <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Play</button>
-              <button disabled={!window.stack.undoable()} onClick={ () => {window.stack.undo()} }>Undo</button>
-             <button disabled={!window.stack.redoable()} onClick={ () => {window.stack.redo()} }>Redo</button>
+              <button disabled={!window.stack.undoable()} onClick={ () => {window.stack.undo(window.store)} }>Undo</button>
+             <button disabled={!window.stack.redoable()} onClick={ () => {window.stack.redo(window.store)} }>Redo</button>
             </div>
             <Scene elements={ this.state.elements }
                    dimension={ this.state.dimension }
