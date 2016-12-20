@@ -3,7 +3,7 @@ import MathEx from './MathEx';
 function reducer(_state, action) {
     if (typeof _state === "undefined") {
       const initialState = {
-        screen:{ width:100, height:100, pageIndex:0 },
+        screen:{ pageIndex:0 },
         dimension:{ width:480, height:320 },
         elements:[{
             id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
@@ -57,9 +57,6 @@ function reducer(_state, action) {
             state.pages[action.pageIndex] = page;
             break;
         case 'resize':
-            state.screen = Object.assign({}, state.screen);
-            state.screen.width = action.width;
-            state.screen.height = action.height;
             undoable = false;
             break;
         case 'preview':
