@@ -6,8 +6,11 @@ import Pages from './Pages';
 import Page from './Page';
 import Preview from './Preview';
 import Reducer from './Reducer';
+import UndoStack from './UndoStack';
 
+window.stack = new UndoStack();
 window.store = createStore(Reducer.reducer);
+window.stack.setStore(window.store);
 
 class App extends Component {
   constructor() {
@@ -23,7 +26,9 @@ class App extends Component {
       <div className="App">
         <div id="left">
             <div className="toolbar">
-            <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Preview</button>
+              <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Play</button>
+              <button onClick={ () => {window.stack.undo()} }>Undo</button>
+              <button onClick={ () => {window.stack.redo()} }>Redo</button>
             </div>
             <Scene elements={ this.state.elements }
                    dimension={ this.state.dimension }

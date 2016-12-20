@@ -2,7 +2,7 @@ import MathEx from './MathEx';
 
 function reducer(_state, action) {
     if (typeof _state === "undefined") {
-      return {
+      const initialState = {
         screen:{ width:100, height:100, pageIndex:0 },
         dimension:{ width:480, height:320 },
         elements:[{
@@ -13,9 +13,12 @@ function reducer(_state, action) {
             id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
           }],
         pages:[{}]
-       };
+      };
+      window.stack.append(initialState);
+      return initialState;
     }
     var state = Object.assign({}, _state);
+    var undoable = true;
     switch(action.type) {
         case 'duplicateScene':
             state.pages = state.pages.map((page) => page);
@@ -57,18 +60,30 @@ function reducer(_state, action) {
             state.screen = Object.assign({}, state.screen);
             state.screen.width = action.width;
             state.screen.height = action.height;
+            undoable = false;
             break;
         case 'preview':
             state.screen = Object.assign({}, state.screen);
             state.screen.preview = action.preview;
+            undoable = false;
             break;
         case 'select':
             state.screen = Object.assign({}, state.screen);
             state.screen.pageIndex = action.pageIndex;
+            undoable = false;
+            break;
+        case 'setState':
+            state = action.state;
+            console.log("setState:" + JSON.stringify(state));
+            undoable = false;
             break;
         default:
             console.log("unknown type:" + action.type);
+            undoable = false;
             break;
+    }
+    if (undoable) {
+        window.stack.append(state);
     }
     return state
 }
