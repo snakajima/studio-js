@@ -23,6 +23,9 @@ function reducer(_state, action) {
       window.stack.append(initialState);
       return initialState;
     }
+    // *** IMPORTANT ***
+    // In order to enable undo and redo, we must strictly follow the Redux guideline.
+    // Do not modify the state object or its sub-objects (no side effect).
     var state = Object.assign({}, _state);
     var undoable = true;
     switch(action.type) {
