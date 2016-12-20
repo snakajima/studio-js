@@ -63,7 +63,6 @@ window.store = createStore((_state, action)=> {
   case 'resize':
     state.screen.width = action.width;
     state.screen.height = action.height;
-    //console.log('resize:' + state.width + ',' + state.height);
     break;
   case 'preview':
    state.screen.preview = action.preview;
@@ -82,16 +81,13 @@ window.store = createStore((_state, action)=> {
 
 class App extends Component {
   constructor() {
-    //console.log("App:constructor");
     super();
     window.store.setApplication(this);
   }
     
   render() {
-    //console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
     const leftWidth = this.states.screen.width/4;
-      const rightWidth = this.states.screen.width - leftWidth - 8;
-    const preview = (this.states.screen.preview) ? <Preview /> : "";
+    const rightWidth = this.states.screen.width - leftWidth - 8;
     const pageIndex = this.states.screen.pageIndex;
     return (
       <div className="App">
@@ -117,16 +113,17 @@ class App extends Component {
             </div>
             {
             (pageIndex >=0) ?
-            <Page pageIndex={this.states.screen.pageIndex} page={this.states.pages[this.states.screen.pageIndex]}
-            dimension={ this.states.dimension }
-            width={ rightWidth }
-            sceneElements={ this.states.elements} />
+              <Page pageIndex={this.states.screen.pageIndex}
+                    page={this.states.pages[pageIndex]}
+                    dimension={ this.states.dimension }
+                    width={ rightWidth }
+                    sceneElements={ this.states.elements} />
             : <Scene elements={ this.states.elements }
-            dimension={ this.states.dimension }
-            width={ rightWidth } />
+                     dimension={ this.states.dimension }
+                     width={ rightWidth } />
             }
         </div>
-        { preview }
+        { this.states.screen.preview ? <Preview /> : "" }
       </div>
     );
   }
@@ -138,7 +135,6 @@ class App extends Component {
         body = d.getElementsByTagName('body')[0],
         width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
         height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
-    //console.log("updateDimensions:" + width + "," + height);
     window.store.dispatch({type:'resize', width:width, height:height});
   }
   componentWillMount() {

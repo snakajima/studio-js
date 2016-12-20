@@ -2,7 +2,7 @@ class Generator {
   static generate(store) {
     const state = store.getState();
     var prev = {};
-    var idsAll = state.elements.map((element) => element.id);
+    const idsAll = state.elements.map((element) => element.id);
     return {
       type:"net.swipe.swipe",
       dimension:[240,240],
@@ -21,7 +21,7 @@ class Generator {
         const ids = idsAll.filter((id) => (prev[id] || page[id]));
         if (ids.length > 0) {
           obj.elements = ids.map((id) => {
-            var element = Object.assign({id:id}, prev[id] || {});
+            let element = Object.assign({id:id}, prev[id] || {});
             return Object.assign(element, {to:page[id] || {translate:[0,0]}});
           })
         };
