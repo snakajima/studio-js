@@ -8,7 +8,8 @@ class Element extends Component {
   }
   
   onDragStart(e) {
-    DragContext.setContext({ element:this.props.element, pageIndex:this.props.pageIndex, id:this.props.element.id, x:e.clientX, y:e.clientY });
+    DragContext.setContext({ pageIndex:this.props.pageIndex, id:this.props.element.id,
+                             x:e.clientX, y:e.clientY });
   }
   
   render() {

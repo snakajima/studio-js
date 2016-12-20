@@ -10,7 +10,7 @@ class Scene extends Component {
   }
   
   onDrop(e) {
-    var cotext = DragContext.getContext();
+    const cotext = DragContext.getContext();
     const scale = this.props.width / this.props.dimension.width;
     window.store.dispatch({type:'moveSceneElement', id:cotext.id,
                     scale:scale,
