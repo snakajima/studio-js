@@ -16,44 +16,44 @@ class App extends Component {
   }
     
   render() {
-    const leftWidth = this.states.screen.width/4;
-    const rightWidth = this.states.screen.width - leftWidth - 8;
-    const pageIndex = this.states.screen.pageIndex;
+    const leftWidth = this.state.screen.width/4;
+    const rightWidth = this.state.screen.width - leftWidth - 8;
+    const pageIndex = this.state.screen.pageIndex;
     return (
       <div className="App">
         <div id="left">
             <div className="toolbar">
             <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Preview</button>
             </div>
-            <Scene elements={ this.states.elements }
-                   dimension={ this.states.dimension }
+            <Scene elements={ this.state.elements }
+                   dimension={ this.state.dimension }
                    selected={ pageIndex===-1 }
                    width={ leftWidth } />
             <div className="subToolbar">
             <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
             </div>
-            <Pages pages={ this.states.pages }
-                   dimension={ this.states.dimension }
+            <Pages pages={ this.state.pages }
+                   dimension={ this.state.dimension }
                    selectedPageIndex={ pageIndex }
-                   width={ leftWidth } height={ this.states.screen.height - 60 }
-                   sceneElements={ this.states.elements }/>
+                   width={ leftWidth } height={ this.state.screen.height - 60 }
+                   sceneElements={ this.state.elements }/>
         </div>
         <div id="center">
             <div className="toolbar">
             </div>
             {
             (pageIndex >=0) ?
-              <Page pageIndex={this.states.screen.pageIndex}
-                    page={this.states.pages[pageIndex]}
-                    dimension={ this.states.dimension }
+              <Page pageIndex={this.state.screen.pageIndex}
+                    page={this.state.pages[pageIndex]}
+                    dimension={ this.state.dimension }
                     width={ rightWidth }
-                    sceneElements={ this.states.elements} />
-            : <Scene elements={ this.states.elements }
-                     dimension={ this.states.dimension }
+                    sceneElements={ this.state.elements} />
+            : <Scene elements={ this.state.elements }
+                     dimension={ this.state.dimension }
                      width={ rightWidth } />
             }
         </div>
-        { this.states.screen.preview ? <Preview /> : "" }
+        { this.state.screen.preview ? <Preview /> : "" }
       </div>
     );
   }

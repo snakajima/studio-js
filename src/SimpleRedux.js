@@ -9,7 +9,7 @@ function createStore(reducer) {
     }
     function setApplication(obj) {
       app = obj;
-      app.states = state;
+      app.state = state;
     }
     function getState() {
       return state;
