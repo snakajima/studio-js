@@ -87,8 +87,10 @@ class App extends Component {
     
   render() {
     //console.log("App:width=" + this.states.screen.width + ",pagecount=" + this.states.pages.length);
-    var leftWidth = this.states.screen.width/4;
-    var preview = (this.states.screen.preview) ? <Preview /> : "";
+    const leftWidth = this.states.screen.width/4;
+      const rightWidth = this.states.screen.width - leftWidth - 8;
+    const preview = (this.states.screen.preview) ? <Preview /> : "";
+    const pageIndex = this.states.screen.pageIndex;
     return (
       <div className="App">
         <div id="left">
@@ -97,20 +99,27 @@ class App extends Component {
             </div>
             <Scene elements={ this.states.elements }
                    dimension={ this.states.dimension }
+                   selected={ pageIndex===-1 }
                    width={ leftWidth } />
             <Pages pages={ this.states.pages }
                    dimension={ this.states.dimension }
-                   selectedPageIndex={ this.states.screen.pageIndex }
+                   selectedPageIndex={ pageIndex }
                    width={ leftWidth } height={ this.states.screen.height - 60 }
                    sceneElements={ this.states.elements }/>
         </div>
         <div id="center">
             <div className="toolbar">
             </div>
+            {
+            (pageIndex >=0) ?
             <Page pageIndex={this.states.screen.pageIndex} page={this.states.pages[this.states.screen.pageIndex]}
-                  dimension={ this.states.dimension }
-                  width={ this.states.screen.width - leftWidth - 8 }
-                  sceneElements={ this.states.elements} />
+            dimension={ this.states.dimension }
+            width={ rightWidth }
+            sceneElements={ this.states.elements} />
+            : <Scene elements={ this.states.elements }
+            dimension={ this.states.dimension }
+            width={ rightWidth } />
+            }
         </div>
         { preview }
       </div>

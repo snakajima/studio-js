@@ -25,8 +25,9 @@ class Scene extends Component {
     const scale = this.props.width / this.props.dimension.width;
     return (
       <div>
-        <div className="canvasScene"
+        <div className={this.props.selected ? "canvasSceneSelected" : "canvasScene"}
              style={{width:this.props.width, height:height}}
+            onClick={()=>{window.store.dispatch({type:'select', pageIndex:-1})}}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>{
           this.props.elements.map((element, index)=>{
             return <Element key={index} pageIndex={-1} element={element} scale={scale}/>

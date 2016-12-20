@@ -24,6 +24,12 @@ body {
   background: #ffc;
 }
 
+.canvasSceneSelected {
+    position:relative;
+    border: 1px solid #00f;
+    background: #ffc;
+}
+
 .canvasPages {
   overflow:scroll;
 }
