@@ -23,12 +23,10 @@ class App extends Component {
   }
     
   render() {
-    var w = window,
-        d = document,
-        documentElement = d.documentElement,
-        body = d.getElementsByTagName('body')[0],
-        width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
-        height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
+    const documentElement = document.documentElement,
+        body = document.getElementsByTagName('body')[0],
+        width = window.innerWidth || documentElement.clientWidth || body.clientWidth,
+        height = window.innerHeight|| documentElement.clientHeight|| body.clientHeight;
     const leftWidth = Math.max(width/4, 140);
     const rightWidth = width - leftWidth - 8;
     const pageIndex = this.state.pageIndex;
@@ -37,15 +35,17 @@ class App extends Component {
         <div id="left">
             <div className="toolbar">
               <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Play</button>
-              <button disabled={!window.stack.undoable()} onClick={ () => {window.stack.undo(window.store)} }>Undo</button>
-             <button disabled={!window.stack.redoable()} onClick={ () => {window.stack.redo(window.store)} }>Redo</button>
+              <button disabled={!window.stack.undoable()}
+                      onClick={ () => {window.stack.undo(window.store)} }>Undo</button>
+             <button disabled={!window.stack.redoable()}
+                      onClick={ () => {window.stack.redo(window.store)} }>Redo</button>
             </div>
             <Scene elements={ this.state.elements }
                    dimension={ this.state.dimension }
                    selected={ pageIndex===-1 }
                    width={ leftWidth } />
             <div className="subToolbar">
-            <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
+               <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
             </div>
             <Pages pages={ this.state.pages }
                    dimension={ this.state.dimension }
@@ -68,7 +68,7 @@ class App extends Component {
                      width={ rightWidth } />
             }
         </div>
-            { this.state.preview ? <Preview width={width} dimension={this.state.dimension} /> : "" }
+        { this.state.preview ? <Preview width={width} dimension={this.state.dimension} /> : "" }
       </div>
     );
   }

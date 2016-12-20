@@ -43,12 +43,14 @@ function reducer(_state, action) {
             break;
         case 'moveSceneElement':
             state.elements = state.elements.map((element)=>{
-                                                if (element.id === action.id) {
-                                                element.x = MathEx.round(element.x + action.dx / action.scale);
-                                                element.y = MathEx.round(element.y + action.dy / action.scale);
-                                                }
-                                                return element
-                                                })
+                if (element.id === action.id) {
+                  var e = Object.assign({}, element);
+                  e.x = MathEx.round(e.x + action.dx / action.scale);
+                  e.y = MathEx.round(e.y + action.dy / action.scale);
+                  return e;
+                }
+                return element
+            })
             break;
         case 'movePageElement':
             var page = Object.assign({}, state.pages[action.pageIndex]);
