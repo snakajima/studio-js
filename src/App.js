@@ -5,6 +5,7 @@ import Scene from './Scene';
 import Pages from './Pages';
 import Page from './Page';
 import Preview from './Preview';
+import MathEx from './MathEx';
 
 window.store = createStore((_state, action)=> {
   if (typeof _state === "undefined") {
@@ -43,10 +44,8 @@ window.store = createStore((_state, action)=> {
   case 'moveSceneElement':
     state.elements = state.elements.map((element)=>{
        if (element.id === action.id) {
-           element.x += action.dx / action.scale;
-           element.y += action.dy / action.scale;
-           element.x = Math.floor(element.x * 10) / 10;
-           element.y = Math.floor(element.y * 10) / 10;
+           element.x = MathEx.round(element.x + action.dx / action.scale);
+           element.y = MathEx.round(element.y + action.dy / action.scale);
        }
        return element
     })
@@ -55,9 +54,8 @@ window.store = createStore((_state, action)=> {
     var page = Object.assign({}, state.pages[action.pageIndex]);
     var element = Object.assign({}, page[action.id] || {});
     var tx = element.translate || [0,0];
-    tx = [tx[0] + action.dx / action.scale, tx[1] + action.dy / action.scale];
-    tx[0] = Math.floor(tx[0] * 10) / 10;
-    tx[1] = Math.floor(tx[1] * 10) / 10;
+    tx[0] = MathEx.round(tx[0] + action.dx / action.scale);
+    tx[1] = MathEx.round(tx[1] + action.dy / action.scale);
     element.translate = tx;
     page[action.id] = element;
     state.pages[action.pageIndex] = page;
