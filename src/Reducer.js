@@ -74,7 +74,6 @@ function reducer(_state, action) {
             break;
         case 'setState':
             state = action.state;
-            console.log("setState:" + JSON.stringify(state));
             undoable = false;
             break;
         default:

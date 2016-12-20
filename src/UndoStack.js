@@ -21,7 +21,6 @@ class UndoStack {
         this.states = this.states.slice(0,this.index+1);
         this.states.push(state);
         this.index++;
-        console.log("undo:append:" + this.states.length + "," + this.index)
     }
     
     undo() {
@@ -29,7 +28,6 @@ class UndoStack {
             this.index--;
             const state = this.states[this.index];
             this.store.dispatch({type:'setState', state:state});
-            console.log("undo:undo:" + this.states.length + "," + this.index)
         }
     }
     
@@ -38,7 +36,6 @@ class UndoStack {
             this.index++;
             const state = this.states[this.index];
             this.store.dispatch({type:'setState', state:state});
-            console.log("undo:redo:" + this.states.length + "," + this.index)
         }
     }
 }

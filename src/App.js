@@ -19,8 +19,14 @@ class App extends Component {
   }
     
   render() {
-    const leftWidth = this.state.screen.width/4;
-    const rightWidth = this.state.screen.width - leftWidth - 8;
+    var w = window,
+        d = document,
+        documentElement = d.documentElement,
+        body = d.getElementsByTagName('body')[0],
+        width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
+        height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
+    const leftWidth = width/4;
+    const rightWidth = width - leftWidth - 8;
     const pageIndex = this.state.screen.pageIndex;
     return (
       <div className="App">
@@ -40,7 +46,7 @@ class App extends Component {
             <Pages pages={ this.state.pages }
                    dimension={ this.state.dimension }
                    selectedPageIndex={ pageIndex }
-                   width={ leftWidth } height={ this.state.screen.height - 60 }
+                   width={ leftWidth } height={ height - 60 }
                    sceneElements={ this.state.elements }/>
         </div>
         <div id="center">
