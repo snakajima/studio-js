@@ -1,11 +1,8 @@
 class Generator {
-  constructor(store) {
-    this.state = store.getState();
-  }
-  
-  generate() {
+  static generate(store) {
+    const state = store.getState();
     var prev = {};
-    var idsAll = this.state.elements.map((element) => element.id);
+    var idsAll = state.elements.map((element) => element.id);
     return {
       type:"net.swipe.swipe",
       dimension:[240,240],
@@ -15,11 +12,11 @@ class Generator {
         pages:{
           s0:{
             play: "scroll",
-            elements: this.state.elements
+            elements: state.elements
           }
         }
       },
-      pages: this.state.pages.map((page) => {
+      pages: state.pages.map((page) => {
         var obj = {template:"s0"}
         const ids = idsAll.filter((id) => (prev[id] || page[id]));
         if (ids.length > 0) {
