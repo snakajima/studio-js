@@ -1,22 +1,17 @@
 import MathEx from './MathEx';
 
-class Reducer {
-  static reducer(_state, action) {
+function reducer(_state, action) {
     if (typeof _state === "undefined") {
       return {
-        screen:{
-          width:100, height:100, pageIndex:0
-        },
-        dimension:{
-          width:480, height:320
-        },
+        screen:{ width:100, height:100, pageIndex:0 },
+        dimension:{ width:480, height:320 },
         elements:[{
-                    id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
-                  },{
-                    id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "img":"http://satoshi.blogs.com/swipe/movie.png"
-                  },{
-                    id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
-                  }],
+            id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
+          },{
+            id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "img":"http://satoshi.blogs.com/swipe/movie.png"
+          },{
+            id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
+          }],
         pages:[{}]
        };
     }
@@ -68,7 +63,6 @@ class Reducer {
             break;
     }
     return state
-  }
 }
 
-export default Reducer;
+module.exports = { reducer };
