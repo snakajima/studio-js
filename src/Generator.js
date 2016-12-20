@@ -1,5 +1,4 @@
-class Generator {
-  static generate(store) {
+function generate(store) {
     const state = store.getState();
     var prev = {};
     const idsAll = state.elements.map((element) => element.id);
@@ -29,7 +28,6 @@ class Generator {
         return obj;
       })
     };
-  }
 }
 
-export default Generator;
+module.exports = { generate };
