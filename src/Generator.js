@@ -5,6 +5,7 @@ class Generator {
   
   generate() {
     var prev = {};
+    var idsAll = this.state.elements.map((element) => element.id);
     return {
       type:"net.swipe.swipe",
       dimension:[240,240],
@@ -20,11 +21,11 @@ class Generator {
       },
       pages: this.state.pages.map((page) => {
         var obj = {template:"s0"}
-        const ids = Object.keys(page);
+        const ids = idsAll.filter((id) => (prev[id] || page[id]));
         if (ids.length > 0) {
           obj.elements = ids.map((id) => {
             var element = Object.assign({id:id}, prev[id] || {});
-            return Object.assign(element, {to:page[id]});
+            return Object.assign(element, {to:page[id] || {translate:[0,0]}});
           })
         };
         prev = page;
