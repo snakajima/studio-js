@@ -20,7 +20,7 @@ class Generator {
       },
       pages: this.state.pages.map((page) => {
         var obj = {template:"s0"}
-        var ids = Object.keys(page);
+        const ids = Object.keys(page);
         if (ids.length > 0) {
           obj.elements = ids.map((id) => {
             var element = Object.assign({id:id}, prev[id] || {});

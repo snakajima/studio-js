@@ -12,9 +12,11 @@ class Preview extends Component {
     }
     componentDidMount() {
         const previewWindow = this.iframe.contentWindow;
-        console.log("Preview:DidMount:" + this.iframe.contentWindow)
-        var swipe = new Generator(window.store).generate();
-        previewWindow.swipe = JSON.stringify(swipe, undefined, 2);
+        //console.log("Preview:DidMount:" + this.iframe.contentWindow)
+        const swipe = new Generator(window.store).generate();
+        const str = JSON.stringify(swipe, undefined, 2);
+        console.log(str);
+        previewWindow.swipe = str;
     }
 }
 
