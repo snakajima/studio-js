@@ -22,8 +22,8 @@ class Pages extends Component {
                   selected={ index===this.props.selectedPageIndex }
                 />
                 <div className="subToolbar">
-                  <button onClick={()=>{window.store.dispatch({type:'deletePage', pageIndex:index})}} >Delete</button>
-                  <button onClick={()=>{window.store.dispatch({type:'duplicatePage', page:page, pageIndex:index})}} >Duplicate</button>
+                  <input className="btnSM" type="image" src="./ic_color_delete.png" onClick={()=>{window.store.dispatch({type:'deletePage', pageIndex:index})}} />
+                  <input className="btnSM" type="image" src="./ic_color_duplicate.png" onClick={()=>{window.store.dispatch({type:'duplicatePage', page:page, pageIndex:index})}} />
                 </div>
             </div>)
         })

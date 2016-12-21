@@ -26,7 +26,7 @@ body {
 
 .canvasSceneSelected {
     position:relative;
-    border: 1px solid #00f;
+    border: 1px solid #00BCD4;
     background: #ffc;
 }
 
@@ -41,7 +41,7 @@ body {
 
 .canvasPageSelected {
     position:relative;
-    border: 1px solid #00f;
+    border: 1px solid #00BCD4;
 }
 
 .previewFrame {

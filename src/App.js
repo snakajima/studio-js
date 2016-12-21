@@ -46,7 +46,7 @@ class App extends Component {
                    main={false}
                    width={ leftWidth } />
             <div className="subToolbar">
-               <button onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} >Insert</button>
+               <input className="btnSM" type="image" src="./ic_color_duplicate.png" onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} />
             </div>
             <Pages pages={ this.state.pages }
                    dimension={ this.state.dimension }

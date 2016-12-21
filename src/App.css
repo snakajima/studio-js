@@ -21,8 +21,13 @@
 
 .subToolbar {
     height:22px;
-    background: #eee;
+    background: #fff;
     margin-bottom: 4px;
+}
+.btnSM {
+  height: 22px;
+  margin-left:4px;
+  margin-right:4px;
 }
 
 #left {

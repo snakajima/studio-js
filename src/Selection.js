@@ -16,7 +16,7 @@ class Selection extends Component {
       <div className='canvasElement' style={{
           left:this.props.element.x * scale-2, top:this.props.element.y * scale-2,
           width:this.props.element.w * scale, height:this.props.element.h * scale,
-          border:"2px solid blue"
+          border:"2px solid #00BCD4"
         }}
       >
       </div>
