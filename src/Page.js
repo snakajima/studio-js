@@ -17,7 +17,7 @@ class Page extends Component {
     
   onClick(e) {
     if (!this.props.main) {
-      window.store.dispatch({type:'select', pageIndex:this.props.pageIndex});
+      window.store.dispatch({type:'selectPage', pageIndex:this.props.pageIndex});
     } else {
       console.log("Page.onClick");
     }

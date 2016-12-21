@@ -74,7 +74,7 @@ function reducer(_state, action) {
             state.preview = action.preview;
             undoable = false;
             break;
-        case 'select':
+        case 'selectPage':
             state.pageIndex = action.pageIndex;
             undoable = false;
             break;
