@@ -59,7 +59,7 @@ class Page extends Component {
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
-          {selectedElements.map((element, index)=>{ return <Selection key={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
+          {selectedElements.map((element, index)=>{ return <Selection key={index+1000} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
                           scale={scale} />})}
         </div>
       </div>

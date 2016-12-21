@@ -39,16 +39,20 @@ class Scene extends Component {
   render() {
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const scale = this.props.width / this.props.dimension.width;
+    const selection = this.props.selection || new Set()
+    const selectedElements = this.props.elements.filter((e) => selection.has(e.id));
+    console.log("Scene:selectedElements:" + selectedElements.length);
     return (
         <div className={this.props.selected ? "canvasSceneSelected" : "canvasScene"}
              style={{width:this.props.width, height:height}}
             onClick={this.onClick}
-             onDrop={this.onDrop} onDragOver={this.onDragOver}>{
-          this.props.elements.map((element, index)=>{
-             return <Element key={index} pageIndex={-1} element={element}
+             onDrop={this.onDrop} onDragOver={this.onDragOver}>
+            {this.props.elements.map((element, index)=>{
+               return <Element key={index} pageIndex={-1} element={element}
                                   scale={scale} main={this.props.main} />
-          })
-        }</div>
+               })
+            }
+        </div>
     );
   }
 }
