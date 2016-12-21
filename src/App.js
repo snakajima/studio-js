@@ -35,10 +35,10 @@ class App extends Component {
         <div id="left">
             <div className="toolbar">
               <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Play</button>
-              <button disabled={!window.stack.undoable()}
-                      onClick={ () => {window.stack.undo(window.store)} }>Undo</button>
-             <button disabled={!window.stack.redoable()}
-                      onClick={ () => {window.stack.redo(window.store)} }>Redo</button>
+              <input className={window.stack.undoable() ? "btn" : "btnIA"} type="image" src="./ic_color_undo.png"
+                  onClick={ () => {window.stack.undo(window.store)} } />
+              <input className={window.stack.redoable() ? "btn" : "btnIA"} type="image" src="./ic_color_redo.png"
+                  onClick={ () => {window.stack.redo(window.store)} } />
             </div>
             <Scene elements={ this.state.elements }
                    dimension={ this.state.dimension }

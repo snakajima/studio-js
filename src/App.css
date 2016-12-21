@@ -2,10 +2,23 @@
 }
 
 .toolbar {
-  padding-top:4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   height:24px;
-  background: #ccc;
+  background: #eee;
 }
+.btn {
+  height: 22px;
+  margin-left:4px;
+  margin-right:4px;
+}
+.btnIA {
+  height: 22px;
+  margin-left:4px;
+  margin-right:4px;
+  opacity: 0.5;
+}
+
 .subToolbar {
     height:22px;
     background: #eee;
