@@ -50,7 +50,6 @@ class Page extends Component {
     const scale = this.props.width / this.props.dimension.width;
     const selection = this.props.selection || new Set()
     const selectedElements = elements.filter((e) => selection.has(e.id));
-    console.log("selectedElements:" + selectedElements.length);
     return (
       <div>
             <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}

@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import Element from './Element';
 import DragContext from './DragContext';
+import Selection from './Selection';
 
 class Scene extends Component {
   constructor(props) {
@@ -41,7 +42,6 @@ class Scene extends Component {
     const scale = this.props.width / this.props.dimension.width;
     const selection = this.props.selection || new Set()
     const selectedElements = this.props.elements.filter((e) => selection.has(e.id));
-    console.log("Scene:selectedElements:" + selectedElements.length);
     return (
         <div className={this.props.selected ? "canvasSceneSelected" : "canvasScene"}
              style={{width:this.props.width, height:height}}
@@ -52,6 +52,8 @@ class Scene extends Component {
                                   scale={scale} main={this.props.main} />
                })
             }
+            {selectedElements.map((element, index)=>{ return <Selection key={index+1000} pageIndex={-1} element={element} main={this.props.main}
+                                  scale={scale} />})}
         </div>
     );
   }
