@@ -9,6 +9,15 @@ body {
   overflow:hidden;
 }
 
+.selection {
+  position:absolute;
+}
+
+.handle {
+  width:18px;
+  position:absolute;
+}
+
 .canvasImage {
   width:100%;
   height:auto;

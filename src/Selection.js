@@ -12,13 +12,50 @@ class Selection extends Component {
   
   render() {
     const scale = this.props.scale;
+    const x = this.props.element.x * scale;
+    const y = this.props.element.y * scale;
+    const w = this.props.element.w * scale;
+    const h = this.props.element.h * scale;
     return (
-      <div className='canvasElement' style={{
-          left:this.props.element.x * scale-2, top:this.props.element.y * scale-2,
-          width:this.props.element.w * scale, height:this.props.element.h * scale,
+      <div style={{left:x, top:y, position:'absolute'}}>
+      <div className='selection' style={{
+          left:-1, top:-1,
+          width:w-2, height:h-2,
           border:"2px solid #00BCD4"
         }}
-      >
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:w/2-9, top:-9 }}
+            draggable={true}
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:w/2-9, top:h-9 }}
+            draggable={true}
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:-9, top:h/2-9 }}
+            draggable={true}
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:w-9, top:h/2-9 }}
+            draggable={true}
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:-9, top:-9 }}
+            draggable={true}
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:w-9, top:-9 }}
+            draggable={true}
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:-9, top:h-9 }}
+            draggable={true}
+        />
+        <img className='handle' src='./scale_handle.png' alt=''
+            style={{left:w-9, top:h-9 }}
+            draggable={true}
+        />
       </div>
     );
   }
