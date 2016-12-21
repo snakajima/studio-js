@@ -10,11 +10,15 @@ class Selection extends Component {
   constructor(props) {
     super();
     this.onDragStart = this.onDragStart.bind(this);
+    this.onDrag = this.onDrag.bind(this);
   }
 
   onDragStart(e,type) {
     DragContext.setContext({ pageIndex:this.props.pageIndex, id:this.props.element.id,
                              x:e.clientX, y:e.clientY });
+  }
+  onDrag(e) {
+     console.log('onDrag');
   }
   
   render() {
@@ -37,41 +41,49 @@ class Selection extends Component {
             style={{left:w/2-9, top:-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w/2-9, top:h-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:h/2-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:h/2-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:h-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:h-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,0)}
+            onDrag={this.onDrag}
         />
       </div>
     );
