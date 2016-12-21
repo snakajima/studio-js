@@ -26,11 +26,13 @@ class Scene extends Component {
   }
   
   onDrop(e) {
-    const cotext = DragContext.getContext();
+    const context = DragContext.getContext();
     const scale = this.props.width / this.props.dimension.width;
-    window.store.dispatch({type:'moveSceneElement', id:cotext.id,
-                    scale:scale,
-                    dx:e.clientX-cotext.x, dy:e.clientY-cotext.y});
+    window.store.dispatch({
+        type:'moveSceneElement', id:context.id,
+        handle:context.handle,
+        scale:scale,
+        dx:e.clientX-context.x, dy:e.clientY-context.y});
   }
   onDragOver(e) {
     if (DragContext.getContext().pageIndex === -1) {
