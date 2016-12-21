@@ -34,7 +34,7 @@ class App extends Component {
       <div className="App">
         <div id="left">
             <div className="toolbar">
-              <button onClick={ () => {window.store.dispatch({type:'preview', preview:true})} }>Play</button>
+              <input className="btn" type="image" onClick={ () => {window.store.dispatch({type:'preview', preview:true})} } src="./ic_color_play.png" />
               <input className={window.stack.undoable() ? "btn" : "btnIA"} type="image" src="./ic_color_undo.png"
                   onClick={ () => {window.stack.undo(window.store)} } />
               <input className={window.stack.redoable() ? "btn" : "btnIA"} type="image" src="./ic_color_redo.png"
