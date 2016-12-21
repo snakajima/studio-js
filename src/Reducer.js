@@ -8,12 +8,14 @@ import MathEx from './MathEx';
 function reducer(_state, action) {
   // The elementMap maps the element id to index.
   // We store it as a property of the state only for convenience.
+  /*
   function elementMap(elements) {
     return elements.reduce((map, v, index)=>{
                             map[v.id] = index;
                             return map;
                            }, {});
   }
+  */
   
   if (typeof _state === "undefined") {
     var initialState = {
@@ -30,7 +32,7 @@ function reducer(_state, action) {
           }],
         pages:[{}]
     };
-    initialState.elementMap = elementMap(initialState.elements);
+    //initialState.elementMap = elementMap(initialState.elements);
     window.stack.append(initialState);
     return initialState;
   }
@@ -107,7 +109,7 @@ function reducer(_state, action) {
   if (undoable) {
     window.stack.append(state);
   }
-  state.elementMap = elementMap(state.elements);
+  //state.elementMap = elementMap(state.elements);
   return state
 }
 
