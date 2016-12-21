@@ -19,7 +19,8 @@ class Scene extends Component {
     if (!this.props.main) {
       window.store.dispatch({type:'selectPage', pageIndex:-1});
     } else {
-        console.log("Scene.onClick");
+      console.log("Scene.onClick");
+      window.store.dispatch({type:'selectElement', selection:new Set()});
     }
   }
   

@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import DragContext from './DragContext';
 import Element from './Element';
+import Selection from './Selection';
 
 class Page extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Page extends Component {
       window.store.dispatch({type:'selectPage', pageIndex:this.props.pageIndex});
     } else {
       console.log("Page.onClick");
+      window.store.dispatch({type:'selectElement', selection:new Set()});
     }
   }
 
@@ -46,6 +48,9 @@ class Page extends Component {
     });
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const scale = this.props.width / this.props.dimension.width;
+    const selection = this.props.selection || new Set()
+    const selectedElements = elements.filter((e) => selection.has(e.id));
+    console.log("selectedElements:" + selectedElements.length);
     return (
       <div>
             <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
@@ -54,6 +59,8 @@ class Page extends Component {
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
+          {selectedElements.map((element, index)=>{ return <Selection key={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
+                          scale={scale} />})}
         </div>
       </div>
     );

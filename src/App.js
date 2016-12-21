@@ -64,10 +64,12 @@ class App extends Component {
                     dimension={ this.state.dimension }
                     width={ rightWidth }
                     main={true}
+                    selection={this.state.selection}
                     sceneElements={ this.state.elements} />
             : <Scene elements={ this.state.elements }
                      dimension={ this.state.dimension }
                      main={true}
+                     selection={this.state.selection}
                      width={ rightWidth } />
             }
         </div>

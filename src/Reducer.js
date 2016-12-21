@@ -8,6 +8,7 @@ import MathEx from './MathEx';
 function reducer(_state, action) {
     if (typeof _state === "undefined") {
       const initialState = {
+        selection:new Set(),
         pageIndex:0,
         preview:false,
         dimension:{ width:480, height:320 },
@@ -80,6 +81,10 @@ function reducer(_state, action) {
             break;
         case 'setState':
             state = action.state;
+            undoable = false;
+            break;
+        case 'selectElement':
+            state.selection = action.selection;
             undoable = false;
             break;
         default:
