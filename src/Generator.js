@@ -34,7 +34,15 @@ function generate(store) {
                   if (d1) {
                     s.push(Object.assign(d0, {to:d1}));
                   } else {
-                    s.push(Object.assign(d0, {to:{translate:[0,0]}}));
+                    var delta = {};
+                    const sceneElement = state.elements[index];
+                    if (d0.translate) {
+                      delta.translate=[0,0]
+                    }
+                    if (d0.rotate) {
+                      delta.rotate = sceneElement.rotate || 0;
+                    }
+                    s.push(Object.assign(d0, {to:delta}));
                   }
                } else if (d1) {
                  s.push({id:element.id, to:d1});
