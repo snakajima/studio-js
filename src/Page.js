@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import DragContext from './DragContext';
 import Element from './Element';
 import Selection from './Selection';
+import MathEx from './MathEx';
 
 class Page extends Component {
   constructor(props) {
@@ -57,6 +58,18 @@ class Page extends Component {
         }
         return e;
       });
+  }
+  
+  static extractDelta(base, element) {
+    var obj={};
+    if (base.x !== element.x || base.y !== element.y) {
+      obj.translate = [MathEx.round(element.x-base.x),
+                       MathEx.round(element.y-base.y)];
+    }
+    if (base.rotate !== element.rotate) {
+      obj.rotate = element.rotate || 0
+    }
+    return Object.keys(obj).length > 0 ? obj : null;
   }
 
   render() {

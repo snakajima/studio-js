@@ -2,21 +2,9 @@
 // Copyright (c) 2016 Satoshi Nakajima (https://github.com/snakajima)
 // License: The MIT License
 //
-import MathEx from './MathEx';
 import Page from './Page';
 
 function generate(store) {
-  function delta(base, element) {
-    var obj={};
-    if (base.x !== element.x || base.y !== element.y) {
-      obj.translate = [MathEx.round(element.x-base.x),
-                         MathEx.round(element.y-base.y)];
-    }
-    if (base.rotate !== element.rotate) {
-      obj.rotate = element.rotate || 0
-    }
-    return Object.keys(obj).length > 0 ? obj : null;
-  }
   
     const state = store.getState();
     var prev = state.elements;
@@ -39,8 +27,8 @@ function generate(store) {
         var elements = Page.applyTransform(state.elements, page);
         console.log("elements=", JSON.stringify(elements));
         obj.elements = elements.reduce((s, element, index) => {
-               var d0 = delta(state.elements[index], prev[index]);
-               const d1 = delta(state.elements[index], element);
+               var d0 = Page.extractDelta(state.elements[index], prev[index]);
+               const d1 = Page.extractDelta(state.elements[index], element);
                if (d0) {
                   d0.id = element.id;
                   if (d1) {
