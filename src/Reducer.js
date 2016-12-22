@@ -71,14 +71,14 @@ function reducer(_state, action) {
         }
         break;
     case 'moveSceneElement':
-        console.log("moveSceneElement", action.handle);
+        console.log("moveSceneElement", action.handle, action.index);
         state.elements = state.elements.map((element)=>{
           return (element.id === action.id) ?
             applyMoveAction(element, action) : element
         })
         break;
     case 'movePageElement':
-        console.log("movePageElement", action.handle);
+        console.log("movePageElement", action.handle, action.index);
         var page = Object.assign({}, state.pages[action.pageIndex]);
         var element = Object.assign({}, page[action.id] || {});
         const tx = element.translate || [0,0];

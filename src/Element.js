@@ -15,9 +15,10 @@ class Element extends Component {
   
   onDragStart(e) {
     DragContext.setContext({
-        pageIndex:this.props.pageIndex,
-        id:this.props.element.id, handle:"move",
-        x:e.clientX, y:e.clientY });
+      pageIndex:this.props.pageIndex,
+      index: this.props.index,
+      id:this.props.element.id, handle:"move",
+      x:e.clientX, y:e.clientY });
   }
     
   onClick(e) {

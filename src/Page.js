@@ -32,7 +32,7 @@ class Page extends Component {
     window.store.dispatch({
         type:'movePageElement', pageIndex:context.pageIndex,
         handle:context.handle,
-        id:context.id, scale:scale,
+        id:context.id, scale:scale, index:context.index,
         dx:e.clientX-context.x, dy:e.clientY-context.y});
   }
   
@@ -87,7 +87,7 @@ class Page extends Component {
              style={{ width:this.props.width, height:height }}
             onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
-          {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
+            {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
           {selectedElements.map((element, index)=>{
             return <Selection key={index+1000} pageIndex={this.props.pageIndex}

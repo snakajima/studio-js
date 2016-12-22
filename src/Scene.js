@@ -29,7 +29,7 @@ class Scene extends Component {
     const context = DragContext.getContext();
     const scale = this.props.width / this.props.dimension.width;
     window.store.dispatch({
-        type:'moveSceneElement', id:context.id,
+        type:'moveSceneElement', id:context.id, index:context.index,
         handle:context.handle,
         scale:scale,
         dx:e.clientX-context.x, dy:e.clientY-context.y});
@@ -50,7 +50,7 @@ class Scene extends Component {
             onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
             {this.props.elements.map((element, index)=>{
-               return <Element key={index} pageIndex={-1} element={element}
+               return <Element key={index} index={index} pageIndex={-1} element={element}
                                   scale={scale} main={this.props.main} />
                })
             }
