@@ -50,6 +50,9 @@ class Page extends Component {
             e.x += delta.translate[0];
             e.y += delta.translate[1];
           }
+          if (delta.rotate) {
+            e.rotate = (e.rorate || 0) + delta.rotate;
+          }
         }
         return e;
       });

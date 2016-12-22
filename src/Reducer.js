@@ -30,7 +30,7 @@ function reducer(_state, action) {
           },{
             id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
           }],
-        pages:[{}]
+        pages:[{},{i1:{rotate:60, translate:[100,0]}}]
     };
     //initialState.elementMap = elementMap(initialState.elements);
     window.stack.append(initialState);
