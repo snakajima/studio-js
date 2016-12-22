@@ -13,7 +13,7 @@ function generate(store) {
                          MathEx.round(element.y-base.y)];
     }
     if (base.rotate !== element.rotate) {
-      obj.rotate = (element.rotate || 0) - (base.rotate || 0)
+      obj.rotate = element.rotate || 0
     }
     return Object.keys(obj).length > 0 ? obj : null;
   }
