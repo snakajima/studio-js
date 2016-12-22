@@ -39,6 +39,11 @@ class Element extends Component {
     if (element.rotate) {
       style.transform="rotate("+element.rotate + "deg)";
     }
+    if (element.scale) {
+      console.log("Element:render:scale=", element.scale);
+      style.transform = (style.transform || "") + " scale("+element.scale[0]+","+element.scale[1]+")";
+      console.log("Element:render:scale=", element.scale, style.transform);
+    }
     return (
       <div className='canvasElement' style={style}
         draggable={true}
