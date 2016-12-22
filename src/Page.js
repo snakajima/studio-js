@@ -51,7 +51,8 @@ class Page extends Component {
             e.y += delta.translate[1];
           }
           if (delta.rotate) {
-            e.rotate = (e.rorate || 0) + delta.rotate;
+            e.rotate = (e.rotate || 0) + delta.rotate;
+            console.log("applyTransform:rotate:" + e.rotate);
           }
         }
         return e;
