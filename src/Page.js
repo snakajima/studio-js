@@ -40,29 +40,39 @@ class Page extends Component {
         e.preventDefault();
     }
   }
+  
+  static applyTransform(elements, deltas) {
+    return elements.map((element)=>{
+        var e = Object.assign({}, element);
+        const delta = deltas[element.id];
+        if (delta) {
+          if (delta.translate) {
+            e.x += delta.translate[0];
+            e.y += delta.translate[1];
+          }
+        }
+        return e;
+      });
+  }
 
   render() {
-    const elements = this.props.sceneElements.map((sceneElement) => {
-      var element = Object.assign({}, sceneElement);
-      var e = this.props.page[element.id] || { translate:[0,0] };
-      element.x += e.translate[0];
-      element.y += e.translate[1];
-      return element;
-    });
+    const elements = Page.applyTransform(this.props.sceneElements, this.props.page);
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const scale = this.props.width / this.props.dimension.width;
     const selection = this.props.selection || new Set()
     const selectedElements = elements.filter((e) => selection.has(e.id));
     return (
       <div>
-            <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
+        <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
              style={{ width:this.props.width, height:height }}
             onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
           {elements.map((element, index)=>{ return <Element key={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
-          {selectedElements.map((element, index)=>{ return <Selection key={index+1000} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
-                          scale={scale} />})}
+          {selectedElements.map((element, index)=>{
+            return <Selection key={index+1000} pageIndex={this.props.pageIndex}
+                              element={element} main={this.props.main}
+                              scale={scale} />})}
         </div>
       </div>
     );

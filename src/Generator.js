@@ -3,22 +3,9 @@
 // License: The MIT License
 //
 import MathEx from './MathEx';
+import Page from './Page';
 
 function generate(store) {
-  function applyTransform(elements, deltas) {
-    return elements.map((element)=>{
-        var e = Object.assign({}, element);
-        const delta = deltas[element.id];
-        if (delta) {
-          console.log("delta=", JSON.stringify(delta));
-          if (delta.translate) {
-            e.x += delta.translate[0];
-            e.y += delta.translate[1];
-          }
-        }
-        return e;
-      });
-  }
   function delta(base, element) {
     if (base.x !== element.x || base.y !== element.y) {
       return {translate:[MathEx.round(element.x-base.x),
@@ -45,7 +32,7 @@ function generate(store) {
       },
       pages: state.pages.map((page) => {
         var obj = {template:"s0"}
-        var elements = applyTransform(state.elements, page);
+        var elements = Page.applyTransform(state.elements, page);
         console.log("elements=", JSON.stringify(elements));
         obj.elements = elements.reduce((s, element, index) => {
                var d0 = delta(state.elements[index], prev[index]);
