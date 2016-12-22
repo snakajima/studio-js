@@ -7,11 +7,12 @@ import Page from './Page';
 
 function generate(store) {
   function delta(base, element) {
+    var obj={};
     if (base.x !== element.x || base.y !== element.y) {
-      return {translate:[MathEx.round(element.x-base.x),
-                         MathEx.round(element.y-base.y)]};
+      obj.translate = [MathEx.round(element.x-base.x),
+                         MathEx.round(element.y-base.y)];
     }
-    return null;
+    return Object.keys(obj).length > 0 ? obj : null;
   }
   
     const state = store.getState();
