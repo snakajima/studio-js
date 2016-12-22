@@ -80,7 +80,6 @@ class Page extends Component {
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const scale = this.props.width / this.props.dimension.width;
     const selection = this.props.selection || new Set()
-    const selectedElements = elements.filter((e) => selection.has(e.id));
     return (
       <div>
         <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
@@ -89,11 +88,15 @@ class Page extends Component {
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
             {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
-          {selectedElements.map((element, index)=>{
-                                return <Selection key={index+1000} index={index}
-                                pageIndex={this.props.pageIndex}
-                              element={element} main={this.props.main}
-                              scale={scale} />})}
+            {elements.reduce((selections, element, index)=>{
+                             if (selection.has(element.id)) {
+                               selections.push(<Selection key={index+1000} index={index}
+                                             pageIndex={this.props.pageIndex}
+                                             element={element} main={this.props.main}
+                                             scale={scale} />);
+                             }
+                             return selections;
+                    }, [])}
         </div>
       </div>
     );

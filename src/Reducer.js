@@ -10,7 +10,9 @@ function applyMoveAction(element, action) {
   var e = Object.assign({}, element);
   switch(action.handle) {
     case "turn":
+      console.log("applyMoveAction:e.rotate:before", e.rotate);
       e.rotate = (e.rotate || 0) + 10;
+      console.log("applyMoveAction:e.rotate:after", e.rotate);
       break;
     default: // move
       e.x = MathEx.round(e.x + action.dx / action.scale);
