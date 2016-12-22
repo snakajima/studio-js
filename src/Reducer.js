@@ -4,6 +4,7 @@
 //
 
 import MathEx from './MathEx';
+import Page from './Page';
 
 function applyMoveAction(element, action) {
   var e = Object.assign({}, element);
@@ -78,18 +79,15 @@ function reducer(_state, action) {
         })
         break;
     case 'movePageElement':
-        console.log("movePageElement", action.handle, action.index);
-        var page = Object.assign({}, state.pages[action.pageIndex]);
-        var element = Object.assign({}, page[action.id] || {});
-        const tx = element.translate || [0,0];
-        element.translate = [
-          MathEx.round(tx[0] + action.dx / action.scale),
-          MathEx.round(tx[1] + action.dy / action.scale)
-        ];
-        page[action.id] = element;
-        state.pages = state.pages.map((page) => page);
-        state.pages[action.pageIndex] = page;
-        break;
+      console.log("movePageElement", action.handle, action.index);
+      const sceneElement = state.elements[action.index];
+      var page = Object.assign({}, state.pages[action.pageIndex]);
+      const pageElement = Page.applyTransformElement(sceneElement, page[action.id]);
+      var movedElement = applyMoveAction(pageElement, action);
+      page[action.id] = Page.extractDelta(sceneElement, movedElement);
+      state.pages = state.pages.map((page) => page);
+      state.pages[action.pageIndex] = page;
+      break;
     case 'resize':
         undoable = false;
         break;
