@@ -15,9 +15,10 @@ class Selection extends Component {
 
   onDragStart(e,handle) {
     DragContext.setContext({
-        pageIndex:this.props.pageIndex,
-        id:this.props.element.id, handle:handle,
-        x:e.clientX, y:e.clientY });
+      pageIndex:this.props.pageIndex,
+      id:this.props.element.id, handle:handle,
+      index:this.props.index,
+      x:e.clientX, y:e.clientY });
   }
   onDrag(e) {
      console.log('onDrag');

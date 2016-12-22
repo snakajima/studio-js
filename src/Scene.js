@@ -54,7 +54,7 @@ class Scene extends Component {
                                   scale={scale} main={this.props.main} />
                })
             }
-            {selectedElements.map((element, index)=>{ return <Selection key={index+1000} pageIndex={-1} element={element} main={this.props.main}
+            {selectedElements.map((element, index)=>{ return <Selection key={index+1000} index={index} pageIndex={-1} element={element} main={this.props.main}
                                   scale={scale} />})}
         </div>
     );

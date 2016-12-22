@@ -90,7 +90,8 @@ class Page extends Component {
             {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
           {selectedElements.map((element, index)=>{
-            return <Selection key={index+1000} pageIndex={this.props.pageIndex}
+                                return <Selection key={index+1000} index={index}
+                                pageIndex={this.props.pageIndex}
                               element={element} main={this.props.main}
                               scale={scale} />})}
         </div>
