@@ -42,22 +42,25 @@ class Page extends Component {
     }
   }
   
+  static applyTransformElement(element, delta) {
+    if (delta) {
+      var e = Object.assign({}, element);
+      if (delta.translate) {
+        e.x += delta.translate[0];
+        e.y += delta.translate[1];
+      }
+      if (delta.rotate) {
+        e.rotate = (e.rotate || 0) + delta.rotate;
+      }
+      return e;
+    }
+    return element;
+  }
+  
   static applyTransform(elements, deltas) {
     return elements.map((element)=>{
-        var e = Object.assign({}, element);
-        const delta = deltas[element.id];
-        if (delta) {
-          if (delta.translate) {
-            e.x += delta.translate[0];
-            e.y += delta.translate[1];
-          }
-          if (delta.rotate) {
-            e.rotate = (e.rotate || 0) + delta.rotate;
-            console.log("applyTransform:rotate:" + e.rotate);
-          }
-        }
-        return e;
-      });
+      return Page.applyTransformElement(element, deltas[element.id]);
+    });
   }
   
   static extractDelta(base, element) {
