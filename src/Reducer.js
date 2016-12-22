@@ -62,8 +62,14 @@ function reducer(_state, action) {
         state.elements = state.elements.map((element)=>{
             if (element.id === action.id) {
               var e = Object.assign({}, element);
-              e.x = MathEx.round(e.x + action.dx / action.scale);
-              e.y = MathEx.round(e.y + action.dy / action.scale);
+              switch(action.handle) {
+              case "turn":
+                e.rotate = (e.rotate || 0) + 10;
+                break;
+              default: // move
+                e.x = MathEx.round(e.x + action.dx / action.scale);
+                e.y = MathEx.round(e.y + action.dy / action.scale);
+              }
               return e;
             }
             return element

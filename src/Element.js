@@ -37,7 +37,6 @@ class Element extends Component {
         };
     if (element.rotate) {
       style.transform="rotate("+element.rotate + "deg)";
-      console.log("transform:" + style.transform);
     }
     return (
       <div className='canvasElement' style={style}
