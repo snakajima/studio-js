@@ -29,12 +29,18 @@ class Element extends Component {
   
   render() {
     const scale = this.props.scale;
+    const element = this.props.element;
+    var style={
+          left:element.x * scale, top:element.y * scale,
+          width:element.w * scale, height:element.h * scale,
+          background:element.bc
+        };
+    if (element.rotate) {
+      style.transform="rotate("+element.rotate + "deg)";
+      console.log("transform:" + style.transform);
+    }
     return (
-      <div className='canvasElement' style={{
-          left:this.props.element.x * scale, top:this.props.element.y * scale,
-          width:this.props.element.w * scale, height:this.props.element.h * scale,
-          background:this.props.element.bc
-        }}
+      <div className='canvasElement' style={style}
         draggable={true}
         onDragStart={this.onDragStart}
         onClick={this.onClick}

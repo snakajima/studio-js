@@ -24,7 +24,7 @@ function reducer(_state, action) {
         preview:false,
         dimension:{ width:480, height:320 },
         elements:[{
-            id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000'
+            id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000', rotate:30
           },{
             id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', "img":"http://satoshi.blogs.com/swipe/movie.png"
           },{
