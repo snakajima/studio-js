@@ -5,6 +5,19 @@
 
 import MathEx from './MathEx';
 
+function applyMoveAction(element, action) {
+  var e = Object.assign({}, element);
+  switch(action.handle) {
+    case "turn":
+      e.rotate = (e.rotate || 0) + 10;
+      break;
+    default: // move
+      e.x = MathEx.round(e.x + action.dx / action.scale);
+      e.y = MathEx.round(e.y + action.dy / action.scale);
+  }
+  return e;
+}
+
 function reducer(_state, action) {
   // The elementMap maps the element id to index.
   // We store it as a property of the state only for convenience.
@@ -54,25 +67,14 @@ function reducer(_state, action) {
         state.pages = state.pages.map((page) => page);
         state.pages.splice(action.pageIndex, 1);
         if (state.pageIndex >=state.pages.length) {
-            state.pageIndex = state.pages.length-1;
+          state.pageIndex = state.pages.length - 1;
         }
         break;
     case 'moveSceneElement':
         console.log("moveSceneElement", action.handle);
         state.elements = state.elements.map((element)=>{
-            if (element.id === action.id) {
-              var e = Object.assign({}, element);
-              switch(action.handle) {
-              case "turn":
-                e.rotate = (e.rotate || 0) + 10;
-                break;
-              default: // move
-                e.x = MathEx.round(e.x + action.dx / action.scale);
-                e.y = MathEx.round(e.y + action.dy / action.scale);
-              }
-              return e;
-            }
-            return element
+          return (element.id === action.id) ?
+            applyMoveAction(element, action) : element
         })
         break;
     case 'movePageElement':
