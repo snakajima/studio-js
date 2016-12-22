@@ -63,7 +63,7 @@ class Page extends Component {
     });
   }
   
-  static extractDelta(base, element) {
+  static extractDelta(base, element, delta=true) {
     var obj={};
     if (base.x !== element.x || base.y !== element.y) {
       obj.translate = [MathEx.round(element.x-base.x),
@@ -71,6 +71,9 @@ class Page extends Component {
     }
     if (base.rotate !== element.rotate) {
       obj.rotate = element.rotate || 0
+      if (delta) {
+        obj.rotate -= base.rotate || 0
+      }
     }
     return Object.keys(obj).length > 0 ? obj : null;
   }

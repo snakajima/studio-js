@@ -27,8 +27,8 @@ function generate(store) {
         const elements = Page.applyTransform(state.elements, page);
         console.log("elements=", JSON.stringify(elements));
         obj.elements = elements.reduce((s, element, index) => {
-               var d0 = Page.extractDelta(state.elements[index], prev[index]);
-               const d1 = Page.extractDelta(state.elements[index], element);
+               var d0 = Page.extractDelta(state.elements[index], prev[index], false);
+               const d1 = Page.extractDelta(state.elements[index], element, false);
                if (d0) {
                   d0.id = element.id;
                   if (d1) {
