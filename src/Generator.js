@@ -27,15 +27,24 @@ function generate(store) {
         const elements = Page.applyTransform(state.elements, page);
         console.log("elements=", JSON.stringify(elements));
         obj.elements = elements.reduce((s, element, index) => {
-               var d0 = Page.extractDelta(state.elements[index], prev[index], false);
-               const d1 = Page.extractDelta(state.elements[index], element, false);
+               const sceneElement = state.elements[index];
+               var d0 = Page.extractDelta(sceneElement, prev[index], false);
+               var d1 = Page.extractDelta(sceneElement, element, false);
                if (d0) {
                   d0.id = element.id;
                   if (d1) {
+                    if (d0.translate && !d1.translate) {
+                      d1.translate = [0,0];
+                    }
+                    if (d0.rotate && !d1.rotate) {
+                      d1.rotate = sceneElement.rotate;
+                    }
+                    if (d0.opacity && !d1.opacity) {
+                      d1.opacity = sceneElement.opacity;
+                    }
                     s.push(Object.assign(d0, {to:d1}));
                   } else {
                     var delta = {};
-                    const sceneElement = state.elements[index];
                     if (d0.translate) {
                       delta.translate=[0,0]
                     }
