@@ -30,7 +30,7 @@ class Scene extends Component {
     const scale = this.props.width / this.props.dimension.width;
     window.store.dispatch({
         type:'moveSceneElement', id:context.id, index:context.index,
-        handle:context.handle,
+        handle:context.handle, params:context.params,
         scale:scale,
         dx:e.clientX-context.x, dy:e.clientY-context.y});
   }

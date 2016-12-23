@@ -32,7 +32,7 @@ class Page extends Component {
     window.store.dispatch({
         type:'movePageElement', pageIndex:context.pageIndex,
         handle:context.handle,
-        id:context.id, scale:scale, index:context.index,
+        id:context.id, scale:scale, index:context.index, params:context.params,
         dx:e.clientX-context.x, dy:e.clientY-context.y});
   }
   

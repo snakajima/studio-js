@@ -11,7 +11,7 @@ function applyMoveAction(element, action) {
   const r = e.scale || [1,1];
   switch(action.handle) {
     case "turn":
-      e.rotate = (e.rotate || 0) + 10;
+      e.rotate = (e.rotate || 0) + action.params.rotate;
       break;
     case "ne":
       e.scale = [r[0] * 1.41, r[1] * 1.41];

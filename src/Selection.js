@@ -14,14 +14,28 @@ class Selection extends Component {
   }
 
   onDragStart(e,handle) {
+    const element = this.props.element;
+    const scale = this.props.scale;
     DragContext.setContext({
       pageIndex:this.props.pageIndex,
-      id:this.props.element.id, handle:handle,
+      id:element.id, handle:handle,
       index:this.props.index,
+      params:{},
+      //centerX:scale * (element.x + element.w/2),
+      //centerY:scale * (element.y + element.h/2),
       x:e.clientX, y:e.clientY });
   }
   onDrag(e) {
-     console.log('onDrag');
+    var context = DragContext.getContext();
+    const element = context.element;
+    //console.log('onDrag', context.handle, element.x, element.w);
+    if (context.handle == 'turn') {
+      const dx = e.clientX - context.x;
+      const dy = e.clientY - context.y;
+      const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360) % 360;
+      console.log('onDrag', dx, dy, r);
+      context.params.rotate = r;
+    }
   }
   
   render() {
