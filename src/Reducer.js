@@ -8,11 +8,19 @@ import Page from './Page';
 
 function applyMoveAction(element, action) {
   var e = Object.assign({}, element);
+  const r = e.scale || [1,1];
   switch(action.handle) {
     case "turn":
-      console.log("applyMoveAction:e.rotate:before", e.rotate);
       e.rotate = (e.rotate || 0) + 10;
-      console.log("applyMoveAction:e.rotate:after", e.rotate);
+      break;
+    case "ne":
+      e.scale = [r[0] * 1.41, r[1] * 1.41];
+      break;
+    case "e":
+      e.scale = [r[0] * 1.41, r[1]];
+      break;
+    case "n":
+      e.scale = [r[0], r[1] * 1.41];
       break;
     default: // move
       e.x = MathEx.round(e.x + action.dx / action.scale);
