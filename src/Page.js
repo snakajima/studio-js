@@ -52,6 +52,10 @@ class Page extends Component {
       if (delta.rotate) {
         e.rotate = (e.rotate || 0) + delta.rotate;
       }
+      if (delta.scale) {
+        var r = e.scale || [1, 1];
+        e.scale = [r[0] * delta.scale[0], r[1] * delta.scale[1]];
+      }
       return e;
     }
     return element;
@@ -73,6 +77,14 @@ class Page extends Component {
       obj.rotate = element.rotate || 0
       if (delta) {
         obj.rotate -= base.rotate || 0
+      }
+    }
+    if (base.scale !== element.scale) {
+      obj.scale = element.scale || [1, 1];
+      if (delta) {
+        var r = base.rotate || [1,1];
+        obj.scale[0] /= r[0];
+        obj.scale[1] /= r[1];
       }
     }
     return Object.keys(obj).length > 0 ? obj : null;
