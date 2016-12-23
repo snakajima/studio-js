@@ -48,14 +48,14 @@ function reducer(_state, action) {
         preview:false,
         dimension:{ width:480, height:320 },
         elements:[{
-            id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000', rotate:30
+            id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000', rotate:30, opacity:0.5
           },{
             id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', scale:[2, 2],
             "img":"http://satoshi.blogs.com/swipe/movie.png"
           },{
             id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
           }],
-        pages:[{},{i1:{rotate:60, translate:[100,0]}, i2:{scale:[1.0, 3.0]}}]
+        pages:[{},{i0:{opacity:1.0}, i1:{rotate:60, translate:[100,0]}, i2:{scale:[1.0, 3.0]}}]
     };
     //initialState.elementMap = elementMap(initialState.elements);
     window.stack.append(initialState);

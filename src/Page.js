@@ -56,6 +56,9 @@ class Page extends Component {
         const r = e.scale || [1, 1];
         e.scale = [r[0] * delta.scale[0], r[1] * delta.scale[1]];
       }
+      if (delta.opacity) {
+        e.opacity = delta.opacity;
+      }
       return e;
     }
     return element;
@@ -86,6 +89,9 @@ class Page extends Component {
         obj.scale[0] /= r[0];
         obj.scale[1] /= r[1];
       }
+    }
+    if (base.opacity !== element.opacity) {
+       obj.opacity = element.opacity;
     }
     return Object.keys(obj).length > 0 ? obj : null;
   }
