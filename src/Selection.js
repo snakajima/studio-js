@@ -15,7 +15,7 @@ class Selection extends Component {
 
   onDragStart(e,handle) {
     const element = this.props.element;
-    const scale = this.props.scale;
+    //const scale = this.props.scale;
     DragContext.setContext({
       pageIndex:this.props.pageIndex,
       id:element.id, handle:handle,
@@ -27,9 +27,9 @@ class Selection extends Component {
   }
   onDrag(e) {
     var context = DragContext.getContext();
-    const element = context.element;
+    //const element = context.element;
     //console.log('onDrag', context.handle, element.x, element.w);
-    if (context.handle == 'turn') {
+    if (context.handle === 'turn') {
       const dx = e.clientX - context.x;
       const dy = e.clientY - context.y;
       const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360) % 360;
@@ -44,8 +44,9 @@ class Selection extends Component {
     const y = this.props.element.y * scale;
     const w = this.props.element.w * scale;
     const h = this.props.element.h * scale;
+    var style = {left:x, top:y, position:'absolute'};
     return (
-      <div style={{left:x, top:y, position:'absolute'}}>
+      <div style={style}>
         <div className='selection' style={{
             left:-1, top:-1,
             width:w-2, height:h-2,
