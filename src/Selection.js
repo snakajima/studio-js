@@ -36,6 +36,14 @@ class Selection extends Component {
       //console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"rotate("+r+"deg)"}});
+    } else if (context.handle === 'ne') {
+       const dx = e.clientX - (context.x - context.width/2);
+       const dy = e.clientY - (context.y + context.height/2);
+       const r = Math.sqrt(dx * dx + dy * dy);
+       const r0 = Math.sqrt(context.width/2 * context.width/2, context.height/2 * context.height/2);
+       const ratio = r / r0;
+       context.params.ratio = ratio;
+       console.log('onDrag', r, r0, ratio);
     }
   }
   
