@@ -33,7 +33,7 @@ class Selection extends Component {
       const dx = e.clientX - context.x;
       const dy = e.clientY - context.y - context.height/2 - 20;
       const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90) % 360;
-      console.log('onDrag', dx, dy, r);
+      //console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"rotate("+r+"deg)"}});
     }

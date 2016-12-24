@@ -118,7 +118,7 @@ function reducer(_state, action) {
         break;
     case 'selectElement':
         state.selection = action.selection;
-        console.log('selectElement', JSON.stringify(state.selection));
+        //console.log('selectElement', JSON.stringify(state.selection));
         undoable = false;
         break;
     case 'setSelectionStyle':
