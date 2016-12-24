@@ -55,6 +55,7 @@ class Scene extends Component {
                })
             }
             {selectedElements.map((element, index)=>{ return <Selection key={index+1000} index={index} pageIndex={-1} element={element} main={this.props.main}
+                                             selectionStyle={this.props.selection.style}
                                   scale={scale} />})}
         </div>
     );

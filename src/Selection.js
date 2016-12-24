@@ -35,6 +35,7 @@ class Selection extends Component {
       const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360) % 360;
       console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
+      window.store.dispatch({type:'setSelectionStyle', style:{transform:"rotate("+r+"deg)"}});
     }
   }
   
@@ -44,7 +45,11 @@ class Selection extends Component {
     const y = this.props.element.y * scale;
     const w = this.props.element.w * scale;
     const h = this.props.element.h * scale;
-    var style = {left:x, top:y, position:'absolute'};
+    var style = {left:x, top:y, position:'absolute', width:w, height:h};
+    //console.log("Selection.style", this.props.selectionStyle);
+    if (this.props.selectionStyle) {
+       style=Object.assign(style, this.props.selectionStyle);
+    }
     return (
       <div style={style}>
         <div className='selection' style={{

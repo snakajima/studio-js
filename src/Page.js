@@ -114,6 +114,7 @@ class Page extends Component {
                                selections.push(<Selection key={index+1000} index={index}
                                              pageIndex={this.props.pageIndex}
                                              element={element} main={this.props.main}
+                                             selectionStyle={this.props.selection.style}
                                              scale={scale} />);
                              }
                              return selections;

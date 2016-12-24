@@ -83,12 +83,13 @@ function reducer(_state, action) {
         }
         break;
     case 'moveSceneElement':
-        console.log("moveSceneElement", action.handle, action.index);
-        state.elements = state.elements.map((element)=>{
-          return (element.id === action.id) ?
-            applyMoveAction(element, action) : element
-        })
-        break;
+      console.log("moveSceneElement", action.handle, action.index);
+      state.elements = state.elements.map((element)=>{
+        return (element.id === action.id) ?
+          applyMoveAction(element, action) : element
+      })
+      state.selection = {ids:state.selection.ids};
+      break;
     case 'movePageElement':
       console.log("movePageElement", action.handle, action.index);
       const sceneElement = state.elements[action.index];
@@ -98,6 +99,7 @@ function reducer(_state, action) {
       page[action.id] = Page.extractDelta(sceneElement, movedElement);
       state.pages = state.pages.map((page) => page);
       state.pages[action.pageIndex] = page;
+      state.selection = {ids:state.selection.ids};
       break;
     case 'resize':
         undoable = false;
@@ -119,8 +121,14 @@ function reducer(_state, action) {
         console.log('selectElement', JSON.stringify(state.selection));
         undoable = false;
         break;
+    case 'setSelectionStyle':
+        if (state.selection) {
+          state.selection = {ids:state.selection.ids, style:action.style};
+        }
+        undoable = false;
+        break;
     default:
-        console.log("unknown type:" + action.type);
+        console.log("unknown type:", JSON.stringify(action));
         undoable = false;
         break;
   }
