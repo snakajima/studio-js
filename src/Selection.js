@@ -15,14 +15,14 @@ class Selection extends Component {
 
   onDragStart(e,handle) {
     const element = this.props.element;
-    //const scale = this.props.scale;
+    const scale = this.props.scale;
     DragContext.setContext({
       pageIndex:this.props.pageIndex,
       id:element.id, handle:handle,
       index:this.props.index,
       params:{},
-      //centerX:scale * (element.x + element.w/2),
-      //centerY:scale * (element.y + element.h/2),
+      width:scale * element.w,
+      height:scale * element.h,
       x:e.clientX, y:e.clientY });
   }
   onDrag(e) {
@@ -31,8 +31,8 @@ class Selection extends Component {
     //console.log('onDrag', context.handle, element.x, element.w);
     if (context.handle === 'turn') {
       const dx = e.clientX - context.x;
-      const dy = e.clientY - context.y;
-      const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360) % 360;
+      const dy = e.clientY - context.y - context.height/2 - 20;
+      const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90) % 360;
       console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"rotate("+r+"deg)"}});
