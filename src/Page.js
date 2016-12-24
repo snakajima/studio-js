@@ -22,7 +22,7 @@ class Page extends Component {
       window.store.dispatch({type:'selectPage', pageIndex:this.props.pageIndex});
     } else {
       console.log("Page.onClick");
-      window.store.dispatch({type:'selectElement', selection:new Set()});
+      window.store.dispatch({type:'selectElement', selection:{ids:new Set()}});
     }
   }
 
@@ -100,7 +100,7 @@ class Page extends Component {
     const elements = Page.applyTransform(this.props.sceneElements, this.props.page);
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const scale = this.props.width / this.props.dimension.width;
-    const selection = this.props.selection || new Set()
+    const selection = this.props.selection || {ids:new Set()}
     return (
       <div>
         <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
@@ -110,7 +110,7 @@ class Page extends Component {
             {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
             {elements.reduce((selections, element, index)=>{
-                             if (selection.has(element.id)) {
+                             if (selection.ids.has(element.id)) {
                                selections.push(<Selection key={index+1000} index={index}
                                              pageIndex={this.props.pageIndex}
                                              element={element} main={this.props.main}

@@ -21,7 +21,7 @@ class Scene extends Component {
       window.store.dispatch({type:'selectPage', pageIndex:-1});
     } else {
       console.log("Scene.onClick");
-      window.store.dispatch({type:'selectElement', selection:new Set()});
+      window.store.dispatch({type:'selectElement', selection:{ids:new Set()}});
     }
   }
   
@@ -42,8 +42,8 @@ class Scene extends Component {
   render() {
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     const scale = this.props.width / this.props.dimension.width;
-    const selection = this.props.selection || new Set()
-    const selectedElements = this.props.elements.filter((e) => selection.has(e.id));
+    const selection = this.props.selection || {ids:new Set()}
+    const selectedElements = this.props.elements.filter((e) => selection.ids.has(e.id));
     return (
         <div className={this.props.selected ? "canvasSceneSelected" : "canvasScene"}
              style={{width:this.props.width, height:height}}

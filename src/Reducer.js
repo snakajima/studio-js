@@ -43,7 +43,7 @@ function reducer(_state, action) {
   
   if (typeof _state === "undefined") {
     var initialState = {
-        selection:new Set(),
+        selection:{ids:new Set()},
         pageIndex:0,
         preview:false,
         dimension:{ width:480, height:320 },
@@ -116,6 +116,7 @@ function reducer(_state, action) {
         break;
     case 'selectElement':
         state.selection = action.selection;
+        console.log('selectElement', JSON.stringify(state.selection));
         undoable = false;
         break;
     default:
