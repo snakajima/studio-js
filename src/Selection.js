@@ -16,14 +16,19 @@ class Selection extends Component {
   onDragStart(e,handle) {
     const element = this.props.element;
     const scale = this.props.scale;
-    DragContext.setContext({
+    var context = {
       pageIndex:this.props.pageIndex,
       id:element.id, handle:handle,
       index:this.props.index,
       params:{},
       width:scale * element.w,
       height:scale * element.h,
-      x:e.clientX, y:e.clientY });
+      x:e.clientX, y:e.clientY };
+    if (element.scale) {
+       context.width *= element.scale[0];
+       context.height *= element.scale[1];
+    }
+    DragContext.setContext(context);
   }
   onDrag(e) {
     var context = DragContext.getContext();
@@ -51,10 +56,16 @@ class Selection extends Component {
   render() {
     const scale = this.props.scale;
     const element = this.props.element;
-    const x = element.x * scale;
-    const y = element.y * scale;
-    const w = element.w * scale;
-    const h = element.h * scale;
+    var x = element.x * scale;
+    var y = element.y * scale;
+    var w = element.w * scale;
+    var h = element.h * scale;
+    if (element.scale) {
+       x -= element.w * (element.scale[0] - 1) / 2;
+       y -= element.h * (element.scale[1] - 1) / 2;
+       w *= element.scale[0];
+       h *= element.scale[1];
+    }
     var style = {left:x, top:y, position:'absolute', width:w, height:h};
     //console.log("Selection.style", this.props.selectionStyle);
     if (this.props.selectionStyle) {
