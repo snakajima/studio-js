@@ -20,8 +20,10 @@ function applyMoveAction(element, action) {
       e.scale = [MathEx.round(r[0] * action.params.ratio, 100),
                  MathEx.round(r[1] * action.params.ratio, 100)];
       break;
+    case "w":
     case "e":
-      e.scale = [r[0] * 1.41, r[1]];
+      e.scale = [MathEx.round(r[0] * action.params.ratio, 100),
+                 r[1]];
       break;
     case "n":
     case "s":

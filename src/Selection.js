@@ -61,6 +61,13 @@ class Selection extends Component {
       const ratio = r / r0;
       context.params.ratio = ratio;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale(1,"+ratio+")"}});
+    } else if (context.handle === 'e' || context.handle === 'w') {
+      const dx = e.clientX - context.cx;
+      const r = Math.sqrt(dx * dx);
+      const r0 = context.width/2;
+      const ratio = r / r0;
+      context.params.ratio = ratio;
+      window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+",1)"}});
     }
   }
   
