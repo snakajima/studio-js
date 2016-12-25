@@ -54,6 +54,13 @@ class Selection extends Component {
       //console.log('onDrag', dx, dy, ratio);
       //console.log('onDrag', r, r0, ratio);
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+")"}});
+    } else if (context.handle === 'n' || context.handle === 's') {
+      const dy = e.clientY - context.cy;
+      const r = Math.sqrt(dy * dy);
+      const r0 = context.height/2;
+      const ratio = r / r0;
+      context.params.ratio = ratio;
+      window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale(1,"+ratio+")"}});
     }
   }
   
@@ -93,25 +100,25 @@ class Selection extends Component {
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w/2-9, top:-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"n")}
+            onDragStart={(e)=>this.onDragStart(e,"n", 0, h/2)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w/2-9, top:h-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"s")}
+            onDragStart={(e)=>this.onDragStart(e,"s", 0, -h/2)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:h/2-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"w")}
+            onDragStart={(e)=>this.onDragStart(e,"w", w/2, 0)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:h/2-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"e")}
+            onDragStart={(e)=>this.onDragStart(e,"e", -w/2, 0)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''

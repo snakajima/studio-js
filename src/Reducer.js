@@ -24,7 +24,9 @@ function applyMoveAction(element, action) {
       e.scale = [r[0] * 1.41, r[1]];
       break;
     case "n":
-      e.scale = [r[0], r[1] * 1.41];
+    case "s":
+      e.scale = [r[0],
+                 MathEx.round(r[1] * action.params.ratio, 100)];
       break;
     default: // move
       e.x = MathEx.round(e.x + action.dx / action.scale);
