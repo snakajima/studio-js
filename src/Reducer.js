@@ -13,6 +13,9 @@ function applyMoveAction(element, action) {
     case "turn":
       e.rotate = (e.rotate || 0) + action.params.rotate;
       break;
+    case "sw":
+    case "se":
+    case "nw":
     case "ne":
       e.scale = [MathEx.round(r[0] * action.params.ratio, 100),
                  MathEx.round(r[1] * action.params.ratio, 100)];

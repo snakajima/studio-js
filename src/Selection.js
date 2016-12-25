@@ -13,7 +13,7 @@ class Selection extends Component {
     this.onDrag = this.onDrag.bind(this);
   }
 
-  onDragStart(e,handle) {
+  onDragStart(e,handle, ox=0, oy=0) {
     const element = this.props.element;
     const scale = this.props.scale;
     var context = {
@@ -23,7 +23,8 @@ class Selection extends Component {
       params:{},
       width:scale * element.w,
       height:scale * element.h,
-      x:e.clientX, y:e.clientY };
+      x:e.clientX, y:e.clientY,
+      cx:e.clientX + ox, cy:e.clientY + oy };
     if (element.scale) {
        context.width *= element.scale[0];
        context.height *= element.scale[1];
@@ -36,15 +37,16 @@ class Selection extends Component {
     //const element = context.element;
     //console.log('onDrag', context.handle, element.x, element.w);
     if (context.handle === 'turn') {
-      const dx = e.clientX - context.x;
-      const dy = e.clientY - context.y - context.height/2 - 20;
+      const dx = e.clientX - context.cx;
+      const dy = e.clientY - context.cy;
       const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90) % 360;
       //console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"rotate("+r+"deg)"}});
-    } else if (context.handle === 'ne') {
-      const dx = e.clientX - (context.x - context.width/2);
-      const dy = e.clientY - (context.y + context.height/2);
+    } else if (context.handle === 'ne' || context.handle === 'nw'
+               || context.handle === 'se'|| context.handle === 'sw') {
+      const dx = e.clientX - context.cx;
+      const dy = e.clientY - context.cy;
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = Math.sqrt(context.width/2 * context.width/2 + context.height/2 * context.height/2);
       const ratio = r / r0;
@@ -85,7 +87,7 @@ class Selection extends Component {
         <img className='handle' src='./turn_handle.png' alt=''
             style={{left:w/2-9, top:-9-20 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"turn")}
+            onDragStart={(e)=>this.onDragStart(e,"turn", 0, h/2 + 20)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
@@ -115,25 +117,25 @@ class Selection extends Component {
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"nw")}
+            onDragStart={(e)=>this.onDragStart(e,"nw", w/2, h/2)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"ne")}
+            onDragStart={(e)=>this.onDragStart(e,"ne", -w/2, h/2)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:h-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"sw")}
+            onDragStart={(e)=>this.onDragStart(e,"sw", w/2, -h/2)}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:h-9 }}
             draggable={true}
-            onDragStart={(e)=>this.onDragStart(e,"se")}
+            onDragStart={(e)=>this.onDragStart(e,"se", -w/2, -h/2)}
             onDrag={this.onDrag}
         />
       </div>
