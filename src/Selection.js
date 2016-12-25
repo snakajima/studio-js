@@ -50,10 +50,11 @@ class Selection extends Component {
   
   render() {
     const scale = this.props.scale;
-    const x = this.props.element.x * scale;
-    const y = this.props.element.y * scale;
-    const w = this.props.element.w * scale;
-    const h = this.props.element.h * scale;
+    const element = this.props.element;
+    const x = element.x * scale;
+    const y = element.y * scale;
+    const w = element.w * scale;
+    const h = element.h * scale;
     var style = {left:x, top:y, position:'absolute', width:w, height:h};
     //console.log("Selection.style", this.props.selectionStyle);
     if (this.props.selectionStyle) {
