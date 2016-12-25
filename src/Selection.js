@@ -67,7 +67,6 @@ class Selection extends Component {
        h *= element.scale[1];
     }
     var style = {left:x, top:y, position:'absolute', width:w, height:h};
-    //console.log("Selection.style", this.props.selectionStyle);
     if (this.props.selectionStyle) {
        style=Object.assign(style, this.props.selectionStyle);
     }

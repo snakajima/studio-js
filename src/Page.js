@@ -85,7 +85,7 @@ class Page extends Component {
     if (base.scale !== element.scale) {
       obj.scale = element.scale || [1, 1];
       if (delta) {
-        const r = base.rotate || [1,1];
+        const r = base.scale || [1,1];
         obj.scale[0] /= r[0];
         obj.scale[1] /= r[1];
       }

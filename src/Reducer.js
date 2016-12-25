@@ -25,6 +25,7 @@ function applyMoveAction(element, action) {
     default: // move
       e.x = MathEx.round(e.x + action.dx / action.scale);
       e.y = MathEx.round(e.y + action.dy / action.scale);
+      break;
   }
   return e;
 }
@@ -91,12 +92,16 @@ function reducer(_state, action) {
       state.selection = {ids:state.selection.ids};
       break;
     case 'movePageElement':
-      console.log("movePageElement", action.handle, action.index);
+      console.log("movePageElement", JSON.stringify(action));
       const sceneElement = state.elements[action.index];
+      //console.log("movePagedElement:sE=", JSON.stringify(sceneElement));
       var page = Object.assign({}, state.pages[action.pageIndex]);
       const pageElement = Page.applyTransformElement(sceneElement, page[action.id]);
+      //console.log("movePagedElement:pE=", JSON.stringify(pageElement));
       var movedElement = applyMoveAction(pageElement, action);
+      //console.log("movePagedElement:mE=", JSON.stringify(movedElement));
       page[action.id] = Page.extractDelta(sceneElement, movedElement);
+      //console.log("movePagedElement:delta=", JSON.stringify(page[action.id]));
       state.pages = state.pages.map((page) => page);
       state.pages[action.pageIndex] = page;
       state.selection = {ids:state.selection.ids};
