@@ -28,6 +28,7 @@ class Selection extends Component {
        context.width *= element.scale[0];
        context.height *= element.scale[1];
     }
+    //console.log('onDragStart', context.width/2, context.height/2);
     DragContext.setContext(context);
   }
   onDrag(e) {
@@ -45,10 +46,11 @@ class Selection extends Component {
       const dx = e.clientX - (context.x - context.width/2);
       const dy = e.clientY - (context.y + context.height/2);
       const r = Math.sqrt(dx * dx + dy * dy);
-      const r0 = Math.sqrt(context.width/2 * context.width/2, context.height/2 * context.height/2);
+      const r0 = Math.sqrt(context.width/2 * context.width/2 + context.height/2 * context.height/2);
       const ratio = r / r0;
       context.params.ratio = ratio;
-      console.log('onDrag', r, r0, ratio);
+      //console.log('onDrag', dx, dy, ratio);
+      //console.log('onDrag', r, r0, ratio);
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+")"}});
     }
   }
