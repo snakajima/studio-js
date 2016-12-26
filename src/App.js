@@ -30,6 +30,7 @@ class App extends Component {
     const leftWidth = Math.max(width/4, 140);
     const rightWidth = width - leftWidth - 8;
     const pageIndex = this.state.pageIndex;
+    const classSelected = this.state.selection.ids.size > 0 ? "btn" : "btnIA";
     return (
       <div className="App">
         <div id="left">
@@ -48,7 +49,7 @@ class App extends Component {
                    main={false}
                    width={ leftWidth } />
             <div className="subToolbar">
-               <input className="btnSM" type="image" src="./ic_color_duplicate.png" onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} />
+               <input className="btnSM" type="image" src="./ic_color_add_page.png" onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} />
             </div>
             <Pages pages={ this.state.pages }
                    dimension={ this.state.dimension }
@@ -58,7 +59,7 @@ class App extends Component {
         </div>
         <div id="center">
             <div className="toolbar">
-              <input className={this.state.selection.ids.size > 0 ? "btn" : "btnIA"} type="image" onClick={ () => {window.store.dispatch({type:'deleteElement', ids:this.state.selection.ids})} } src="./ic_color_delete.png" />
+              <input className={classSelected} type="image" onClick={ () => {window.store.dispatch({type:'deleteElement', ids:this.state.selection.ids})} } src="./ic_color_delete.png" />
             </div>
             {
             (pageIndex >=0) ?
