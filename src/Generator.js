@@ -25,7 +25,7 @@ function generate(store) {
       pages: state.pages.map((page) => {
         var obj = {template:"s0"}
         const elements = Page.applyTransform(state.elements, page);
-        console.log("elements=", JSON.stringify(elements));
+        //console.log("elements=", JSON.stringify(elements));
         obj.elements = elements.reduce((s, element, index) => {
                const sceneElement = state.elements[index];
                var d0 = Page.extractDelta(sceneElement, prev[index], false);

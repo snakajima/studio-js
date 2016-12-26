@@ -39,6 +39,8 @@ class App extends Component {
                   onClick={ () => {window.stack.undo(window.store)} } />
               <input className={window.stack.redoable() ? "btn" : "btnIA"} type="image" src="./ic_color_redo.png"
                   onClick={ () => {window.stack.redo(window.store)} } />
+              <input className="btn" type="image" onClick={ () => {window.store.dispatch({type:'debugReload'})} }
+                     style={{float:'right', opacity:0.01}} src="./scale_handle.png" />
             </div>
             <Scene elements={ this.state.elements }
                    dimension={ this.state.dimension }

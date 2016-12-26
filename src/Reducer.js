@@ -5,6 +5,8 @@
 
 import MathEx from './MathEx';
 import Page from './Page';
+import Generator from './Generator';
+import Loader from './Loader';
 
 function applyMoveAction(element, action) {
   var e = Object.assign({}, element);
@@ -123,6 +125,11 @@ function reducer(_state, action) {
       } else {
         undoable = false;
       }
+      break;
+    case 'debugReload':
+      console.log('debugReload');
+      const swipe = Generator.generate(window.store);
+      state = Loader.load(swipe, state);
       break;
     case 'resize':
         undoable = false;
