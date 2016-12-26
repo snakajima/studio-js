@@ -79,10 +79,12 @@ class Selection extends Component {
     var w = element.w * scale;
     var h = element.h * scale;
     if (element.scale) {
-       x -= element.w * (element.scale[0] - 1) / 2;
-       y -= element.h * (element.scale[1] - 1) / 2;
+       x += w / 2;
+       y += h / 2;
        w *= element.scale[0];
        h *= element.scale[1];
+       x -= w / 2;
+       y -= h / 2;
     }
     var style = {left:x, top:y, position:'absolute', width:w, height:h};
     if (this.props.selectionStyle) {
