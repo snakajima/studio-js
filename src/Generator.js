@@ -10,8 +10,9 @@ function normalize(_state) {
   state.elements = state.elements.map((element, index) => {
     const idNew = 'i' + index;
     idMap[element.id] = idNew;
-    element.id = idNew;
-    return element;
+    var elementCopy = Object.assign({}, element);
+    elementCopy.id = idNew;
+    return elementCopy;
   });
   console.log("normalize:idMap", JSON.stringify(idMap));
   state.pages = state.pages.map((page) => {
@@ -27,6 +28,7 @@ function normalize(_state) {
 
 function generate(store) {
     const state = normalize(store.getState());
+    //const state = store.getState();
     var prev = state.elements;
     //const idsAll = state.elements.map((element) => element.id);
     return {
