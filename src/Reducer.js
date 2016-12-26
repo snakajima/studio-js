@@ -62,9 +62,10 @@ function reducer(_state, action) {
             id:"i0", x:10, y:30, h:20, w:50, bc:'#ff0000', rotate:30, opacity:0.5
           },{
             id:"i1", x:50, y:60, h:60, w:50, bc:'#8080ff', scale:[2, 2],
-            "img":"http://satoshi.blogs.com/swipe/movie.png"
+            img:"http://satoshi.blogs.com/swipe/movie.png"
           },{
-            id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00', "img":"http://satoshi.blogs.com/swipe/shuttlex.png"
+            id:"i2", x:80, y:50, h:30, w:50, bc:'#00ff00',
+            img:"http://satoshi.blogs.com/swipe/shuttlex.png"
           }],
         pages:[{},{i0:{opacity:1.0}, i1:{rotate:60, translate:[100,0]}, i2:{scale:[1.0, 3.0]}}]
     };
@@ -117,6 +118,30 @@ function reducer(_state, action) {
       state.pages[action.pageIndex] = page;
       state.selection = {ids:state.selection.ids};
       break;
+    case 'moveElementFront':
+    case 'moveElementBack':
+      if (action.ids.size > 0) {
+        var extra = [];
+        state.elements = state.elements.filter((element) => {
+            if (action.ids.has(element.id)) {
+              extra.push(element);
+              return false;
+            } else {
+              return true;
+            }
+        });
+        if (action.type == 'moveElementFront') {
+            extra.forEach((element) => {
+              state.elements.push(element);
+            });
+        } else {
+            extra.reverse()
+            extra.forEach((element) => {
+              state.elements.unshift(element);
+            });
+        }
+      }
+      break;
     case 'deleteElement':
       if (action.ids.size > 0) {
           state.elements = state.elements.filter((element) => {
@@ -138,7 +163,8 @@ function reducer(_state, action) {
       console.log('addElement', state.nextIndex);
       state.elements = state.elements.map((element) => element);
       state.elements.push({
-         id:"i"+state.nextIndex, x:10 * state.nextIndex, y:10 * state.nextIndex, h:100, w:100, bc:'#ff00ff'
+         id:"i"+state.nextIndex, x:10 * state.nextIndex, y:10 * state.nextIndex, h:100, w:100, bc:'#ff00ff',
+         img:'http://satoshi.blogs.com/swipe/shuttlex.png'
       });
       state.nextIndex++;
       break;
