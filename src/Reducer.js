@@ -114,6 +114,16 @@ function reducer(_state, action) {
       state.pages[action.pageIndex] = page;
       state.selection = {ids:state.selection.ids};
       break;
+    case 'deleteElement':
+      if (action.ids.size > 0) {
+          state.elements = state.elements.filter((element) => {
+             return !action.ids.has(element.id);
+          });
+          state.selection = {ids:new Set()};
+      } else {
+        undoable = false;
+      }
+      break;
     case 'resize':
         undoable = false;
         break;

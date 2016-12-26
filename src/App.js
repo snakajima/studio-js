@@ -21,7 +21,7 @@ class App extends Component {
     super();
     window.store.setApplication(this);
   }
-    
+  
   render() {
     const documentElement = document.documentElement,
         body = document.getElementsByTagName('body')[0],
@@ -56,6 +56,7 @@ class App extends Component {
         </div>
         <div id="center">
             <div className="toolbar">
+              <input className={this.state.selection.ids.size > 0 ? "btn" : "btnIA"} type="image" onClick={ () => {window.store.dispatch({type:'deleteElement', ids:this.state.selection.ids})} } src="./ic_color_delete.png" />
             </div>
             {
             (pageIndex >=0) ?
