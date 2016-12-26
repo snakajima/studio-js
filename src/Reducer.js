@@ -122,6 +122,13 @@ function reducer(_state, action) {
           state.elements = state.elements.filter((element) => {
              return !action.ids.has(element.id);
           });
+          state.pages = state.pages.map((page) => {
+            const ids = Object.keys(page).filter((id) => !action.ids.has(id));
+            return ids.reduce((p, id) => {
+              p[id] = page[id];
+              return p;
+            }, {});
+          });
           state.selection = {ids:new Set()};
       } else {
         undoable = false;
