@@ -22,6 +22,11 @@ class App extends Component {
     window.store.setApplication(this);
   }
   
+  // Note: no need to do .bind(this)
+  dispatcher(action) {
+    return () => { window.store.dispatch(action) };
+  }
+  
   render() {
     const documentElement = document.documentElement,
         body = document.getElementsByTagName('body')[0],
@@ -35,12 +40,15 @@ class App extends Component {
       <div className="App">
         <div id="left">
             <div className="toolbar">
-              <input className="btn" type="image" onClick={ () => {window.store.dispatch({type:'preview', preview:true})} } src="./ic_color_play.png" />
-              <input className={window.stack.undoable() ? "btn" : "btnIA"} type="image" src="./ic_color_undo.png"
+              <input className="btn" type="image" onClick={ this.dispatcher({type:'preview', preview:true}) }
+                     src="./ic_color_play.png" />
+              <input className={window.stack.undoable() ? "btn" : "btnIA"} type="image"
+                     src="./ic_color_undo.png"
                   onClick={ () => {window.stack.undo(window.store)} } />
-              <input className={window.stack.redoable() ? "btn" : "btnIA"} type="image" src="./ic_color_redo.png"
+              <input className={window.stack.redoable() ? "btn" : "btnIA"} type="image"
+                     src="./ic_color_redo.png"
                   onClick={ () => {window.stack.redo(window.store)} } />
-              <input className="btn" type="image" onClick={ () => {window.store.dispatch({type:'debugReload'})} }
+              <input className="btn" type="image" onClick={ this.dispatcher({type:'debugReload'}) }
                      style={{float:'right', opacity:0.01}} src="./scale_handle.png" />
             </div>
             <Scene elements={ this.state.elements }
@@ -49,7 +57,8 @@ class App extends Component {
                    main={false}
                    width={ leftWidth } />
             <div className="subToolbar">
-               <input className="btnSM" type="image" src="./ic_color_add_page.png" onClick={()=>{window.store.dispatch({type:'duplicateScene'})}} />
+               <input className="btnSM" type="image" src="./ic_color_add_page.png"
+                      onClick={this.dispatcher({type:'duplicateScene'})} />
             </div>
             <Pages pages={ this.state.pages }
                    dimension={ this.state.dimension }
@@ -59,7 +68,9 @@ class App extends Component {
         </div>
         <div id="center">
             <div className="toolbar">
-              <input className={classSelected} type="image" onClick={ () => {window.store.dispatch({type:'deleteElement', ids:this.state.selection.ids})} } src="./ic_color_delete.png" />
+              <input className={classSelected} type="image"
+                     onClick={ this.dispatcher({type:'deleteElement', ids:this.state.selection.ids}) }
+                     src="./ic_color_delete.png" />
             </div>
             {
             (pageIndex >=0) ?
