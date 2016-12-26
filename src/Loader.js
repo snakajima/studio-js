@@ -51,7 +51,8 @@ function load(swipe, prevState) {
     preview:false,
     dimension:{ width:swipe.dimension[0] || 320, height:swipe.dimension[1] || 320 },
     elements:sceneElements,
-    pages:pages
+    pages:pages,
+    nextIndex:sceneElements.length
   };
   return state;
 }

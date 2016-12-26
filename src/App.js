@@ -71,6 +71,15 @@ class App extends Component {
               <input className={classSelected} type="image"
                      onClick={ this.dispatcher({type:'deleteElement', ids:this.state.selection.ids}) }
                      src="./ic_color_delete.png" />
+              <input className={classSelected} type="image"
+                     onClick={ this.dispatcher({type:'moveElementBack', ids:this.state.selection.ids}) }
+                     src="./ic_color_back_layer.png" />
+              <input className={classSelected} type="image"
+                     onClick={ this.dispatcher({type:'moveElementFront', ids:this.state.selection.ids}) }
+                     src="./ic_color_front_layer.png" />
+              <input className="btn" type="image"
+                     onClick={ this.dispatcher({type:'addElement'}) }
+                     src="./ic_color_plus.png" />
             </div>
             {
             (pageIndex >=0) ?

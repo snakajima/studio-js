@@ -69,6 +69,7 @@ function reducer(_state, action) {
         pages:[{},{i0:{opacity:1.0}, i1:{rotate:60, translate:[100,0]}, i2:{scale:[1.0, 3.0]}}]
     };
     //initialState.elementMap = elementMap(initialState.elements);
+    initialState.nextIndex = initialState.elements.length;
     window.stack.append(initialState);
     return initialState;
   }
@@ -125,6 +126,14 @@ function reducer(_state, action) {
       } else {
         undoable = false;
       }
+      break;
+    case 'addElement':
+      console.log('addElement', state.nextIndex);
+      state.elements = state.elements.map((element) => element);
+      state.elements.push({
+         id:"i"+state.nextIndex, x:10 * state.nextIndex, y:10 * state.nextIndex, h:100, w:100, bc:'#ff00ff'
+      });
+      state.nextIndex++;
       break;
     case 'debugReload':
       console.log('debugReload');
