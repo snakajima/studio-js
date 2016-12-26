@@ -130,7 +130,7 @@ function reducer(_state, action) {
               return true;
             }
         });
-        if (action.type == 'moveElementFront') {
+        if (action.type === 'moveElementFront') {
             extra.forEach((element) => {
               state.elements.push(element);
             });
@@ -140,6 +140,8 @@ function reducer(_state, action) {
               state.elements.unshift(element);
             });
         }
+      } else {
+        undoable = false;
       }
       break;
     case 'deleteElement':

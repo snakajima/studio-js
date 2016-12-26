@@ -35,7 +35,18 @@ class App extends Component {
     const leftWidth = Math.max(width/4, 140);
     const rightWidth = width - leftWidth - 8;
     const pageIndex = this.state.pageIndex;
-    const classSelected = this.state.selection.ids.size > 0 ? "btn" : "btnIA";
+    var classSelected = "btnIA";
+    var classFront = "btnIA";
+    var classBack = "btnIA";
+    if (this.state.selection.ids.size > 0) {
+      classSelected = "btn";
+      if (!this.state.selection.ids.has(this.state.elements[this.state.elements.length-1].id)) {
+        classFront = "btn";
+      }
+      if (!this.state.selection.ids.has(this.state.elements[0].id)) {
+        classBack = "btn";
+      }
+    }
     return (
       <div className="App">
         <div id="left">
@@ -71,10 +82,10 @@ class App extends Component {
               <input className={classSelected} type="image"
                      onClick={ this.dispatcher({type:'deleteElement', ids:this.state.selection.ids}) }
                      src="./ic_color_delete.png" />
-              <input className={classSelected} type="image"
+              <input className={classBack} type="image"
                      onClick={ this.dispatcher({type:'moveElementBack', ids:this.state.selection.ids}) }
                      src="./ic_color_back_layer.png" />
-              <input className={classSelected} type="image"
+              <input className={classFront} type="image"
                      onClick={ this.dispatcher({type:'moveElementFront', ids:this.state.selection.ids}) }
                      src="./ic_color_front_layer.png" />
               <input className="btn" type="image"
