@@ -102,7 +102,7 @@ class Selection extends Component {
           style.transform="rotate("+element.rotate + "deg) " + style.transform;
         }
     }
-    console.log("Selection:style.transform=", style.transform);
+    //console.log("Selection:style.transform=", style.transform);
     return (
       <div style={style}>
         <div className='selection' style={{
