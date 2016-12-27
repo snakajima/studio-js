@@ -45,7 +45,7 @@ class Selection extends Component {
       const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90) % 360;
       //console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
-      window.store.dispatch({type:'setSelectionStyle', style:{transform:"rotate("+r+"deg)"}});
+      window.store.dispatch({type:'setSelectionStyle', style:{rotate:r}});
     } else if (context.handle === 'ne' || context.handle === 'nw'
                || context.handle === 'se'|| context.handle === 'sw') {
       const r = Math.sqrt(dx * dx + dy * dy);
@@ -54,19 +54,19 @@ class Selection extends Component {
       context.params.ratio = ratio;
       //console.log('onDrag', dx, dy, ratio);
       //console.log('onDrag', r, r0, ratio);
-      window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+")"}});
+      window.store.dispatch({type:'setSelectionStyle', style:{scale:[ratio, ratio]}});
     } else if (context.handle === 'n' || context.handle === 's') {
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.height/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
-      window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale(1,"+ratio+")"}});
+      window.store.dispatch({type:'setSelectionStyle', style:{scale:[1,ratio]}});
     } else if (context.handle === 'e' || context.handle === 'w') {
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.width/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
-      window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+",1)"}});
+      window.store.dispatch({type:'setSelectionStyle', style:{scale:[ratio, 1]}});
     } else if (context.handle === 'move') {
       // to be implemented
       console.log('Selection:onDrag:move', dx, dy);
@@ -90,14 +90,20 @@ class Selection extends Component {
     }
     var style = {left:x, top:y, position:'absolute', width:w, height:h};
     if (this.props.selectionStyle) {
-       style=Object.assign(style, this.props.selectionStyle);
-    }
-    if (element.rotate) {
-        if (!style.transform) {
-          style.transform="rotate("+element.rotate + "deg)";
-        } else if (style.transform.substr(0,6)!=='rotate') {
-          style.transform="rotate("+element.rotate + "deg) " + style.transform;
-        }
+       const s = this.props.selectionStyle;
+       var tx = [];
+       if (s.rotate) {
+         tx.push("rotate("+s.rotate + "deg)");
+       } else if (element.rotate) {
+         tx.push("rotate("+element.rotate + "deg)");
+       }
+       if (s.scale) {
+         tx.push("scale(" + s.scale[0] + "," + s.scale[1] + ")");
+       }
+       style.transform = tx.join(' ');
+       console.log('transform=', style.transform);
+    } else if (element.rotate) {
+       style.transform="rotate("+element.rotate + "deg)";
     }
     //console.log("Selection:style.transform=", style.transform);
     return (
