@@ -40,15 +40,20 @@ class Scene extends Component {
     }
   }
   render() {
-    const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
-    const scale = this.props.width / this.props.dimension.width;
+    const margin = this.props.margin || 0;
+    const width = this.props.width - margin * 2;
+    const scale = width / this.props.dimension.width;
+    const height = this.props.dimension.height * scale;
+    //const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
+    //const scale = this.props.width / this.props.dimension.width;
     const selection = this.props.selection || {ids:new Set()}
     const selectedElements = this.props.elements.filter((e) => selection.ids.has(e.id));
     return (
-        <div className={this.props.selected ? "canvasSceneSelected" : "canvasScene"}
-             style={{width:this.props.width, height:height}}
+        <div className={this.props.selected ? "frameSceneSelected" : "frameScene"}
+             style={{width:this.props.width, height:height + margin * 2}}
             onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
+          <div className='canvasScene' style={{ left:margin, top:margin, width:width, height:height }}>
             {this.props.elements.map((element, index)=>{
                return <Element key={index} index={index} pageIndex={-1} element={element}
                                   scale={scale} main={this.props.main} />
@@ -57,6 +62,7 @@ class Scene extends Component {
             {selectedElements.map((element, index)=>{ return <Selection key={index+1000} index={index} pageIndex={-1} element={element} main={this.props.main}
                                              selectionStyle={this.props.selection.style}
                                   scale={scale} />})}
+          </div>
         </div>
     );
   }

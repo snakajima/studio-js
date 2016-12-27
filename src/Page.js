@@ -98,15 +98,17 @@ class Page extends Component {
 
   render() {
     const elements = Page.applyTransform(this.props.sceneElements, this.props.page);
-    const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
-    const scale = this.props.width / this.props.dimension.width;
+    const margin = this.props.margin || 0;
+    const width = this.props.width - margin * 2;
+    const scale = width / this.props.dimension.width;
+    const height = this.props.dimension.height * scale;
     const selection = this.props.selection || {ids:new Set()}
     return (
-      <div>
-        <div className={ this.props.selected ? "canvasPageSelected" : "canvasPage"}
-             style={{ width:this.props.width, height:height }}
+        <div className={ this.props.selected ? "framePageSelected" : "framePage"}
+             style={{ width:this.props.width, height:height + margin * 2 }}
             onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
+          <div className='canvasPage' style={{ left:margin, top:margin, width:width, height:height }}>
             {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
             {elements.reduce((selections, element, index)=>{
@@ -119,8 +121,8 @@ class Page extends Component {
                              }
                              return selections;
                     }, [])}
+          </div>
         </div>
-      </div>
     );
   }
 }

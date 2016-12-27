@@ -27,31 +27,48 @@ body {
   top:50%;
 }
 
-.canvasScene {
+.frameScene {
   position:relative;
   border: 1px solid #aaa;
-  background: #ffc;
+  background: #eee;
+  overflow:hidden;
 }
 
-.canvasSceneSelected {
+.frameSceneSelected {
     position:relative;
     border: 1px solid #00BCD4;
-    background: #ffc;
+    background: #eee;
+  overflow:hidden;
+}
+
+.canvasScene {
+    background:#ffc;
+    position:absolute;
 }
 
 .canvasPages {
   overflow:scroll;
 }
 
-.canvasPage {
+.framePage {
   position:relative;
   border: 1px solid #aaa;
+  background-color: #eee;
+  overflow:hidden;
 }
 
-.canvasPageSelected {
-    position:relative;
-    border: 1px solid #00BCD4;
+.framePageSelected {
+  position:relative;
+  border: 1px solid #00BCD4;
+  background-color: #eee;
+  overflow:hidden;
 }
+
+.canvasPage {
+    background:#fff;
+    position:absolute;
+}
+
 
 .previewFrame {
     position:fixed;
