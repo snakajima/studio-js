@@ -16,6 +16,9 @@ class Selection extends Component {
   onDragStart(e,handle, ox=0, oy=0) {
     const element = this.props.element;
     const scale = this.props.scale;
+    const rad = (element.rotate || 0) / 180 * Math.PI;
+    const dx = ox * Math.cos(rad) - oy * Math.sin(rad);
+    const dy = ox * Math.sin(rad) + oy * Math.cos(rad);
     var context = {
       pageIndex:this.props.pageIndex,
       id:element.id, handle:handle,
@@ -24,7 +27,7 @@ class Selection extends Component {
       width:scale * element.w,
       height:scale * element.h,
       x:e.clientX, y:e.clientY,
-      cx:e.clientX + ox, cy:e.clientY + oy };
+      cx:e.clientX + dx, cy:e.clientY + dy };
     if (element.scale) {
        context.width *= element.scale[0];
        context.height *= element.scale[1];
@@ -55,15 +58,17 @@ class Selection extends Component {
       //console.log('onDrag', r, r0, ratio);
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+")"}});
     } else if (context.handle === 'n' || context.handle === 's') {
+      const dx = e.clientX - context.cx;
       const dy = e.clientY - context.cy;
-      const r = Math.sqrt(dy * dy);
+      const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.height/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale(1,"+ratio+")"}});
     } else if (context.handle === 'e' || context.handle === 'w') {
       const dx = e.clientX - context.cx;
-      const r = Math.sqrt(dx * dx);
+      const dy = e.clientY - context.cy;
+      const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.width/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
@@ -90,6 +95,14 @@ class Selection extends Component {
     if (this.props.selectionStyle) {
        style=Object.assign(style, this.props.selectionStyle);
     }
+    if (element.rotate) {
+        if (!style.transform) {
+          style.transform="rotate("+element.rotate + "deg)";
+        } else if (style.transform.substr(0,6)!=='rotate') {
+          style.transform="rotate("+element.rotate + "deg) " + style.transform;
+        }
+    }
+    console.log("Selection:style.transform=", style.transform);
     return (
       <div style={style}>
         <div className='selection' style={{
