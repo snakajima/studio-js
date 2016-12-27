@@ -14,6 +14,7 @@ class Selection extends Component {
   }
 
   onDragStart(e,handle, ox=0, oy=0) {
+    e.dataTransfer.setDragImage(e.target, -10000, -10000);
     const element = this.props.element;
     const scale = this.props.scale;
     const rad = (element.rotate || 0) / 180 * Math.PI;
@@ -103,7 +104,7 @@ class Selection extends Component {
          tx.push("scale(" + s.scale[0] + "," + s.scale[1] + ")");
        }
        style.transform = tx.join(' ');
-       console.log('transform=', style.transform);
+       //console.log('transform=', style.transform);
     } else if (element.rotate) {
        style.transform="rotate("+element.rotate + "deg)";
     }
