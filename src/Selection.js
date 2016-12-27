@@ -39,17 +39,15 @@ class Selection extends Component {
     var context = DragContext.getContext();
     //const element = context.element;
     //console.log('onDrag', context.handle, element.x, element.w);
+    const dx = e.clientX - context.cx;
+    const dy = e.clientY - context.cy;
     if (context.handle === 'turn') {
-      const dx = e.clientX - context.cx;
-      const dy = e.clientY - context.cy;
       const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90) % 360;
       //console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"rotate("+r+"deg)"}});
     } else if (context.handle === 'ne' || context.handle === 'nw'
                || context.handle === 'se'|| context.handle === 'sw') {
-      const dx = e.clientX - context.cx;
-      const dy = e.clientY - context.cy;
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = Math.sqrt(context.width/2 * context.width/2 + context.height/2 * context.height/2);
       const ratio = r / r0;
@@ -58,21 +56,20 @@ class Selection extends Component {
       //console.log('onDrag', r, r0, ratio);
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+")"}});
     } else if (context.handle === 'n' || context.handle === 's') {
-      const dx = e.clientX - context.cx;
-      const dy = e.clientY - context.cy;
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.height/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale(1,"+ratio+")"}});
     } else if (context.handle === 'e' || context.handle === 'w') {
-      const dx = e.clientX - context.cx;
-      const dy = e.clientY - context.cy;
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.width/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
       window.store.dispatch({type:'setSelectionStyle', style:{transform:"scale("+ratio+",1)"}});
+    } else if (context.handle === 'move') {
+      // to be implemented
+      console.log('Selection:onDrag:move', dx, dy);
     }
   }
   
@@ -112,6 +109,7 @@ class Selection extends Component {
           }}
           draggable={true}
           onDragStart={(e)=>this.onDragStart(e,"move")}
+          onDrag={this.onDrag}
         />
         <img className='handle' src='./turn_handle.png' alt=''
             style={{left:w/2-9, top:-9-20 }}
