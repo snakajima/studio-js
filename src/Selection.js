@@ -68,8 +68,7 @@ class Selection extends Component {
       context.params.ratio = ratio;
       window.store.dispatch({type:'setSelectionStyle', style:{scale:[ratio, 1]}});
     } else if (context.handle === 'move') {
-      // to be implemented
-      console.log('Selection:onDrag:move', dx, dy);
+      window.store.dispatch({type:'setSelectionStyle', style:{translate:[dx, dy]}});
     }
   }
   
@@ -92,6 +91,9 @@ class Selection extends Component {
     if (this.props.selectionStyle) {
        const s = this.props.selectionStyle;
        var tx = [];
+       if (s.translate) {
+         tx.push("translate(" + s.translate[0] + "px," + s.translate[1] + "px)");
+       }
        if (s.rotate) {
          tx.push("rotate("+s.rotate + "deg)");
        } else if (element.rotate) {
