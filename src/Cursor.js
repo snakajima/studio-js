@@ -28,7 +28,7 @@ class Cursor extends Component {
       state.selection = Object.assign({}, _state.selection);
     }
     switch(action.type) {
-      case 'resize':
+      case 'update':
         break;
       case 'selectElement':
         state.selection = action.selection;
@@ -116,7 +116,7 @@ class Cursor extends Component {
   }
   
   updateDimensions() {
-    window.cursor.dispatch({type:'resize'});
+    window.cursor.dispatch({type:'update'});
   }
   componentWillMount() {
     this.updateDimensions();
