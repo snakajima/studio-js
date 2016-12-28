@@ -48,7 +48,7 @@ class Cursor extends Component {
   onDrop(e) {
     console.log('Cursor:onDrop');
     const context = DragContext.getContext();
-    const scale = (this.width - this.state.margin * 2)/ this.state.dimension.width;
+    const scale = this.scale;
     if (this.state.pageIndex >= 0) {
       window.store.dispatch({
                             type:'movePageElement', pageIndex:context.pageIndex,
@@ -79,13 +79,13 @@ class Cursor extends Component {
     //console.log('Cursor:elements', JSON.stringify(elements));
     const margin = this.state.margin || 0;
     const w = rightWidth - margin * 2;
-    this.width = w; // HACK: pass this value to onDrop (is this a bad practice?)
     const scale = w / this.state.dimension.width;
+    this.scale = scale; // HACK: pass this value to onDrop (is this a bad practice?)
     const height = this.state.dimension.height * scale + margin * 2;
     const selection = this.state.selection || {ids:new Set()}
     const context = DragContext.getContext();
     //console.log('Cursor:more', margin, w, scale, JSON.stringify(selection));
-    var style = {float:'left', background:'rgba(0, 255, 0, 0.2)', width:10, height:10, position:'relative'};
+    var style = {};
     if (context.cursor) {
       style.width = rightWidth;
       style.height = height;
@@ -106,7 +106,7 @@ class Cursor extends Component {
         <div className='toolbar' style={{width:3}} ></div>
         <div className='frameScene' style={{width:leftWidth, float:'left', height:3}}>
         </div>
-          <div style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
+          <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
           <div style={{position:'absolute', left:margin + 1, top:margin+1}}>
             {cursors}
           </div>
