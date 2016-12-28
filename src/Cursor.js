@@ -42,11 +42,19 @@ class Cursor extends Component {
     console.log('Cursor:onDrop');
     const context = DragContext.getContext();
     const scale = (this.width - this.state.margin * 2)/ this.state.dimension.width;
-    window.store.dispatch({
-                          type:'movePageElement', pageIndex:context.pageIndex,
-                          handle:context.handle,
-                          id:context.id, scale:scale, index:context.index, params:context.params,
-                          dx:e.clientX-context.x, dy:e.clientY-context.y});
+    if (this.state.pageIndex >= 0) {
+      window.store.dispatch({
+                            type:'movePageElement', pageIndex:context.pageIndex,
+                            handle:context.handle,
+                            id:context.id, scale:scale, index:context.index, params:context.params,
+                            dx:e.clientX-context.x, dy:e.clientY-context.y});
+    } else {
+      window.store.dispatch({
+                            type:'moveSceneElement', id:context.id, index:context.index,
+                            handle:context.handle, params:context.params,
+                            scale:scale,
+                            dx:e.clientX-context.x, dy:e.clientY-context.y});
+    }
   }
 
   onDragOver(e) {
@@ -58,7 +66,9 @@ class Cursor extends Component {
 
   render() {
     const { leftWidth, rightWidth } = App.windowSize();
-    const elements = Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex]);
+    const elements = (this.state.pageIndex >= 0) ?
+        Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex])
+      : this.state.elements;
     //console.log('Cursor:elements', JSON.stringify(elements));
     const margin = this.state.margin || 0;
     const w = rightWidth - margin * 2;
