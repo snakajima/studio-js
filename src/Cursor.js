@@ -41,20 +41,25 @@ class Cursor extends Component {
     const selection = this.state.selection || {ids:new Set()}
     console.log('Cursor:more', margin, w, scale, JSON.stringify(selection));
     return (
-        <div>
+      <div>
+        <div className='toolbar' style={{width:3}} ></div>
+        <div className='frameScene' style={{width:leftWidth, float:'left', height:3}}>
+        </div>
+        <div style={{float:'left', background:'#0f0', width:3, position:'relative'}}>
+          <div style={{position:'absolute', left:margin + 1, top:margin+1}}>
         {elements.reduce((selections, element, index)=>{
                          if (selection.ids.has(element.id)) {
                            selections.push(<Selection key={index+1000} index={index}
                                          pageIndex={this.state.pageIndex}
                                          element={element} main={true}
                                          selectionStyle={this.state.selection.style}
-                                         offsetX={leftWidth+margin+3}
-                                         offsetY={28+margin+1}
                                          scale={scale} />);
                          }
                          return selections;
                 }, [])}
+            </div>
         </div>
+      </div>
     )
   }
   

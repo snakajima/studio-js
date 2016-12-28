@@ -81,8 +81,8 @@ class Selection extends Component {
   render() {
     const scale = this.props.scale;
     const element = this.props.element;
-    var x = element.x * scale + (this.props.offsetX || 0);
-    var y = element.y * scale + (this.props.offsetY || 0);
+    var x = element.x * scale;
+    var y = element.y * scale;
     var w = element.w * scale;
     var h = element.h * scale;
     if (element.scale) {
