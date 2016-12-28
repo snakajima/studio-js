@@ -21,8 +21,7 @@ class Scene extends Component {
       window.store.dispatch({type:'selectPage', pageIndex:-1});
     } else {
       console.log("Scene.onClick");
-      window.store.dispatch({type:'selectElement', selection:{ids:new Set()}});
-      window.cursor.dispatch({type:'selectElement', selection:[]});
+      window.cursor.dispatch({type:'selectElement', selection:{ids:new Set()}});
     }
   }
   

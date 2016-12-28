@@ -192,17 +192,6 @@ function reducer(_state, action) {
         state = action.state;
         undoable = false;
         break;
-    case 'selectElement':
-        state.selection = action.selection;
-        //console.log('selectElement', JSON.stringify(state.selection));
-        undoable = false;
-        break;
-    case 'setSelectionStyle':
-        if (state.selection) {
-          state.selection = {ids:state.selection.ids, style:action.style};
-        }
-        undoable = false;
-        break;
     default:
         console.log("unknown type:", JSON.stringify(action));
         undoable = false;

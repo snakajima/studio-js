@@ -24,12 +24,19 @@ class Cursor extends Component {
     }
     
     var state = Object.assign({}, window.store.getState());
+    if (_state.selection) {
+      state.selection = Object.assign({}, _state.selection);
+    }
     switch(action.type) {
       case 'resize':
         break;
-      case 'setSelectionStyle':
+      case 'selectElement':
+        state.selection = action.selection;
         break;
-      case 'update':
+      case 'setSelectionStyle':
+        if (state.selection) {
+          state.selection = {ids:state.selection.ids, style:action.style};
+        }
         break;
       default:
         console.log('Cursor:unknown action', action.type);
