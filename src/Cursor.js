@@ -32,7 +32,7 @@ class Cursor extends Component {
   }
   
   render() {
-    const { width, height, leftWidth, rightWidth } = App.windowSize();
+    const { leftWidth, rightWidth } = App.windowSize();
     const elements = Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex]);
     console.log('Cursor:elements', JSON.stringify(elements));
     const margin = this.state.margin || 0;

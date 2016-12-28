@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import DragContext from './DragContext';
 import Element from './Element';
-import Selection from './Selection';
+//import Selection from './Selection';
 import MathEx from './MathEx';
 
 class Page extends Component {
@@ -103,7 +103,7 @@ class Page extends Component {
     const width = this.props.width - margin * 2;
     const scale = width / this.props.dimension.width;
     const height = this.props.dimension.height * scale;
-    const selection = this.props.selection || {ids:new Set()}
+    //const selection = this.props.selection || {ids:new Set()}
     return (
         <div className={ this.props.selected ? "framePageSelected" : "framePage"}
              style={{ width:this.props.width, height:height + margin * 2 }}
