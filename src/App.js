@@ -104,13 +104,13 @@ class App extends Component {
                     dimension={ this.state.dimension }
                     width={ rightWidth }
                     main={true}
-                    margin={24}
+                    margin={this.state.margin}
                     selection={this.state.selection}
                     sceneElements={ this.state.elements} />
             : <Scene elements={ this.state.elements }
                      dimension={ this.state.dimension }
                      main={true}
-                     margin={24}
+                     margin={this.state.margin}
                      selection={this.state.selection}
                      width={ rightWidth } />
             }

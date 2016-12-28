@@ -112,7 +112,8 @@ class Page extends Component {
           <div className='canvasPage' style={{ left:margin, top:margin, width:width, height:height }}>
             {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
-            {elements.reduce((selections, element, index)=>{
+          
+            {/*elements.reduce((selections, element, index)=>{
                              if (selection.ids.has(element.id)) {
                                selections.push(<Selection key={index+1000} index={index}
                                              pageIndex={this.props.pageIndex}
@@ -121,7 +122,8 @@ class Page extends Component {
                                              scale={scale} />);
                              }
                              return selections;
-                    }, [])}
+                    }, [])*/}
+            
           </div>
         </div>
     );

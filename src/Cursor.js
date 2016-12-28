@@ -36,7 +36,7 @@ class Cursor extends Component {
     const elements = Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex]);
     console.log('Cursor:elements', JSON.stringify(elements));
     const margin = this.state.margin || 0;
-    const w = width - margin * 2;
+    const w = rightWidth - margin * 2;
     const scale = w / this.state.dimension.width;
     const selection = this.state.selection || {ids:new Set()}
     console.log('Cursor:more', margin, w, scale, JSON.stringify(selection));
@@ -48,6 +48,8 @@ class Cursor extends Component {
                                          pageIndex={this.state.pageIndex}
                                          element={element} main={true}
                                          selectionStyle={this.state.selection.style}
+                                         offsetX={leftWidth+margin+3}
+                                         offsetY={28+margin+1}
                                          scale={scale} />);
                          }
                          return selections;

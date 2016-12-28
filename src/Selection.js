@@ -42,11 +42,12 @@ class Selection extends Component {
     //console.log('onDrag', context.handle, element.x, element.w);
     const dx = e.clientX - context.cx;
     const dy = e.clientY - context.cy;
+    var style = null;
     if (context.handle === 'turn') {
       const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90) % 360;
       //console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
-      window.store.dispatch({type:'setSelectionStyle', style:{rotate:r}});
+      style = {rotate:r};
     } else if (context.handle === 'ne' || context.handle === 'nw'
                || context.handle === 'se'|| context.handle === 'sw') {
       const r = Math.sqrt(dx * dx + dy * dy);
@@ -55,29 +56,33 @@ class Selection extends Component {
       context.params.ratio = ratio;
       //console.log('onDrag', dx, dy, ratio);
       //console.log('onDrag', r, r0, ratio);
-      window.store.dispatch({type:'setSelectionStyle', style:{scale:[ratio, ratio]}});
+      style = {scale:[ratio, ratio]};
     } else if (context.handle === 'n' || context.handle === 's') {
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.height/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
-      window.store.dispatch({type:'setSelectionStyle', style:{scale:[1,ratio]}});
+      style = {scale:[1,ratio]};
     } else if (context.handle === 'e' || context.handle === 'w') {
       const r = Math.sqrt(dx * dx + dy * dy);
       const r0 = context.width/2;
       const ratio = r / r0;
       context.params.ratio = ratio;
-      window.store.dispatch({type:'setSelectionStyle', style:{scale:[ratio, 1]}});
+      style = {scale:[ratio, 1]};
     } else if (context.handle === 'move') {
-      window.store.dispatch({type:'setSelectionStyle', style:{translate:[dx, dy]}});
+      style = {translate:[dx, dy]};
+    }
+    if (style) {
+      window.store.dispatch({type:'setSelectionStyle', style:style});
+      window.cursor.dispatch({type:'setSelectionStyle', style:style});
     }
   }
   
   render() {
     const scale = this.props.scale;
     const element = this.props.element;
-    var x = element.x * scale;
-    var y = element.y * scale;
+    var x = element.x * scale + (this.props.offsetX || 0);
+    var y = element.y * scale + (this.props.offsetY || 0);
     var w = element.w * scale;
     var h = element.h * scale;
     if (element.scale) {
