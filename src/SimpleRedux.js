@@ -10,7 +10,9 @@ function createStore(reducer) {
     var app;
     function dispatch(action) {
       state = reducer(state, action)
-      app.setState(state)
+      if (app) {
+        app.setState(state)
+      }
     }
     function setApplication(obj) {
       app = obj;

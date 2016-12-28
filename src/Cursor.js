@@ -102,10 +102,7 @@ class Cursor extends Component {
                                   return selections;
                                   }, []);
     return (
-      <div>
-        <div className='toolbar' style={{width:3}} ></div>
-        <div className='frameScene' style={{width:leftWidth, float:'left', height:3}}>
-        </div>
+        <div style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
           <div style={{position:'absolute', left:margin + 1, top:margin+1}}>
             {cursors}

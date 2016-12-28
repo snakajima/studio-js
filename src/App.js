@@ -22,6 +22,11 @@ class App extends Component {
     window.store.setApplication(this);
   }
   
+  setState(state) {
+    super.setState(state);
+    window.cursor.dispatch({type:'update'});
+  }
+  
   // Note: no need to do .bind(this)
   dispatcher(action) {
     return () => { window.store.dispatch(action) };
