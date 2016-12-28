@@ -12,7 +12,7 @@ class Element extends Component {
     this.onDragStart = this.onDragStart.bind(this);
     this.onClick = this.onClick.bind(this);
   }
-  
+
   onDragStart(e) {
     DragContext.setContext({
       pageIndex:this.props.pageIndex,

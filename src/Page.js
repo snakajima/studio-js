@@ -28,6 +28,7 @@ class Page extends Component {
   }
 
   onDrop(e) {
+    console.log('Page:onDrop');
     const context = DragContext.getContext();
     const scale = (this.props.width - this.props.margin * 2)/ this.props.dimension.width;
     window.store.dispatch({
@@ -38,6 +39,7 @@ class Page extends Component {
   }
   
   onDragOver(e) {
+    console.log('Page:onDragOver');
     if (DragContext.getContext().pageIndex === this.props.pageIndex) {
         e.preventDefault();
     }
@@ -107,7 +109,7 @@ class Page extends Component {
     return (
         <div className={ this.props.selected ? "framePageSelected" : "framePage"}
              style={{ width:this.props.width, height:height + margin * 2 }}
-            onClick={this.onClick}
+             onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
           <div className='canvasPage' style={{ left:margin, top:margin, width:width, height:height }}>
             {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}

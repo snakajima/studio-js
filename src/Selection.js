@@ -10,9 +10,13 @@ class Selection extends Component {
   constructor(props) {
     super();
     this.onDragStart = this.onDragStart.bind(this);
+    this.onDragEnd = this.onDragEnd.bind(this);
     this.onDrag = this.onDrag.bind(this);
   }
 
+  onDragEnd(e) {
+    console.log('onDragEnd');
+  }
   onDragStart(e,handle, ox=0, oy=0) {
     e.dataTransfer.setDragImage(e.target, -10000, -10000);
     const element = this.props.element;
@@ -123,6 +127,7 @@ class Selection extends Component {
           }}
           draggable={true}
           onDragStart={(e)=>this.onDragStart(e,"move")}
+          onDragEnd={this.onDragEnd}
           onDrag={this.onDrag}
         />
         <img className='handle' src='./turn_handle.png' alt=''
