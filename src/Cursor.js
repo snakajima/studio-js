@@ -74,24 +74,25 @@ class Cursor extends Component {
       style.height = height;
     }
 
+    var cursors = elements.reduce((selections, element, index)=>{
+                                  if (selection.ids.has(element.id)) {
+                                  selections.push(<Selection key={index+1000} index={index}
+                                                  pageIndex={this.state.pageIndex}
+                                                  element={element} main={true}
+                                                  selectionStyle={this.state.selection.style}
+                                                  scale={scale} />);
+                                  }
+                                  return selections;
+                                  }, []);
     return (
       <div>
         <div className='toolbar' style={{width:3}} ></div>
         <div className='frameScene' style={{width:leftWidth, float:'left', height:3}}>
         </div>
-            <div style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
+          <div style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
           <div style={{position:'absolute', left:margin + 1, top:margin+1}}>
-        {elements.reduce((selections, element, index)=>{
-                         if (selection.ids.has(element.id)) {
-                           selections.push(<Selection key={index+1000} index={index}
-                                         pageIndex={this.state.pageIndex}
-                                         element={element} main={true}
-                                         selectionStyle={this.state.selection.style}
-                                         scale={scale} />);
-                         }
-                         return selections;
-                }, [])}
-            </div>
+            {cursors}
+          </div>
         </div>
       </div>
     )
