@@ -39,9 +39,9 @@ class Cursor extends Component {
   }
 
   onDrop(e) {
-    console.log('Page:onDrop');
+    console.log('Cursor:onDrop');
     const context = DragContext.getContext();
-    const scale = (this.state.width - this.state.margin * 2)/ this.state.dimension.width;
+    const scale = (this.width - this.state.margin * 2)/ this.state.dimension.width;
     window.store.dispatch({
                           type:'movePageElement', pageIndex:context.pageIndex,
                           handle:context.handle,
@@ -50,7 +50,7 @@ class Cursor extends Component {
   }
 
   onDragOver(e) {
-    console.log('Page:onDragOver');
+    //console.log('Cursor:onDragOver');
     if (DragContext.getContext().pageIndex === this.state.pageIndex) {
       e.preventDefault();
     }
@@ -62,6 +62,7 @@ class Cursor extends Component {
     //console.log('Cursor:elements', JSON.stringify(elements));
     const margin = this.state.margin || 0;
     const w = rightWidth - margin * 2;
+    this.width = w; // HACK: pass this value to onDrop (is this a bad practice?)
     const scale = w / this.state.dimension.width;
     const height = this.state.dimension.height * scale + margin * 2;
     const selection = this.state.selection || {ids:new Set()}
