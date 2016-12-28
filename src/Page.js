@@ -21,8 +21,9 @@ class Page extends Component {
     if (!this.props.main) {
       window.store.dispatch({type:'selectPage', pageIndex:this.props.pageIndex});
     } else {
-      console.log("Page.onClick");
+      //console.log("Page.onClick");
       window.store.dispatch({type:'selectElement', selection:{ids:new Set()}});
+      window.cursor.dispatch({type:'selectElement', selection:[]});
     }
   }
 

@@ -22,6 +22,7 @@ class Scene extends Component {
     } else {
       console.log("Scene.onClick");
       window.store.dispatch({type:'selectElement', selection:{ids:new Set()}});
+      window.cursor.dispatch({type:'selectElement', selection:[]});
     }
   }
   

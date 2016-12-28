@@ -27,13 +27,18 @@ class App extends Component {
     return () => { window.store.dispatch(action) };
   }
   
-  render() {
+  static windowSize() {
     const documentElement = document.documentElement,
         body = document.getElementsByTagName('body')[0],
         width = window.innerWidth || documentElement.clientWidth || body.clientWidth,
         height = window.innerHeight|| documentElement.clientHeight|| body.clientHeight;
     const leftWidth = Math.max(width/4, 140);
     const rightWidth = width - leftWidth - 8;
+    return { width, height, leftWidth, rightWidth };
+  }
+  
+  render() {
+    const { width, height, leftWidth, rightWidth } = App.windowSize();
     const pageIndex = this.state.pageIndex;
     var classSelected = "btnIA";
     var classFront = "btnIA";
