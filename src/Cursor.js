@@ -14,6 +14,8 @@ class Cursor extends Component {
   constructor() {
     super();
     window.cursor.setApplication(this);
+    this.onDrop = this.onDrop.bind(this);
+    this.onDragOver = this.onDragOver.bind(this);
   }
   
   static reducer(_state, action) {
@@ -35,7 +37,25 @@ class Cursor extends Component {
     }
     return state;
   }
-  
+
+  onDrop(e) {
+    console.log('Page:onDrop');
+    const context = DragContext.getContext();
+    const scale = (this.state.width - this.state.margin * 2)/ this.state.dimension.width;
+    window.store.dispatch({
+                          type:'movePageElement', pageIndex:context.pageIndex,
+                          handle:context.handle,
+                          id:context.id, scale:scale, index:context.index, params:context.params,
+                          dx:e.clientX-context.x, dy:e.clientY-context.y});
+  }
+
+  onDragOver(e) {
+    console.log('Page:onDragOver');
+    if (DragContext.getContext().pageIndex === this.state.pageIndex) {
+      e.preventDefault();
+    }
+  }
+
   render() {
     const { leftWidth, rightWidth } = App.windowSize();
     const elements = Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex]);
@@ -58,7 +78,7 @@ class Cursor extends Component {
         <div className='toolbar' style={{width:3}} ></div>
         <div className='frameScene' style={{width:leftWidth, float:'left', height:3}}>
         </div>
-        <div style={style}>
+            <div style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
           <div style={{position:'absolute', left:margin + 1, top:margin+1}}>
         {elements.reduce((selections, element, index)=>{
                          if (selection.ids.has(element.id)) {
