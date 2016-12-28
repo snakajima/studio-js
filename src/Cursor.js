@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import App from './App';
 import Page from './Page';
 import Selection from './Selection';
+import DragContext from './DragContext';
 import createStore from './SimpleRedux';
 
 class Cursor extends Component {
@@ -26,6 +27,8 @@ class Cursor extends Component {
         break;
       case 'setSelectionStyle':
         break;
+      case 'update':
+        break;
       default:
         console.log('Cursor:unknown action', action.type);
         break;
@@ -40,14 +43,22 @@ class Cursor extends Component {
     const margin = this.state.margin || 0;
     const w = rightWidth - margin * 2;
     const scale = w / this.state.dimension.width;
+    const height = this.state.dimension.height * scale + margin * 2;
     const selection = this.state.selection || {ids:new Set()}
+    const context = DragContext.getContext();
     //console.log('Cursor:more', margin, w, scale, JSON.stringify(selection));
+    var style = {float:'left', background:'rgba(0, 255, 0, 0.2)', width:10, height:10, position:'relative'};
+    if (context.cursor) {
+      style.width = rightWidth;
+      style.height = height;
+    }
+
     return (
       <div>
         <div className='toolbar' style={{width:3}} ></div>
         <div className='frameScene' style={{width:leftWidth, float:'left', height:3}}>
         </div>
-        <div style={{float:'left', background:'rgba(0, 255, 0, 0.2)', width:10, height:10, position:'relative'}}>
+        <div style={style}>
           <div style={{position:'absolute', left:margin + 1, top:margin+1}}>
         {elements.reduce((selections, element, index)=>{
                          if (selection.ids.has(element.id)) {

@@ -16,6 +16,8 @@ class Selection extends Component {
 
   onDragEnd(e) {
     console.log('onDragEnd');
+    DragContext.setContext({});
+    window.cursor.dispatch({type:'update'});
   }
   onDragStart(e,handle, ox=0, oy=0) {
     e.dataTransfer.setDragImage(e.target, -10000, -10000);
@@ -32,6 +34,7 @@ class Selection extends Component {
       width:scale * element.w,
       height:scale * element.h,
       x:e.clientX, y:e.clientY,
+      cursor:true,
       cx:e.clientX + dx, cy:e.clientY + dy };
     if (element.scale) {
        context.width *= element.scale[0];
@@ -39,6 +42,7 @@ class Selection extends Component {
     }
     //console.log('onDragStart', context.width/2, context.height/2);
     DragContext.setContext(context);
+    window.cursor.dispatch({type:'update'});
   }
   onDrag(e) {
     var context = DragContext.getContext();
@@ -134,54 +138,63 @@ class Selection extends Component {
             style={{left:w/2-9, top:-9-20 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"turn", 0, h/2 + 20)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w/2-9, top:-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"n", 0, h/2)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w/2-9, top:h-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"s", 0, -h/2)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:h/2-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"w", w/2, 0)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:h/2-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"e", -w/2, 0)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"nw", w/2, h/2)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"ne", -w/2, h/2)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:-9, top:h-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"sw", w/2, -h/2)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
         <img className='handle' src='./scale_handle.png' alt=''
             style={{left:w-9, top:h-9 }}
             draggable={true}
             onDragStart={(e)=>this.onDragStart(e,"se", -w/2, -h/2)}
+            onDragEnd={this.onDragEnd}
             onDrag={this.onDrag}
         />
       </div>
