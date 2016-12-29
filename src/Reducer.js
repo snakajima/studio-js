@@ -167,8 +167,8 @@ function reducer(_state, action) {
       console.log('addElement', state.nextIndex);
       state.elements = state.elements.map((element) => element);
       state.elements.push({
-         id:"i"+state.nextIndex, x:10 * state.nextIndex, y:10 * state.nextIndex, h:100, w:100, bc:'#ff00ff',
-         img:'http://satoshi.blogs.com/swipe/shuttlex.png'
+         id:"i"+state.nextIndex, x:10 * state.nextIndex, y:10 * state.nextIndex, h:120, w:120, bc:'#fff',
+         img:'http://satoshi.blogs.com/swipe/Dice' + (state.nextIndex % 6 + 1) +'.png'
       });
       state.nextIndex++;
       break;
