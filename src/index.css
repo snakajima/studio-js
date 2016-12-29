@@ -50,6 +50,15 @@ body {
   overflow:scroll;
 }
 
+.frameCursor {
+  float:left;
+  background:rgba(0, 255, 0, 0.0);
+  width:10;
+  height:10;
+  position:relative;
+  border: 1px solid rgba(255, 0, 0, 0.0);
+}
+
 .framePage {
   position:relative;
   border: 1px solid #aaa;

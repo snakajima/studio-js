@@ -56,6 +56,7 @@ function reducer(_state, action) {
   if (typeof _state === "undefined") {
     var initialState = {
         selection:{ids:new Set()},
+        margin:40,
         pageIndex:0,
         preview:false,
         dimension:{ width:480, height:320 },
@@ -180,6 +181,7 @@ function reducer(_state, action) {
         undoable = false;
         break;
     case 'preview':
+        state.selection = {ids:new Set()};
         state.preview = action.preview;
         undoable = false;
         break;
@@ -187,19 +189,12 @@ function reducer(_state, action) {
         state.pageIndex = action.pageIndex;
         undoable = false;
         break;
-    case 'setState':
-        state = action.state;
-        undoable = false;
-        break;
     case 'selectElement':
         state.selection = action.selection;
-        //console.log('selectElement', JSON.stringify(state.selection));
         undoable = false;
         break;
-    case 'setSelectionStyle':
-        if (state.selection) {
-          state.selection = {ids:state.selection.ids, style:action.style};
-        }
+    case 'setState':
+        state = action.state;
         undoable = false;
         break;
     default:

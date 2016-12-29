@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import DragContext from './DragContext';
 import Element from './Element';
-import Selection from './Selection';
+//import Selection from './Selection';
 import MathEx from './MathEx';
 
 class Page extends Component {
@@ -21,12 +21,13 @@ class Page extends Component {
     if (!this.props.main) {
       window.store.dispatch({type:'selectPage', pageIndex:this.props.pageIndex});
     } else {
-      console.log("Page.onClick");
+      //console.log("Page.onClick");
       window.store.dispatch({type:'selectElement', selection:{ids:new Set()}});
     }
   }
 
   onDrop(e) {
+    console.log('Page:onDrop');
     const context = DragContext.getContext();
     const scale = (this.props.width - this.props.margin * 2)/ this.props.dimension.width;
     window.store.dispatch({
@@ -37,6 +38,7 @@ class Page extends Component {
   }
   
   onDragOver(e) {
+    console.log('Page:onDragOver');
     if (DragContext.getContext().pageIndex === this.props.pageIndex) {
         e.preventDefault();
     }
@@ -102,16 +104,17 @@ class Page extends Component {
     const width = this.props.width - margin * 2;
     const scale = width / this.props.dimension.width;
     const height = this.props.dimension.height * scale;
-    const selection = this.props.selection || {ids:new Set()}
+    //const selection = this.props.selection || {ids:new Set()}
     return (
         <div className={ this.props.selected ? "framePageSelected" : "framePage"}
              style={{ width:this.props.width, height:height + margin * 2 }}
-            onClick={this.onClick}
+             onClick={this.onClick}
              onDrop={this.onDrop} onDragOver={this.onDragOver}>
           <div className='canvasPage' style={{ left:margin, top:margin, width:width, height:height }}>
             {elements.map((element, index)=>{ return <Element key={index} index={index} pageIndex={this.props.pageIndex} element={element} main={this.props.main}
               scale={scale} />})}
-            {elements.reduce((selections, element, index)=>{
+          
+            {/*elements.reduce((selections, element, index)=>{
                              if (selection.ids.has(element.id)) {
                                selections.push(<Selection key={index+1000} index={index}
                                              pageIndex={this.props.pageIndex}
@@ -120,7 +123,8 @@ class Page extends Component {
                                              scale={scale} />);
                              }
                              return selections;
-                    }, [])}
+                    }, [])*/}
+            
           </div>
         </div>
     );

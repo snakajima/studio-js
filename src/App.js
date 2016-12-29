@@ -22,18 +22,28 @@ class App extends Component {
     window.store.setApplication(this);
   }
   
+  setState(state) {
+    super.setState(state);
+    window.cursor.dispatch({type:'update'});
+  }
+  
   // Note: no need to do .bind(this)
   dispatcher(action) {
     return () => { window.store.dispatch(action) };
   }
   
-  render() {
+  static windowSize() {
     const documentElement = document.documentElement,
         body = document.getElementsByTagName('body')[0],
         width = window.innerWidth || documentElement.clientWidth || body.clientWidth,
         height = window.innerHeight|| documentElement.clientHeight|| body.clientHeight;
     const leftWidth = Math.max(width/4, 140);
     const rightWidth = width - leftWidth - 8;
+    return { width, height, leftWidth, rightWidth };
+  }
+  
+  render() {
+    const { width, height, leftWidth, rightWidth } = App.windowSize();
     const pageIndex = this.state.pageIndex;
     var classSelected = "btnIA";
     var classFront = "btnIA";
@@ -99,13 +109,13 @@ class App extends Component {
                     dimension={ this.state.dimension }
                     width={ rightWidth }
                     main={true}
-                    margin={24}
+                    margin={this.state.margin}
                     selection={this.state.selection}
                     sceneElements={ this.state.elements} />
             : <Scene elements={ this.state.elements }
                      dimension={ this.state.dimension }
                      main={true}
-                     margin={24}
+                     margin={this.state.margin}
                      selection={this.state.selection}
                      width={ rightWidth } />
             }
