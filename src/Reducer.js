@@ -189,6 +189,10 @@ function reducer(_state, action) {
         state.pageIndex = action.pageIndex;
         undoable = false;
         break;
+    case 'selectElement':
+        state.selection = action.selection;
+        undoable = false;
+        break;
     case 'setState':
         state = action.state;
         undoable = false;

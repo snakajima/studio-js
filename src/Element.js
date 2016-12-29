@@ -24,7 +24,7 @@ class Element extends Component {
   onClick(e) {
     if (this.props.main) {
       e.stopPropagation();
-        window.cursor.dispatch({type:'selectElement', selection:{ids:new Set([this.props.element.id])}});
+        window.store.dispatch({type:'selectElement', selection:{ids:new Set([this.props.element.id])}});
         //window.cursor.dispatch({type:'selectElement', selection:[this.props.element.id]});
     }
   }

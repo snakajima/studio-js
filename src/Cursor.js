@@ -24,14 +24,8 @@ class Cursor extends Component {
     }
     
     var state = Object.assign({}, window.store.getState());
-    if (_state.selection) {
-      state.selection = Object.assign({}, _state.selection);
-    }
     switch(action.type) {
       case 'update':
-        break;
-      case 'selectElement':
-        state.selection = action.selection;
         break;
       case 'setSelectionStyle':
         if (state.selection) {
@@ -46,7 +40,7 @@ class Cursor extends Component {
   }
 
   onDrop(e) {
-    console.log('Cursor:onDrop');
+    //console.log('Cursor:onDrop');
     const context = DragContext.getContext();
     const scale = this.scale;
     if (this.state.pageIndex >= 0) {
@@ -110,19 +104,6 @@ class Cursor extends Component {
         </div>
       </div>
     )
-  }
-  
-  updateDimensions() {
-    window.cursor.dispatch({type:'update'});
-  }
-  componentWillMount() {
-    this.updateDimensions();
-  }
-  componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
   }
 }
 

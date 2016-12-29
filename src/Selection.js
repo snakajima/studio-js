@@ -15,7 +15,6 @@ class Selection extends Component {
   }
 
   onDragEnd(e) {
-    console.log('onDragEnd');
     DragContext.setContext({});
     window.cursor.dispatch({type:'setSelectionStyle', style:{}});
   }
@@ -42,8 +41,8 @@ class Selection extends Component {
     }
     //console.log('onDragStart', context.width/2, context.height/2);
     DragContext.setContext(context);
-    //window.cursor.dispatch({type:'update'});
   }
+
   onDrag(e) {
     var context = DragContext.getContext();
     //const element = context.element;
@@ -81,7 +80,6 @@ class Selection extends Component {
       style = {translate:[dx, dy]};
     }
     if (style) {
-      //window.store.dispatch({type:'setSelectionStyle', style:style});
       window.cursor.dispatch({type:'setSelectionStyle', style:style});
     }
   }
