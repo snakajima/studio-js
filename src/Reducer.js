@@ -181,7 +181,7 @@ function reducer(_state, action) {
         undoable = false;
         break;
     case 'preview':
-        window.cursor.dispatch({type:'selectElement', selection:{ids:new Set()}});
+        state.selection = {ids:new Set()};
         state.preview = action.preview;
         undoable = false;
         break;
