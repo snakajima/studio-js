@@ -98,7 +98,7 @@ class Cursor extends Component {
     return (
         <div style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
-          <div style={{position:'absolute', left:margin + 1, top:margin+1}}>
+          <div style={{position:'absolute', left:margin, top:margin}}>
             {cursors}
           </div>
         </div>
