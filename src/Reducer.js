@@ -85,10 +85,12 @@ function reducer(_state, action) {
     case 'duplicateScene':
         state.pages = state.pages.map((page) => page);
         state.pages.unshift({});
+        state.pageIndex = 0;
         break;
     case 'duplicatePage':
         state.pages = state.pages.map((page) => page);
         state.pages.splice(action.pageIndex + 1, 0, Object.assign({}, action.page));
+        state.pageIndex = action.pageIndex + 1;
         break;
     case 'deletePage':
         state.pages = state.pages.map((page) => page);
