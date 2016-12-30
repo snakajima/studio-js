@@ -56,7 +56,7 @@ function reducer(_state, action) {
   if (typeof _state === "undefined") {
     var initialState = {
         selection:{ids:new Set()},
-        margin:40,
+        margin:24,
         pageIndex:0,
         preview:false,
         dimension:{ width:480, height:320 },

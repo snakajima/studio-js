@@ -66,6 +66,11 @@ class Cursor extends Component {
   }
 
   render() {
+    const selection = this.state.selection || {ids:new Set()}
+    if (selection.ids.size === 0) {
+      return <div></div>;
+    }
+
     const { leftWidth, rightWidth } = App.windowSize();
     const elements = (this.state.pageIndex >= 0) ?
         Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex])
@@ -76,7 +81,6 @@ class Cursor extends Component {
     const scale = w / this.state.dimension.width;
     this.scale = scale; // HACK: pass this value to onDrop (is this a bad practice?)
     const height = this.state.dimension.height * scale + margin * 2;
-    const selection = this.state.selection || {ids:new Set()}
     const context = DragContext.getContext();
     //console.log('Cursor:more', margin, w, scale, JSON.stringify(selection));
     var style = {};
@@ -85,8 +89,10 @@ class Cursor extends Component {
       style.height = height;
     }
 
+    var selectedElements = [];
     var cursors = elements.reduce((selections, element, index)=>{
-                                  if (selection.ids.has(element.id)) {
+                              if (selection.ids.has(element.id)) {
+                                  selectedElements.push(element);
                                   selections.push(<Selection key={index+1000} index={index}
                                                   pageIndex={this.state.pageIndex}
                                                   element={element} main={true}
@@ -94,13 +100,19 @@ class Cursor extends Component {
                                                   scale={scale} />);
                                   }
                                   return selections;
-                                  }, []);
+                              }, []);
+    const firstElement = selectedElements[0];
     return (
         <div style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
-          <div style={{position:'absolute', left:margin, top:margin}}>
-            {cursors}
-          </div>
+            <div style={{position:'absolute', left:margin, top:margin}}>
+              {cursors}
+            </div>
+        </div>
+        <div className='frameProperties'
+             style={{position:'absolute', top:height+2, width:rightWidth}}>
+             <div className='frameProperty'>Opacity:{firstElement.opacity || 1}</div>
+             <div className='frameProperty'>Rotation:{(this.state.selection.style || firstElement).rotate || 0}</div>
         </div>
       </div>
     )

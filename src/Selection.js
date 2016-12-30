@@ -16,7 +16,7 @@ class Selection extends Component {
 
   onDragEnd(e) {
     DragContext.setContext({});
-    window.cursor.dispatch({type:'setSelectionStyle', style:{}});
+    window.cursor.dispatch({type:'setSelectionStyle', style:undefined});
   }
   onDragStart(e,handle, ox=0, oy=0) {
     e.dataTransfer.setDragImage(e.target, -10000, -10000);
