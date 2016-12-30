@@ -47,7 +47,7 @@ function load(swipe, prevState) {
   });
   var state = {
     selection:{ids:new Set()},
-    pageIndex:0,
+    pageIndex:pages.length > 0 ? 0 : -1,
     preview:false,
     dimension:{ width:swipe.dimension[0] || 320, height:swipe.dimension[1] || 320 },
     elements:sceneElements,
