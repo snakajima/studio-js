@@ -112,7 +112,7 @@ class Cursor extends Component {
         <div className='frameProperties'
              style={{position:'absolute', top:height+2, width:rightWidth}}>
              <div className='frameProperty'>Opacity:{firstElement.opacity || 1}</div>
-             <div className='frameProperty'>Rotation:{(this.state.selection.style || firstElement).rotate || 0}</div>
+             <div className='frameProperty'>Rotation:{(this.state.selection.style || {}).rotate || firstElement.rotate || 0}</div>
         </div>
       </div>
     )
