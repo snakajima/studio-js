@@ -110,6 +110,11 @@ class Cursor extends Component {
       scales = [MathEx.round(scales[0] * selectionStyle.scale[0], 100),
                 MathEx.round(scales[1] * selectionStyle.scale[1], 100)];
     }
+    var position = {x:firstElement.x, y:firstElement.y};
+    if (selectionStyle.translate) {
+       position.x = MathEx.round(position.x + selectionStyle.translate[0] / scale);
+       position.y = MathEx.round(position.y + selectionStyle.translate[1] / scale);
+    }
     return (
         <div style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -119,9 +124,10 @@ class Cursor extends Component {
         </div>
         <div className='frameProperties'
              style={{position:'absolute', top:height+2, width:rightWidth}}>
-             <div className='frameProperty'>Opacity:{firstElement.opacity || 1}</div>
-             <div className='frameProperty'>Rotation:{rotation}</div>
-             <div className='frameProperty'>Scale:{scales[0]}, {scales[1]}</div>
+             <div className='frameProperty'>Position: {position.x}, {position.y}</div>
+             <div className='frameProperty'>Size: {MathEx.round(firstElement.w * scales[0])}, {MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
+             <div className='frameProperty'>Opacity: {firstElement.opacity || 1}</div>
+             <div className='frameProperty'>Rotation: {rotation}</div>
         </div>
       </div>
     )
