@@ -9,6 +9,7 @@ import Page from './Page';
 import Selection from './Selection';
 import DragContext from './DragContext';
 import createStore from './SimpleRedux';
+import MathEx from './MathEx';
 
 class Cursor extends Component {
   constructor() {
@@ -102,6 +103,13 @@ class Cursor extends Component {
                                   return selections;
                               }, []);
     const firstElement = selectedElements[0];
+    const selectionStyle = this.state.selection.style || {};
+    const rotation = selectionStyle.rotate || firstElement.rotate || 0;
+    var scales = firstElement.scale || [1, 1];
+    if (selectionStyle.scale) {
+      scales = [MathEx.round(scales[0] * selectionStyle.scale[0], 100),
+                MathEx.round(scales[1] * selectionStyle.scale[1], 100)];
+    }
     return (
         <div style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -112,7 +120,8 @@ class Cursor extends Component {
         <div className='frameProperties'
              style={{position:'absolute', top:height+2, width:rightWidth}}>
              <div className='frameProperty'>Opacity:{firstElement.opacity || 1}</div>
-             <div className='frameProperty'>Rotation:{(this.state.selection.style || {}).rotate || firstElement.rotate || 0}</div>
+             <div className='frameProperty'>Rotation:{rotation}</div>
+             <div className='frameProperty'>Scale:{scales[0]}, {scales[1]}</div>
         </div>
       </div>
     )
