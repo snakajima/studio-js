@@ -51,15 +51,22 @@ body {
 }
 
 .frameProperties {
+  padding-top: 4px;
+  padding-bottom: 4px;
   border: 1px solid #aaa;
   border-top: #fff;
 }
 
 .frameProperty {
-  margin-top:8px;
+  margin-top:4px;
   margin-left:24px;
-  margin-bottom:8px;
+  margin-bottom:4px;
   color: #777;
+}
+
+.fieldProperty {
+  width: 6em;
+  float: left;
 }
 
 .frameCursor {

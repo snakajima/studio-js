@@ -124,10 +124,14 @@ class Cursor extends Component {
         </div>
         <div className='frameProperties'
              style={{position:'absolute', top:height+2, width:rightWidth}}>
-             <div className='frameProperty'>Position: {position.x}, {position.y}</div>
-             <div className='frameProperty'>Size: {MathEx.round(firstElement.w * scales[0])}, {MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
-             <div className='frameProperty'>Opacity: {firstElement.opacity || 1}</div>
-             <div className='frameProperty'>Rotation: {rotation}</div>
+             <div className='frameProperty'>
+               <div className='fieldProperty'>Position:</div>{position.x}, {position.y}</div>
+             <div className='frameProperty'>
+               <div className='fieldProperty'>Size:</div>{MathEx.round(firstElement.w * scales[0])}, {MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
+             <div className='frameProperty'>
+               <div className='fieldProperty'>Opacity:</div>{firstElement.opacity || 1}</div>
+             <div className='frameProperty'>
+               <div className='fieldProperty'>Rotation:</div>{rotation}</div>
         </div>
       </div>
     )
