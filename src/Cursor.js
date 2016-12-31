@@ -115,6 +115,7 @@ class Cursor extends Component {
        position.x = MathEx.round(position.x + selectionStyle.translate[0] / scale);
        position.y = MathEx.round(position.y + selectionStyle.translate[1] / scale);
     }
+    const fontSize = Math.floor(height / 25) + 'px';
     return (
         <div style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -123,7 +124,7 @@ class Cursor extends Component {
             </div>
         </div>
         <div className='frameProperties'
-             style={{position:'absolute', top:height+2, width:rightWidth}}>
+             style={{position:'absolute', top:height+2, width:rightWidth, fontSize:fontSize}}>
              <div className='frameProperty'>
                <div className='fieldProperty'>Position:</div>{position.x}, {position.y}</div>
              <div className='frameProperty'>
