@@ -25,7 +25,9 @@ class Slider extends Component {
   }
   onClickWithValue(value) {
     return (e) => {
-      console.log('onClick', value);
+      //console.log('onClick', value);
+      window.cursor.dispatch({type:'setSliderValue', value:value, name:this.props.name});
+      window.cursor.dispatch({type:'setSliderDragValue'});
     }
   }
 

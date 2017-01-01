@@ -10,12 +10,30 @@ import Loader from './Loader';
 
 function applyMoveAction(element, action) {
   var e = Object.assign({}, element);
+  //console.log('applyMOveAction', action.set);
+  if (action.set) {
+    //console.log('applyMOveAction2', action.set.name);
+    switch(action.set.name) {
+    case 'opacity':
+      //console.log('applyMOveAction3', action.set.value);
+      e.opacity = action.set.value;
+      break;
+    default:
+      console.log('Reducer:Set:Unknown', action.set.name);
+      break;
+    }
+    return e;
+  }
   if (action.change) {
     switch(action.change.name) {
     case 'opacity':
       e.opacity = Math.min(1, Math.max(0, MathEx.round(MathEx.valueOf(e.opacity, 1) + action.change.delta)));
       break;
+    case 'rotate':
+      e.rotate = (MathEx.valueOf(e.rotate, 0) + action.change.delta) % 360;
+      break;
     default:
+      console.log('Reducer:Change:Unknown', action.change.name);
       break;
     }
     return e;

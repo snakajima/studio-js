@@ -36,8 +36,17 @@ class Cursor extends Component {
         break;
       case 'setSliderDragValue':
         if (state.selection) {
-          console.log('setSliderDragValue', action.value, action.name);
+          //console.log('setSliderDragValue', action.value, action.name);
           state.selection = {ids:state.selection.ids, slider:action};
+        }
+        break;
+      case 'setSliderValue':
+        if (state.selection) {
+          //console.log('setSliderValue', action.value, action.name);
+          window.store.dispatch({
+            type:'changeElement',
+            set:action
+          });
         }
         break;
       default:
@@ -147,15 +156,15 @@ class Cursor extends Component {
              <div className='frameProperty'>
                <div className='fieldProperty'>Opacity:</div>
                <div className='fieldValue'>{opacity}</div>
-               <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:-0.1})}>-0.1</div>
-               <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:0.1})}>+0.1</div>
-               <Slider sections={10} cellSize={fontSize} value={opacity} name='opacity
-               ' slider={selection.slider} />
+               <Slider sections={10} cellSize={fontSize} value={opacity} name='opacity'
+                slider={selection.slider} />
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>
                <div className='fieldProperty'>Rotation:</div>
                <div className='fieldValue'>{rotation}</div>
+               <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:-1})}>-1</div>
+               <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:1})}>+1</div>
                <div style={{clear:'both'}}></div>
              </div>
         </div>
