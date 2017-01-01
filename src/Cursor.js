@@ -65,6 +65,15 @@ class Cursor extends Component {
       e.preventDefault();
     }
   }
+  
+  dispatcher(change) {
+    return (e)=>{
+      window.store.dispatch({
+        type:'changeProperty',
+        change:change
+      });
+    };
+  }
 
   render() {
     const selection = this.state.selection || {ids:new Set()}
@@ -138,8 +147,8 @@ class Cursor extends Component {
              <div className='frameProperty'>
                <div className='fieldProperty'>Opacity:</div>
                <div className='fieldValue'>{firstElement.opacity || 1}</div>
-               <div className='fieldButton'>-0.1</div>
-               <div className='fieldButton'>+0.1</div>
+               <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:-0.1})}>-0.1</div>
+               <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:0.1})}>+0.1</div>
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>
