@@ -58,7 +58,7 @@ class App extends Component {
       }
     }
     return (
-      <div className="App">
+      <div className="App" style={{userSelect:'none'}}>
         <div id="left">
             <div className="toolbar">
               <input className="btn" type="image" onClick={ this.dispatcher({type:'preview', preview:true}) }

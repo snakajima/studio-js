@@ -82,6 +82,7 @@ body {
   border: 1px solid #00BCD4;
   border-radius: 4px;
   margin-right: 4px;
+  cursor: pointer;
 }
 
 .frameCursor {

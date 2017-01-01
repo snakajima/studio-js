@@ -118,7 +118,7 @@ class Cursor extends Component {
     }
     const fontSize = Math.floor(height / 25) + 'px';
     return (
-        <div style={{position:'absolute', top:28, left:leftWidth + 2}}>
+        <div style={{userSelect:'none', position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
             <div style={{position:'absolute', left:margin, top:margin}}>
               {cursors}
@@ -138,7 +138,7 @@ class Cursor extends Component {
              </div>
              <div className='frameProperty'>
                <div className='fieldProperty'>Opacity:</div>
-               <div className='fieldValue'>{firstElement.opacity || 1}</div>
+               <div className='fieldValue'>{MathEx.valueOf(firstElement.opacity, 1)}</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:-0.1})}>-0.1</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:0.1})}>+0.1</div>
                <div style={{clear:'both'}}></div>
