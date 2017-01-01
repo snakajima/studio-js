@@ -95,6 +95,7 @@ class Page extends Component {
     }
     if (base.opacity !== element.opacity) {
        obj.opacity = element.opacity;
+       console.log('Page:found5');
     }
     return Object.keys(obj).length > 0 ? obj : null;
   }

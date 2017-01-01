@@ -69,7 +69,7 @@ class Cursor extends Component {
   dispatcher(change) {
     return (e)=>{
       window.store.dispatch({
-        type:'changeProperty',
+        type:'changePropertyValue',
         change:change
       });
     };

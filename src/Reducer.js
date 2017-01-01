@@ -10,6 +10,18 @@ import Loader from './Loader';
 
 function applyMoveAction(element, action) {
   var e = Object.assign({}, element);
+  if (action.change) {
+    console.log('found3');
+    switch(action.change.name) {
+    case 'opacity':
+      e.opacity = (e.opacity || 1) + action.change.delta;
+      console.log('found3', e.opacity);
+      break;
+    default:
+      break;
+    }
+    return e;
+  }
   const r = e.scale || [1,1];
   switch(action.handle) {
     case "turn":
@@ -111,7 +123,7 @@ function reducer(_state, action) {
       console.log("movePageElement", JSON.stringify(action));
       const sceneElement = state.elements[action.index];
       //console.log("movePagedElement:sE=", JSON.stringify(sceneElement));
-      var page = Object.assign({}, state.pages[action.pageIndex]);
+      let page = Object.assign({}, state.pages[action.pageIndex]);
       const pageElement = Page.applyTransformElement(sceneElement, page[action.id]);
       //console.log("movePagedElement:pE=", JSON.stringify(pageElement));
       var movedElement = applyMoveAction(pageElement, action);
@@ -121,6 +133,26 @@ function reducer(_state, action) {
       state.pages = state.pages.map((page) => page);
       state.pages[action.pageIndex] = page;
       state.selection = {ids:state.selection.ids};
+      break;
+    case 'changePropertyValue':
+      console.log("changePropertyValue", JSON.stringify(action));
+      if (state.selection) {
+        if (state.pageIndex >= 0) {
+          let page = Object.assign({}, state.pages[state.pageIndex]);
+          state.elements.forEach((sceneElement) => {
+            if (state.selection.ids.has(sceneElement.id)) {
+              console.log('found', sceneElement.id);
+              const pageElement = Page.applyTransformElement(sceneElement, page[action.id]);
+              var movedElement = applyMoveAction(pageElement, action);
+              page[sceneElement.id] = Page.extractDelta(sceneElement, movedElement);
+              console.log('found6', JSON.stringify(page[action.id]));
+            }
+          });
+          state.pages = state.pages.map((page) => page);
+          state.pages[state.pageIndex] = page;
+        } else {
+        }
+      }
       break;
     case 'moveElementFront':
     case 'moveElementBack':
