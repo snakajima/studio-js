@@ -34,6 +34,12 @@ class Cursor extends Component {
           state.selection = {ids:state.selection.ids, style:action.style};
         }
         break;
+      case 'setSliderDragValue':
+        if (state.selection) {
+          console.log('setSliderDragValue', action.value, action.name);
+          state.selection = {ids:state.selection.ids, slider:action};
+        }
+        break;
       default:
         console.log('Cursor:unknown action', action.type);
         break;
@@ -143,7 +149,8 @@ class Cursor extends Component {
                <div className='fieldValue'>{opacity}</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:-0.1})}>-0.1</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:0.1})}>+0.1</div>
-               <Slider sections={10} cellSize={fontSize} value={opacity} />
+               <Slider sections={10} cellSize={fontSize} value={opacity} name='opacity
+               ' slider={selection.slider} />
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>
