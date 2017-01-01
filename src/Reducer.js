@@ -132,8 +132,8 @@ function reducer(_state, action) {
       state.pages[action.pageIndex] = page;
       state.selection = {ids:state.selection.ids};
       break;
-    case 'changePropertyValue':
-      console.log("changePropertyValue", JSON.stringify(action));
+    case 'changeElement':
+      console.log("changeElement", JSON.stringify(action));
       if (state.selection) {
         if (state.pageIndex >= 0) {
           let page = Object.assign({}, state.pages[state.pageIndex]);

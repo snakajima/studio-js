@@ -44,19 +44,11 @@ class Cursor extends Component {
     //console.log('Cursor:onDrop');
     const context = DragContext.getContext();
     const scale = this.scale;
-    if (this.state.pageIndex >= 0) {
-      window.store.dispatch({
-                            type:'movePageElement', pageIndex:context.pageIndex,
-                            handle:context.handle,
-                            id:context.id, scale:scale, index:context.index, params:context.params,
-                            dx:e.clientX-context.x, dy:e.clientY-context.y});
-    } else {
-      window.store.dispatch({
-                            type:'moveSceneElement', id:context.id, index:context.index,
-                            handle:context.handle, params:context.params,
-                            scale:scale,
-                            dx:e.clientX-context.x, dy:e.clientY-context.y});
-    }
+    window.store.dispatch({
+                        type:'changeElement',
+                        handle:context.handle,
+                        scale:scale, params:context.params,
+                        dx:e.clientX-context.x, dy:e.clientY-context.y});
   }
 
   onDragOver(e) {
@@ -69,7 +61,7 @@ class Cursor extends Component {
   dispatcher(change) {
     return (e)=>{
       window.store.dispatch({
-        type:'changePropertyValue',
+        type:'changeElement',
         change:change
       });
     };
