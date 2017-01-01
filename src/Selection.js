@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import DragContext from './DragContext';
+import MathEx from './MathEx';
 
 class Selection extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Selection extends Component {
     e.dataTransfer.setDragImage(e.target, -10000, -10000);
     const element = this.props.element;
     const scale = this.props.scale;
-    const rad = (element.rotate || 0) / 180 * Math.PI;
+    const rad = MathEx.valueOf(element.rotate, 0) / 180 * Math.PI;
     const dx = ox * Math.cos(rad) - oy * Math.sin(rad);
     const dy = ox * Math.sin(rad) + oy * Math.cos(rad);
     var context = {

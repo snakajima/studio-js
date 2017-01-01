@@ -53,7 +53,7 @@ class Page extends Component {
         e.y += delta.translate[1];
       }
       if (MathEx.hasValue(delta.rotate)) {
-        e.rotate = (e.rotate || 0) + delta.rotate;
+        e.rotate = MathEx.valueOf(e.rotate, 0) + delta.rotate;
       }
       if (delta.scale) {
         const r = e.scale || [1, 1];
@@ -80,9 +80,9 @@ class Page extends Component {
                        MathEx.round(element.y-base.y)];
     }
     if (base.rotate !== element.rotate) {
-      obj.rotate = element.rotate || 0
+      obj.rotate = MathEx.valueOf(element.rotate, 0)
       if (delta) {
-        obj.rotate -= base.rotate || 0
+        obj.rotate -= MathEx.valueOf(base.rotate, 0)
       }
     }
     if (base.scale !== element.scale) {
@@ -101,7 +101,7 @@ class Page extends Component {
 
   render() {
     const elements = Page.applyTransform(this.props.sceneElements, this.props.page);
-    const margin = this.props.margin || 0;
+    const margin = MathEx.valueOf(this.props.margin, 0);
     const width = this.props.width - margin * 2;
     const scale = width / this.props.dimension.width;
     const height = this.props.dimension.height * scale;
