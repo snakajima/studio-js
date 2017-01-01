@@ -118,7 +118,7 @@ class Cursor extends Component {
     }
     const fontSize = Math.floor(height / 25) + 'px';
     return (
-        <div style={{userSelect:'none', position:'absolute', top:28, left:leftWidth + 2}}>
+        <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
             <div style={{position:'absolute', left:margin, top:margin}}>
               {cursors}
