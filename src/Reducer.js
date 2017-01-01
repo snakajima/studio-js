@@ -14,8 +14,8 @@ function applyMoveAction(element, action) {
     console.log('found3');
     switch(action.change.name) {
     case 'opacity':
-      e.opacity = (e.opacity || 1) + action.change.delta;
-      console.log('found3', e.opacity);
+      e.opacity = MathEx.round((e.opacity || 1) + action.change.delta);
+      console.log('found3', e.opacity, element.opacity);
       break;
     default:
       break;
@@ -142,7 +142,7 @@ function reducer(_state, action) {
           state.elements.forEach((sceneElement) => {
             if (state.selection.ids.has(sceneElement.id)) {
               console.log('found', sceneElement.id);
-              const pageElement = Page.applyTransformElement(sceneElement, page[action.id]);
+              const pageElement = Page.applyTransformElement(sceneElement, page[sceneElement.id]);
               var movedElement = applyMoveAction(pageElement, action);
               page[sceneElement.id] = Page.extractDelta(sceneElement, movedElement);
               console.log('found6', JSON.stringify(page[action.id]));
