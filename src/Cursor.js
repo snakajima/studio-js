@@ -10,6 +10,7 @@ import Selection from './Selection';
 import DragContext from './DragContext';
 import createStore from './SimpleRedux';
 import MathEx from './MathEx';
+import Slider from './Slider';
 
 class Cursor extends Component {
   constructor() {
@@ -116,7 +117,7 @@ class Cursor extends Component {
        position.x = MathEx.round(position.x + selectionStyle.translate[0] / scale);
        position.y = MathEx.round(position.y + selectionStyle.translate[1] / scale);
     }
-    const fontSize = Math.floor(height / 25) + 'px';
+    const fontSize = Math.floor(height / 25);
     return (
         <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -141,6 +142,7 @@ class Cursor extends Component {
                <div className='fieldValue'>{MathEx.valueOf(firstElement.opacity, 1)}</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:-0.1})}>-0.1</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:0.1})}>+0.1</div>
+               <Slider sections={10} cellSize={fontSize} />
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>

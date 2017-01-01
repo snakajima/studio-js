@@ -137,3 +137,17 @@ body {
     background:#fff;
 }
 
+.sliderFrame {
+  float:left;
+  border: 1px solid #00BCD4;
+  border-radius: 4px;
+}
+
+.sliderCell {
+  float:left;
+  border-left: 1px solid #00BCD4;
+}
+
+.sliderCellFirst {
+  float:left;
+}
