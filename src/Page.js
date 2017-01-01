@@ -52,14 +52,14 @@ class Page extends Component {
         e.x += delta.translate[0];
         e.y += delta.translate[1];
       }
-      if (delta.rotate) {
+      if (MathEx.hasValue(delta.rotate)) {
         e.rotate = (e.rotate || 0) + delta.rotate;
       }
       if (delta.scale) {
         const r = e.scale || [1, 1];
         e.scale = [r[0] * delta.scale[0], r[1] * delta.scale[1]];
       }
-      if (delta.opacity) {
+      if (MathEx.hasValue(delta.opacity)) {
         e.opacity = delta.opacity;
       }
       return e;

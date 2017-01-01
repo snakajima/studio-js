@@ -13,7 +13,7 @@ function applyMoveAction(element, action) {
   if (action.change) {
     switch(action.change.name) {
     case 'opacity':
-      e.opacity = Math.min(1, Math.max(0, MathEx.round((e.opacity || 1) + action.change.delta)));
+      e.opacity = Math.min(1, Math.max(0, MathEx.round(MathEx.valueOf(e.opacity, 1) + action.change.delta)));
       break;
     default:
       break;

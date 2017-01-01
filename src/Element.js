@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import DragContext from './DragContext';
+import MathEx from './MathEx';
 
 class Element extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Element extends Component {
           width:element.w * scale, height:element.h * scale,
           background:element.bc
         };
-    if (element.rotate) {
+    if (MathEx.hasValue(element.rotate)) {
       style.transform="rotate("+element.rotate + "deg)";
     }
     if (element.scale) {
@@ -45,7 +46,7 @@ class Element extends Component {
       style.transform = (style.transform || "") + " scale("+element.scale[0]+","+element.scale[1]+")";
       //console.log("Element:render:scale=", element.scale, style.transform);
     }
-    if (element.opacity) {
+    if (MathEx.hasValue(element.opacity)) {
       style.opacity = element.opacity;
     }
     return (
