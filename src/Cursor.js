@@ -163,8 +163,10 @@ class Cursor extends Component {
              <div className='frameProperty'>
                <div className='fieldProperty'>Rotation:</div>
                <div className='fieldValue'>{rotation}</div>
+               <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:-15})}>-15</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:-1})}>-1</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:1})}>+1</div>
+               <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:15})}>+15</div>
                <div style={{clear:'both'}}></div>
              </div>
         </div>

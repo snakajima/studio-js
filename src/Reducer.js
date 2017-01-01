@@ -30,7 +30,11 @@ function applyMoveAction(element, action) {
       e.opacity = Math.min(1, Math.max(0, MathEx.round(MathEx.valueOf(e.opacity, 1) + action.change.delta)));
       break;
     case 'rotate':
-      e.rotate = (MathEx.valueOf(e.rotate, 0) + action.change.delta) % 360;
+      e.rotate = (360 + MathEx.valueOf(e.rotate, 0) + action.change.delta) % 360;
+      const mod = Math.abs(action.change.delta);
+      if (mod > 1) {
+        e.rotate = Math.floor(e.rotate / mod) * mod;
+      }
       break;
     default:
       console.log('Reducer:Change:Unknown', action.change.name);
