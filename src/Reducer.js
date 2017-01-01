@@ -110,6 +110,7 @@ function reducer(_state, action) {
         }
         break;
     case 'moveSceneElement':
+      // This is only for direct drag&drop (no selection)
       console.log("moveSceneElement", action.handle, action.index);
       state.elements = state.elements.map((element)=>{
         return (element.id === action.id) ?
@@ -118,6 +119,7 @@ function reducer(_state, action) {
       state.selection = {ids:state.selection.ids};
       break;
     case 'movePageElement':
+      // This is only for direct drag&drop (no selection)
       console.log("movePageElement", JSON.stringify(action));
       const sceneElement = state.elements[action.index];
       //console.log("movePagedElement:sE=", JSON.stringify(sceneElement));
