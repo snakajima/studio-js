@@ -147,6 +147,10 @@ function reducer(_state, action) {
           state.pages = state.pages.map((page) => page);
           state.pages[state.pageIndex] = page;
         } else {
+          state.elements = state.elements.map((element)=>{
+            return state.selection.ids.has(element.id) ?
+              applyMoveAction(element, action) : element
+          })
         }
       }
       break;
