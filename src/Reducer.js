@@ -11,11 +11,9 @@ import Loader from './Loader';
 function applyMoveAction(element, action) {
   var e = Object.assign({}, element);
   if (action.change) {
-    console.log('found3');
     switch(action.change.name) {
     case 'opacity':
-      e.opacity = MathEx.round((e.opacity || 1) + action.change.delta);
-      console.log('found3', e.opacity, element.opacity);
+      e.opacity = Math.min(1, Math.max(0, MathEx.round((e.opacity || 1) + action.change.delta)));
       break;
     default:
       break;
@@ -141,11 +139,9 @@ function reducer(_state, action) {
           let page = Object.assign({}, state.pages[state.pageIndex]);
           state.elements.forEach((sceneElement) => {
             if (state.selection.ids.has(sceneElement.id)) {
-              console.log('found', sceneElement.id);
               const pageElement = Page.applyTransformElement(sceneElement, page[sceneElement.id]);
               var movedElement = applyMoveAction(pageElement, action);
               page[sceneElement.id] = Page.extractDelta(sceneElement, movedElement);
-              console.log('found6', JSON.stringify(page[action.id]));
             }
           });
           state.pages = state.pages.map((page) => page);
