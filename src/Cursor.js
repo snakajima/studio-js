@@ -126,13 +126,27 @@ class Cursor extends Component {
         <div className='frameProperties'
              style={{position:'absolute', top:height+2, width:rightWidth, fontSize:fontSize}}>
              <div className='frameProperty'>
-               <div className='fieldProperty'>Position:</div>{position.x}, {position.y}</div>
+               <div className='fieldProperty'>Position:</div>
+               <div className='fieldValue'>{position.x}, {position.y}</div>
+               <div style={{clear:'both'}}></div>
+             </div>
              <div className='frameProperty'>
-               <div className='fieldProperty'>Size:</div>{MathEx.round(firstElement.w * scales[0])}, {MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
+               <div className='fieldProperty'>Size:</div>
+               <div className='fieldValue'>{MathEx.round(firstElement.w * scales[0])}, {MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
+               <div style={{clear:'both'}}></div>
+             </div>
              <div className='frameProperty'>
-               <div className='fieldProperty'>Opacity:</div>{firstElement.opacity || 1}</div>
+               <div className='fieldProperty'>Opacity:</div>
+               <div className='fieldValue'>{firstElement.opacity || 1}</div>
+               <div className='fieldButton'>-0.1</div>
+               <div className='fieldButton'>+0.1</div>
+               <div style={{clear:'both'}}></div>
+             </div>
              <div className='frameProperty'>
-               <div className='fieldProperty'>Rotation:</div>{rotation}</div>
+               <div className='fieldProperty'>Rotation:</div>
+               <div className='fieldValue'>{rotation}</div>
+               <div style={{clear:'both'}}></div>
+             </div>
         </div>
       </div>
     )

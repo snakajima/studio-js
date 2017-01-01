@@ -69,6 +69,21 @@ body {
   float: left;
 }
 
+.fieldValue {
+  width: 12em;
+  float: left;
+}
+
+.fieldButton {
+  width: 2.5em;
+  float: left;
+  color: #00BCD4;
+  text-align: center;
+  border: 1px solid #00BCD4;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
 .frameCursor {
   float:left;
   background:rgba(0, 255, 0, 0.0);
