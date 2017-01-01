@@ -11,10 +11,13 @@ class Slider extends Component {
   }
   render() {
     const cellWidth = Math.floor(this.props.cellSize * 2.0 / 3.0);
-    console.log("Slider:sections", this.props.cellSize, this.props.sections, cellWidth);
     const sections = (new Array(this.props.sections)).fill(0).map((_e, index) => {
-      console.log("Slider:index", _e, index);
-      return <div className={(index===0) ? 'sliderCellFirst' : 'sliderCell'}
+      var className = (index===0) ? 'sliderCellFirst' : 'sliderCell';
+      if (this.props.value >= (index+1)/this.props.sections) {
+        className += ' sliderCellOn';
+      }
+      return <div className={className}
+                  key={index}
                   style={{float:'left',width:cellWidth, height:this.props.cellSize}}></div>;
     });
     return (

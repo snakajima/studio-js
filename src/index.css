@@ -151,3 +151,7 @@ body {
 .sliderCellFirst {
   float:left;
 }
+
+.sliderCellOn {
+  background: #00BCD4;
+}

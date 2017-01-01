@@ -118,6 +118,7 @@ class Cursor extends Component {
        position.y = MathEx.round(position.y + selectionStyle.translate[1] / scale);
     }
     const fontSize = Math.floor(height / 25);
+    const opacity = MathEx.valueOf(firstElement.opacity, 1);
     return (
         <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -139,10 +140,10 @@ class Cursor extends Component {
              </div>
              <div className='frameProperty'>
                <div className='fieldProperty'>Opacity:</div>
-               <div className='fieldValue'>{MathEx.valueOf(firstElement.opacity, 1)}</div>
+               <div className='fieldValue'>{opacity}</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:-0.1})}>-0.1</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'opacity', delta:0.1})}>+0.1</div>
-               <Slider sections={10} cellSize={fontSize} />
+               <Slider sections={10} cellSize={fontSize} value={opacity} />
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>
