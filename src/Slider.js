@@ -50,6 +50,9 @@ class Slider extends Component {
     });
     return (
       <div style={{float:'left'}}>
+      <div className='sliderCellZero'
+           onClick={this.onClickWithValue(0)}
+           style={cellStyle}></div>
       <div className='sliderFrame'
            onMouseLeave={this.onMouseLeave}
         >
