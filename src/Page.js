@@ -101,7 +101,7 @@ class Page extends Component {
     }
     const t0 = MathEx.valueOf(base.timing, [0,1]);
     const t1 = MathEx.valueOf(element.timing, [0,1]);
-    if (t0[0] !== t1[0] && t0[1] !== t1[1]) {
+    if (t0[0] !== t1[0] || t0[1] !== t1[1]) {
        obj.timing = t1;
     }
     
