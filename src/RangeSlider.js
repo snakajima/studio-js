@@ -17,6 +17,7 @@ class RangeSlider extends Component {
     return (e) => {
       if (this.dragging) {
         console.log('onMouseOver', this.start, value, this.props.name);
+        this.end = value;
         const range = [Math.min(this.start, value), Math.max(this.start, value)];
         window.cursor.dispatch({type:'setSliderDragValue', value:range, name:this.props.name});
       }
@@ -26,7 +27,10 @@ class RangeSlider extends Component {
     if (this.dragging) {
       console.log('onMouseLeave');
       this.dragging = false;
+      const range = [Math.min(this.start, this.end), Math.max(this.start, this.end)];
+      window.cursor.dispatch({type:'setSliderValue', value:range, name:this.props.name});
       window.cursor.dispatch({type:'setSliderDragValue'});
+      //window.cursor.dispatch({type:'setSliderDragValue'});
     }
   }
   onMouseDownWithValue(value) {
@@ -34,6 +38,7 @@ class RangeSlider extends Component {
       console.log('onMouseDown', value);
       this.dragging = true;
       this.start = value;
+      this.end = value;
       window.cursor.dispatch({type:'setSliderDragValue', value:[value, value], name:this.props.name});
     }
   }
