@@ -148,6 +148,13 @@ body {
   border-left: 1px solid #00BCD4;
 }
 
+.sliderCellZero {
+  float:left;
+  border: 1px solid #00BCD4;
+  border-radius: 4px;
+  margin-right: 2px;
+}
+
 .sliderCellFirst {
   float:left;
 }

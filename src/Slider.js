@@ -35,6 +35,7 @@ class Slider extends Component {
     this.cellWidth = Math.floor(this.props.cellSize * 2.0 / 3.0);
     const valueCur = (this.props.slider && this.props.slider.name===this.props.name) ?
       this.props.slider.value : this.props.value;
+    const cellStyle = {width:this.cellWidth, height:this.props.cellSize};
     const sections = (new Array(this.props.sections)).fill(0).map((_e, index) => {
       var className = (index===0) ? 'sliderCellFirst' : 'sliderCell';
       const value = (index+1)/this.props.sections;
@@ -45,13 +46,15 @@ class Slider extends Component {
            onClick={this.onClickWithValue(value)}
            onMouseOver={this.onMouseOverWithValue(value)}
                   key={index}
-                  style={{float:'left',width:this.cellWidth, height:this.props.cellSize}}></div>;
+                  style={cellStyle}></div>;
     });
     return (
+      <div style={{float:'left'}}>
       <div className='sliderFrame'
            onMouseLeave={this.onMouseLeave}
         >
         {sections}
+      </div>
       </div>
     );
   }
