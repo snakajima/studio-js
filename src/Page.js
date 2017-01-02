@@ -62,6 +62,9 @@ class Page extends Component {
       if (MathEx.hasValue(delta.opacity)) {
         e.opacity = delta.opacity;
       }
+      if (delta.timing) {
+        e.timing = delta.timing;
+      }
       return e;
     }
     return element;
@@ -96,6 +99,12 @@ class Page extends Component {
     if (base.opacity !== element.opacity) {
        obj.opacity = element.opacity;
     }
+    const t0 = MathEx.valueOf(base.timing, [0,1]);
+    const t1 = MathEx.valueOf(element.timing, [0,1]);
+    if (t0[0] !== t1[0] && t0[1] !== t1[1]) {
+       obj.timing = t1;
+    }
+    
     return Object.keys(obj).length > 0 ? obj : null;
   }
 

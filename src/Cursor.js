@@ -11,6 +11,7 @@ import DragContext from './DragContext';
 import createStore from './SimpleRedux';
 import MathEx from './MathEx';
 import Slider from './Slider';
+import RangeSlider from './RangeSlider';
 
 class Cursor extends Component {
   constructor() {
@@ -134,6 +135,7 @@ class Cursor extends Component {
     }
     const fontSize = Math.floor(height / 25);
     const opacity = MathEx.valueOf(firstElement.opacity, 1);
+    const timing = firstElement.timing || [0,1];
     return (
         <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -145,12 +147,12 @@ class Cursor extends Component {
              style={{position:'absolute', top:height+2, width:rightWidth, fontSize:fontSize}}>
              <div className='frameProperty'>
                <div className='fieldProperty'>Position:</div>
-               <div className='fieldValue'>{position.x}, {position.y}</div>
+               <div className='fieldValue'>{position.x}, H{position.y}</div>
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>
                <div className='fieldProperty'>Size:</div>
-               <div className='fieldValue'>{MathEx.round(firstElement.w * scales[0])}, {MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
+               <div className='fieldValue'>W{MathEx.round(firstElement.w * scales[0])} x H{MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>
@@ -167,6 +169,13 @@ class Cursor extends Component {
                <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:-1})}>-1</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:1})}>+1</div>
                <div className='fieldButton' onClick={this.dispatcher({name:'rotate', delta:15})}>+15</div>
+               <div style={{clear:'both'}}></div>
+             </div>
+             <div className='frameProperty'>
+               <div className='fieldProperty'>Timing:</div>
+               <div className='fieldValue'>{timing[0]}〜{timing[1]}</div>
+               <RangeSlider sections={10} cellSize={fontSize} value={timing} name='timing'
+                slider={selection.slider} />
                <div style={{clear:'both'}}></div>
              </div>
         </div>

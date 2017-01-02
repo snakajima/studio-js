@@ -18,6 +18,10 @@ function applyMoveAction(element, action) {
       //console.log('applyMOveAction3', action.set.value);
       e.opacity = action.set.value;
       break;
+    case 'timing':
+      //console.log('applyMOveAction3', action.set.value);
+      e.timing = action.set.value;
+      break;
     default:
       console.log('Reducer:Set:Unknown', action.set.name);
       break;
