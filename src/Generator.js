@@ -47,11 +47,11 @@ function generate(store) {
       pages: state.pages.map((page) => {
         var obj = {template:"s0"}
         const elements = Page.applyTransform(state.elements, page);
-        //console.log("elements=", JSON.stringify(elements));
         obj.elements = elements.reduce((s, element, index) => {
                const sceneElement = state.elements[index];
                var d0 = Page.extractDelta(sceneElement, prev[index], false);
                var d1 = Page.extractDelta(sceneElement, element, false);
+               var obj = undefined;
                if (d0) {
                   d0.id = element.id;
                   if (d1) {
@@ -64,7 +64,7 @@ function generate(store) {
                     if (d0.opacity && !d1.opacity) {
                       d1.opacity = sceneElement.opacity;
                     }
-                    s.push(Object.assign(d0, {to:d1}));
+                    obj = Object.assign(d0, {to:d1});
                   } else {
                     var delta = {};
                     if (d0.translate) {
@@ -73,13 +73,22 @@ function generate(store) {
                     if (d0.rotate) {
                       delta.rotate = sceneElement.rotate || 0;
                     }
-                    s.push(Object.assign(d0, {to:delta}));
+                    obj = Object.assign(d0, {to:delta});
                   }
                } else if (d1) {
-                 s.push({id:element.id, to:d1});
+                  obj = {id:element.id, to:d1};
                }
-              return s;
-              }, []);
+               if (obj) {
+                  if (obj.to) {
+                     if (element.timing) {
+                        // We always need to specify the timing
+                        obj.to.timing = element.timing;
+                     }
+                  }
+                  s.push(obj);
+               }
+               return s;
+        }, []);
         prev = elements;
         return obj;
       })
