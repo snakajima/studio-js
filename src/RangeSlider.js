@@ -4,6 +4,7 @@
 //
 
 import React, { Component } from 'react';
+import MathEx from './MathEx';
 
 class RangeSlider extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class RangeSlider extends Component {
       if (this.dragging) {
         console.log('onMouseOver', this.start, value, this.props.name);
         this.end = value;
-        const range = [Math.min(this.start, value), Math.max(this.start, value)];
+        const range = [MathEx.round(Math.min(this.start, value) - 1/this.props.sections),
+                       Math.max(this.start, value)];
         window.cursor.dispatch({type:'setSliderDragValue', value:range, name:this.props.name});
       }
     }
@@ -27,7 +29,8 @@ class RangeSlider extends Component {
     if (this.dragging) {
       console.log('onMouseLeave');
       this.dragging = false;
-      const range = [Math.min(this.start, this.end), Math.max(this.start, this.end)];
+      const range = [MathEx.round(Math.min(this.start, this.end) - 1/this.props.sections),
+                     Math.max(this.start, this.end)];
       window.cursor.dispatch({type:'setSliderValue', value:range, name:this.props.name});
       window.cursor.dispatch({type:'setSliderDragValue'});
       //window.cursor.dispatch({type:'setSliderDragValue'});
@@ -39,7 +42,8 @@ class RangeSlider extends Component {
       this.dragging = true;
       this.start = value;
       this.end = value;
-      window.cursor.dispatch({type:'setSliderDragValue', value:[value, value], name:this.props.name});
+      window.cursor.dispatch({type:'setSliderDragValue',
+                              value:[MathEx.round(value - 1/this.props.sections), value], name:this.props.name});
     }
   }
   onMouseUpWithValue(value) {
@@ -47,7 +51,8 @@ class RangeSlider extends Component {
       if (this.dragging) {
         console.log('onMouseUp', this.start, value, this.props.name);
         this.dragging = false;
-        const range = [Math.min(this.start, value), Math.max(this.start, value)];
+        const range = [MathEx.round(Math.min(this.start, value) - 1/this.props.sections),
+                       Math.max(this.start, value)];
         window.cursor.dispatch({type:'setSliderValue', value:range, name:this.props.name});
         window.cursor.dispatch({type:'setSliderDragValue'});
       }
@@ -64,7 +69,7 @@ class RangeSlider extends Component {
     const sections = (new Array(this.props.sections)).fill(0).map((_e, index) => {
       var className = (index===0) ? 'sliderCellFirst' : 'sliderCell';
       const value = (index+1)/this.props.sections;
-      if (range[0] <= value && value <= range[1]) {
+      if (range[0] < value && value <= range[1]) {
         className += ' sliderCellOn';
       }
       return <div className={className}
