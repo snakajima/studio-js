@@ -137,7 +137,7 @@ class Cursor extends Component {
     const fontSize = Math.floor(height / 32);
     const opacity = MathEx.valueOf(firstElement.opacity, 1);
     const timing = firstElement.timing || [0,1];
-    const loop = firstElement.loop || {type:"None", count:1};
+    const loop = firstElement.loop || {style:"None", count:1};
     return (
         <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -186,7 +186,7 @@ class Cursor extends Component {
                <div className='fieldValue'>{loop.type}</div>
                <Segment cellSize={fontSize*1.2} cellWidth={6 * Math.floor(fontSize * 2.0 / 3.0)}
                         name='loop' value={loop}
-                        choices={["None", "Wiggle", "Blink", "Vibrate", "Spin", "Shift"]}/>
+                        choices={["none", "wiggle", "blink", "vibrate", "spin", "shift"]}/>
                <div style={{clear:'both'}}></div>
              </div>
         </div>

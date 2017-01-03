@@ -109,7 +109,7 @@ class Page extends Component {
     }
     const l0 = MathEx.valueOf(base.loop, {type:"None", count:1});
     const l1 = MathEx.valueOf(element.loop, {type:"None", count:1});
-    if (l0.type !== l1.type || l0.count !== l1.count) {
+    if (l0.style !== l1.style || l0.count !== l1.count) {
       obj.loop = element.loop;
     }
     

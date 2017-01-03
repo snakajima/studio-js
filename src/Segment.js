@@ -12,7 +12,7 @@ class Segment extends Component {
   onClickWithValue(value) {
     return (e) => {
       window.store.dispatch({type:'changeElement',
-           set:{name:this.props.name, value:{type:value, count:3}}});
+           set:{name:this.props.name, value:{style:value, count:3}}});
     }
   }
   
@@ -20,7 +20,7 @@ class Segment extends Component {
     const cellStyle = {width:this.props.cellWidth, height:this.props.cellSize};
     const sections = this.props.choices.map((choice, index) => {
       var className = (index===0) ? 'segmentCellFirst' : 'segmentCell';
-      if (choice === this.props.value.type) {
+      if (choice === this.props.value.style) {
         className += ' segmentCellOn';
       }
       return <div className={className}

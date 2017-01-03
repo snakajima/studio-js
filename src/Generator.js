@@ -80,7 +80,13 @@ function generate(store) {
                }
                if (obj) {
                  delete obj.timing; // delete extra timing property here
+                 if (element.loop && element.loop.style !== 'none') {
+                   obj.loop = element.loop;
+                 } else {
+                   delete obj.loop;
+                 }
                  if (obj.to) {
+                     delete obj.to.loop;
                      if (element.timing) {
                         // We always need to specify the timing
                         obj.to.timing = element.timing;
