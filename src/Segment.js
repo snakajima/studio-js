@@ -9,10 +9,10 @@ class Segment extends Component {
   constructor(props) {
     super();
   }
-  onClickWithValue(value) {
+  onClickWithValue(value, count) {
     return (e) => {
       window.store.dispatch({type:'changeElement',
-           set:{name:this.props.name, value:{style:value, count:3}}});
+           set:{name:this.props.name, value:{style:value, count:count}}});
     }
   }
   
@@ -24,7 +24,7 @@ class Segment extends Component {
         className += ' segmentCellOn';
       }
       return <div className={className}
-                  onClick={this.onClickWithValue(choice)}
+                  onClick={this.onClickWithValue(choice, this.props.value.count)}
                   key={choice}
                   style={cellStyle}>{choice}</div>;
     });
