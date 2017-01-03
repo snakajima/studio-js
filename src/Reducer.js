@@ -46,7 +46,7 @@ function applyMoveAction(element, action) {
       break;
     case 'loop':
       if (e.loop && e.loop.style !== "none") {
-         e.loop.count = Math.max(0, e.loop.count + action.change.delta);
+         e.loop.count = Math.max(1, e.loop.count + action.change.delta);
       }
       break;
     default:
