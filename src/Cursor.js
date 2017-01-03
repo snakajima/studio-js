@@ -12,6 +12,7 @@ import createStore from './SimpleRedux';
 import MathEx from './MathEx';
 import Slider from './Slider';
 import RangeSlider from './RangeSlider';
+import Segment from './Segment';
 
 class Cursor extends Component {
   constructor() {
@@ -136,6 +137,7 @@ class Cursor extends Component {
     const fontSize = Math.floor(height / 32);
     const opacity = MathEx.valueOf(firstElement.opacity, 1);
     const timing = firstElement.timing || [0,1];
+    const loop = firstElement.loop || "None";
     return (
         <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth + 2}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
@@ -177,6 +179,14 @@ class Cursor extends Component {
                <div className='fieldValue'>{timing[0]}〜{timing[1]}</div>
                <RangeSlider sections={10} cellSize={fontSize} value={timing} name='timing'
                 slider={selection.slider} />
+               <div style={{clear:'both'}}></div>
+             </div>
+             <div className='frameProperty'>
+               <div className='fieldProperty'>Loop:</div>
+               <div className='fieldValue'>{loop}</div>
+               <Segment cellSize={fontSize*1.2} cellWidth={6 * Math.floor(fontSize * 2.0 / 3.0)}
+                        name='loop' value={loop}
+                        choices={["None", "Wiggle", "Blink", "Vibrate", "Spin", "Shift"]}/>
                <div style={{clear:'both'}}></div>
              </div>
         </div>
