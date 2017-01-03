@@ -22,8 +22,12 @@ function applyMoveAction(element, action) {
       //console.log('applyMOveAction3', action.set.value);
       e.timing = action.set.value;
       break;
+    case 'loop':
+      //console.log('applyMOveAction3', action.set.value);
+      e.loop = action.set.value;
+      break;
     default:
-      console.log('Reducer:Set:Unknown', action.set.name);
+      console.log('Reducer:Set:Unknown', action.set.name, action.set.value);
       break;
     }
     return e;

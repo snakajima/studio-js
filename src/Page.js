@@ -65,6 +65,9 @@ class Page extends Component {
       if (delta.timing) {
         e.timing = delta.timing;
       }
+      if (delta.loop) {
+        e.loop = delta.loop;
+      }
       return e;
     }
     return element;
@@ -103,6 +106,11 @@ class Page extends Component {
     const t1 = MathEx.valueOf(element.timing, [0,1]);
     if (t0[0] !== t1[0] || t0[1] !== t1[1]) {
        obj.timing = t1;
+    }
+    const l0 = MathEx.valueOf(base.loop, {type:"None", count:1});
+    const l1 = MathEx.valueOf(element.loop, {type:"None", count:1});
+    if (l0.type !== l1.type || l0.count !== l1.count) {
+      obj.loop = element.loop;
     }
     
     return Object.keys(obj).length > 0 ? obj : null;
