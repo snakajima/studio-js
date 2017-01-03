@@ -133,7 +133,7 @@ class Cursor extends Component {
        position.x = MathEx.round(position.x + selectionStyle.translate[0] / scale);
        position.y = MathEx.round(position.y + selectionStyle.translate[1] / scale);
     }
-    const fontSize = Math.floor(height / 25);
+    const fontSize = Math.floor(height / 32);
     const opacity = MathEx.valueOf(firstElement.opacity, 1);
     const timing = firstElement.timing || [0,1];
     return (
@@ -152,7 +152,8 @@ class Cursor extends Component {
              </div>
              <div className='frameProperty'>
                <div className='fieldProperty'>Size:</div>
-               <div className='fieldValue'>W{MathEx.round(firstElement.w * scales[0])} x H{MathEx.round(firstElement.h * scales[1])} ({scales[0]}, {scales[1]})</div>
+               <div className='fieldValue'>W{MathEx.round(firstElement.w * scales[0])} x H{MathEx.round(firstElement.h * scales[1])}</div>
+               <div className='fieldValue'>x{scales[0]}, x{scales[1]}</div>
                <div style={{clear:'both'}}></div>
              </div>
              <div className='frameProperty'>
