@@ -79,13 +79,14 @@ function generate(store) {
                   obj = {id:element.id, to:d1};
                }
                if (obj) {
-                  if (obj.to) {
+                 delete obj.timing; // delete extra timing property here
+                 if (obj.to) {
                      if (element.timing) {
                         // We always need to specify the timing
                         obj.to.timing = element.timing;
                      }
-                  }
-                  s.push(obj);
+                 }
+                 s.push(obj);
                }
                return s;
         }, []);
