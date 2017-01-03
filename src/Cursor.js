@@ -183,7 +183,7 @@ class Cursor extends Component {
              </div>
              <div className='frameProperty'>
                <div className='fieldProperty'>Loop:</div>
-               <div className='fieldValue'>{loop.style}{(loop.style==="none") ? "" : "," + loop.count}</div>
+               <div className='fieldValue'>{loop.style}{(loop.style==="none") ? "" : ", " + loop.count}</div>
                <Segment cellSize={fontSize*1.2} cellWidth={5.5 * Math.floor(fontSize * 2.0 / 3.0)}
                         name='loop' value={loop}
                         choices={["none", "wiggle", "blink", "vibrate", "spin", "shift"]}/>
