@@ -184,9 +184,12 @@ class Cursor extends Component {
              <div className='frameProperty'>
                <div className='fieldProperty'>Loop:</div>
                <div className='fieldValue'>{loop.style}, {loop.count}</div>
-               <Segment cellSize={fontSize*1.2} cellWidth={6 * Math.floor(fontSize * 2.0 / 3.0)}
+               <Segment cellSize={fontSize*1.2} cellWidth={5.5 * Math.floor(fontSize * 2.0 / 3.0)}
                         name='loop' value={loop}
                         choices={["none", "wiggle", "blink", "vibrate", "spin", "shift"]}/>
+               <div className='fieldButton' style={{marginLeft:4}}
+                    onClick={this.dispatcher({name:'loop', delta:-1})}>-1</div>
+               <div className='fieldButton' onClick={this.dispatcher({name:'loop', delta:1})}>+1</div>
                <div style={{clear:'both'}}></div>
              </div>
         </div>

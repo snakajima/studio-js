@@ -44,6 +44,11 @@ function applyMoveAction(element, action) {
         e.rotate = Math.floor(e.rotate / mod) * mod;
       }
       break;
+    case 'loop':
+      if (e.loop && e.loop.style !== "none") {
+         e.loop.count = Math.max(0, e.loop.count + action.change.delta);
+      }
+      break;
     default:
       console.log('Reducer:Change:Unknown', action.change.name);
       break;
