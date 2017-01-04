@@ -261,7 +261,11 @@ function reducer(_state, action) {
         undoable = false;
         break;
     case 'selectElement':
-        state.selection = action.selection;
+      if (action.id) {
+        state.selection = {ids:new Set([action.id])};
+      } else {
+        state.selection = {ids:new Set()};
+      }
         undoable = false;
         break;
     case 'setState':
