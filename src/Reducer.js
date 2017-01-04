@@ -59,7 +59,7 @@ function applyMoveAction(element, action) {
   switch(action.handle) {
     case "turn":
       //e.rotate = (e.rotate || 0) + action.params.rotate;
-      e.rotate = action.params.rotate;
+      e.rotate = ((e.rotate || 0) + action.params.rotate + 360) % 360;
       break;
     case "sw":
     case "se":
@@ -261,7 +261,16 @@ function reducer(_state, action) {
         undoable = false;
         break;
     case 'selectElement':
-        state.selection = action.selection;
+      if (action.id) {
+        if (action.add && state.selection && state.selection.ids) {
+          state.selection = {ids:new Set(state.selection.ids)};
+          state.selection.ids.add(action.id);
+        } else {
+          state.selection = {ids:new Set([action.id])};
+        }
+      } else {
+        state.selection = {ids:new Set()};
+      }
         undoable = false;
         break;
     case 'setState':

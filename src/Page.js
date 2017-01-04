@@ -22,7 +22,7 @@ class Page extends Component {
       window.store.dispatch({type:'selectPage', pageIndex:this.props.pageIndex});
     } else {
       //console.log("Page.onClick");
-      window.store.dispatch({type:'selectElement', selection:{ids:new Set()}});
+      window.store.dispatch({type:'selectElement'});
     }
   }
 
