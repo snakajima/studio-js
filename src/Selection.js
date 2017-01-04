@@ -19,9 +19,14 @@ class Selection extends Component {
     DragContext.setContext({});
     window.cursor.dispatch({type:'setSelectionStyle', style:undefined});
   }
-  onDragStart(e,handle, ox=0, oy=0) {
+  onDragStart(e, handle, ox=0, oy=0) {
     if (typeof e.dataTransfer.setDragImage === "function") {
       e.dataTransfer.setDragImage(e.target, -10000, -10000);
+    } else {
+      // To hide the drag image for Microsoft Edge
+      const target = e.target;
+      target.style.opacity = 0;
+      setTimeout(()=>{target.style.opacity = 1;});
     }
     const element = this.props.element;
     const scale = this.props.scale;
