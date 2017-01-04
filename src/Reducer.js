@@ -59,7 +59,7 @@ function applyMoveAction(element, action) {
   switch(action.handle) {
     case "turn":
       //e.rotate = (e.rotate || 0) + action.params.rotate;
-      e.rotate = action.params.rotate;
+      e.rotate = ((e.rotate || 0) + action.params.rotate + 360) % 360;
       break;
     case "sw":
     case "se":

@@ -33,6 +33,7 @@ class Selection extends Component {
       params:{},
       width:scale * element.w,
       height:scale * element.h,
+      rotate:element.rotate || 0,
       x:e.clientX, y:e.clientY,
       cursor:true,
       cx:e.clientX + dx, cy:e.clientY + dy };
@@ -52,7 +53,7 @@ class Selection extends Component {
     const dy = e.clientY - context.cy;
     var style = null;
     if (context.handle === 'turn') {
-      const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90) % 360;
+      const r = Math.round(Math.atan2(dy,dx) * 180 / Math.PI + 360 + 90 - context.rotate) % 360;
       //console.log('onDrag', dx, dy, r);
       context.params.rotate = r;
       style = {rotate:r};
@@ -107,10 +108,9 @@ class Selection extends Component {
        if (s.translate) {
          tx.push("translate(" + s.translate[0] + "px," + s.translate[1] + "px)");
        }
-       if (s.rotate) {
-         tx.push("rotate("+s.rotate + "deg)");
-       } else if (element.rotate) {
-         tx.push("rotate("+element.rotate + "deg)");
+       const r = ((element.rotate || 0) + (s.rotate || 0) + 360) % 360;
+       if (r) {
+         tx.push("rotate("+r + "deg)");
        }
        if (s.scale) {
          tx.push("scale(" + s.scale[0] + "," + s.scale[1] + ")");
