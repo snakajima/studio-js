@@ -11,11 +11,11 @@ class Pages extends Component {
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
     return (
       <div className='canvasPages'
-           style={{height:this.props.height - height}}>{
+            style={{height:this.props.height - height, width:this.props.width }}>{
         this.props.pages.map((page, index) => {
              return (<div key={index} >
                 <Page pageIndex={index} page={page}
-                  width={ this.props.width }
+                  width={ this.props.width - this.props.scrollbarWidth }
                   dimension={ this.props.dimension }
                   sceneElements={ this.props.sceneElements }
                   main={false}

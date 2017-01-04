@@ -38,12 +38,13 @@ class App extends Component {
         width = window.innerWidth || documentElement.clientWidth || body.clientWidth,
         height = window.innerHeight|| documentElement.clientHeight|| body.clientHeight;
     const leftWidth = Math.max(width/4, 140);
-    const rightWidth = width - leftWidth - 8;
-    return { width, height, leftWidth, rightWidth };
+    const rightWidth = width - leftWidth;
+    const scrollbarWidth = 16; // hardcoded for Edge (14 is sufficient)
+    return { width, height, leftWidth, rightWidth, scrollbarWidth };
   }
   
   render() {
-    const { width, height, leftWidth, rightWidth } = App.windowSize();
+    const { width, height, leftWidth, rightWidth, scrollbarWidth } = App.windowSize();
     const pageIndex = this.state.pageIndex;
     var classSelected = "btnIA";
     var classFront = "btnIA";
@@ -59,7 +60,7 @@ class App extends Component {
     }
     return (
       <div className="App unselectable">
-        <div id="left">
+        <div id="left" style={{width:leftWidth}}>
             <div className="toolbar">
               <input className="btn" type="image" onClick={ this.dispatcher({type:'preview', preview:true}) }
                      src="./ic_color_play.png" />
@@ -76,7 +77,7 @@ class App extends Component {
                    dimension={ this.state.dimension }
                    selected={ pageIndex===-1 }
                    main={false}
-                   width={ leftWidth } />
+                   width={ leftWidth-scrollbarWidth } />
             <div className="subToolbar">
                <input className="btnSM" type="image" src="./ic_color_add_page.png"
                       onClick={this.dispatcher({type:'duplicateScene'})} />
@@ -84,7 +85,7 @@ class App extends Component {
             <Pages pages={ this.state.pages }
                    dimension={ this.state.dimension }
                    selectedPageIndex={ pageIndex }
-                   width={ leftWidth } height={ height - 60 }
+                  width={ leftWidth } scrollbarWidth={ scrollbarWidth } height={ height - 60 }
                    sceneElements={ this.state.elements }/>
         </div>
         <div id="center">
@@ -107,7 +108,7 @@ class App extends Component {
               <Page pageIndex={this.state.pageIndex}
                     page={this.state.pages[pageIndex]}
                     dimension={ this.state.dimension }
-                    width={ rightWidth }
+                    width={ rightWidth - scrollbarWidth }
                     main={true}
                     margin={this.state.margin}
                     selection={this.state.selection}
@@ -117,7 +118,7 @@ class App extends Component {
                      main={true}
                      margin={this.state.margin}
                      selection={this.state.selection}
-                     width={ rightWidth } />
+                     width={ rightWidth - scrollbarWidth } />
             }
         </div>
         { this.state.preview ? <Preview width={width} dimension={this.state.dimension} /> : "" }

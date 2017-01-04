@@ -91,13 +91,14 @@ class Cursor extends Component {
       return <div></div>;
     }
 
-    const { leftWidth, rightWidth } = App.windowSize();
+    const { leftWidth, rightWidth, scrollbarWidth } = App.windowSize();
     const elements = (this.state.pageIndex >= 0) ?
         Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex])
       : this.state.elements;
     //console.log('Cursor:elements', JSON.stringify(elements));
     const margin = this.state.margin || 0;
-    const w = rightWidth - margin * 2;
+    const clientWidth = rightWidth - scrollbarWidth;
+    const w = clientWidth - margin * 2;
     const scale = w / this.state.dimension.width;
     this.scale = scale; // HACK: pass this value to onDrop (is this a bad practice?)
     const height = this.state.dimension.height * scale + margin * 2;
@@ -105,7 +106,7 @@ class Cursor extends Component {
     //console.log('Cursor:more', margin, w, scale, JSON.stringify(selection));
     var style = {};
     if (context.cursor) {
-      style.width = rightWidth;
+      style.width = clientWidth;
       style.height = height;
     }
 
@@ -139,14 +140,14 @@ class Cursor extends Component {
     const timing = firstElement.timing || [0,1];
     const loop = firstElement.loop || {style:"none", count:3};
     return (
-        <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth + 2}}>
+        <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth}}>
           <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
             <div style={{position:'absolute', left:margin, top:margin}}>
               {cursors}
             </div>
         </div>
         <div className='frameProperties'
-             style={{position:'absolute', top:height+2, width:rightWidth, fontSize:fontSize}}>
+             style={{position:'absolute', top:height+2, width:clientWidth, fontSize:fontSize}}>
              <div className='frameProperty'>
                <div className='fieldProperty'>Position:</div>
                <div className='fieldValue'>{position.x}, H{position.y}</div>
