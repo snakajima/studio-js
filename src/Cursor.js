@@ -104,10 +104,11 @@ class Cursor extends Component {
     const height = this.state.dimension.height * scale + margin * 2;
     const context = DragContext.getContext();
     //console.log('Cursor:more', margin, w, scale, JSON.stringify(selection));
-    var style = {};
+    var styleDropTarget = {};
     if (context.cursor) {
-      style.width = clientWidth;
-      style.height = height;
+      styleDropTarget.width = clientWidth;
+      styleDropTarget.height = height;
+      //styleDropTarget.background = 'rgba(255,0,0,0.333)';
     }
 
     var selectedElements = [];
@@ -141,7 +142,8 @@ class Cursor extends Component {
     const loop = firstElement.loop || {style:"none", count:3};
     return (
         <div className='unselectable' style={{position:'absolute', top:28, left:leftWidth}}>
-          <div className='frameCursor' style={style} onDrop={this.onDrop} onDragOver={this.onDragOver}>
+          <div className='frameCursor' style={styleDropTarget}
+               onDrop={this.onDrop} onDragOver={this.onDragOver}>
             <div style={{position:'absolute', left:margin, top:margin}}>
               {cursors}
             </div>

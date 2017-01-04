@@ -20,7 +20,9 @@ class Selection extends Component {
     window.cursor.dispatch({type:'setSelectionStyle', style:undefined});
   }
   onDragStart(e,handle, ox=0, oy=0) {
-    e.dataTransfer.setDragImage(e.target, -10000, -10000);
+    if (typeof e.dataTransfer.setDragImage === "function") {
+      e.dataTransfer.setDragImage(e.target, -10000, -10000);
+    }
     const element = this.props.element;
     const scale = this.props.scale;
     const rad = MathEx.valueOf(element.rotate, 0) / 180 * Math.PI;
