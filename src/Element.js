@@ -25,12 +25,9 @@ class Element extends Component {
   onClick(e) {
     if (this.props.main) {
       e.stopPropagation();
-      console.log('Element:onClick:shift', e.shiftKey);
       window.store.dispatch({type:'selectElement',
                              id:this.props.element.id,
                             add:e.shiftKey});
-                            　//selection:{ids:new Set([this.props.element.id])}});
-        //window.cursor.dispatch({type:'selectElement', selection:[this.props.element.id]});
     }
   }
   
