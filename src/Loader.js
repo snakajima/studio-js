@@ -16,9 +16,9 @@ function load(swipe, prevState) {
       return page.elements.reduce((ret, element)=>{
         var value = {};
         const sceneElement = elementMap[element.id];
-        console.log("load.map", sceneElement);
+        //console.log("load.map", sceneElement);
         if (element.to) {
-          console.log('load:element=', JSON.stringify(element.to));
+          //console.log('load:element=', JSON.stringify(element.to));
           if (element.to.translate) {
             value.translate = element.to.translate;
           }
@@ -38,6 +38,14 @@ function load(swipe, prevState) {
               value.scale[1] /= sceneElement.scale[1];
             }
           }
+          if (element.to.timing) {
+            console.log('loader:element:timing', JSON.stringify(element.to.timing));
+            value.timing = element.to.timing;
+          }
+        }
+        if (element.loop) {
+          console.log('loader:element:loop', JSON.stringify(element.loop));
+          value.loop = element.loop;
         }
         ret[element.id] = value;
         return ret;
