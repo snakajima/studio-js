@@ -9,13 +9,14 @@ import Page from './Page';
 class Pages extends Component {
   render() {
     const height = this.props.dimension.height * this.props.width / this.props.dimension.width;
+    const clientWidth = this.props.width - this.props.scrollbarWidth;
     return (
       <div className='canvasPages'
             style={{height:this.props.height - height, width:this.props.width }}>{
         this.props.pages.map((page, index) => {
-             return (<div key={index} >
+             return (<div key={index} style={{width:clientWidth}} >
                 <Page pageIndex={index} page={page}
-                  width={ this.props.width - this.props.scrollbarWidth }
+                  width={ clientWidth }
                   dimension={ this.props.dimension }
                   sceneElements={ this.props.sceneElements }
                   main={false}
