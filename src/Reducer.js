@@ -262,7 +262,12 @@ function reducer(_state, action) {
         break;
     case 'selectElement':
       if (action.id) {
-        state.selection = {ids:new Set([action.id])};
+        if (action.add && state.selection && state.selection.ids) {
+          state.selection = {ids:new Set(state.selection.ids)};
+          state.selection.ids.add(action.id);
+        } else {
+          state.selection = {ids:new Set([action.id])};
+        }
       } else {
         state.selection = {ids:new Set()};
       }
