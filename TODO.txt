@@ -1,5 +1,6 @@
 1. * Opacity
-2. Multi-selection (h/v align, spread, h/v center)
+2. *Multi-selection
+2.1 h/v align, spread, h/v center
 3. * Animation Effect (wiggle, blink, vigrate, spin, shift, sprite)
 4. * Start/End timing
 5. Vector data

@@ -136,7 +136,7 @@ class Cursor extends Component {
        position.x = MathEx.round(position.x + selectionStyle.translate[0] / scale);
        position.y = MathEx.round(position.y + selectionStyle.translate[1] / scale);
     }
-    const fontSize = Math.floor(height / 32);
+    const fontSize = Math.floor(height / 36);
     const opacity = MathEx.valueOf(firstElement.opacity, 1);
     const timing = firstElement.timing || [0,1];
     const loop = firstElement.loop || {style:"none", count:3};
