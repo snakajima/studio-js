@@ -4,7 +4,7 @@
 //
 
 import React, { Component } from 'react';
-import './App.css';
+import './Editor.css';
 import createStore from './SimpleRedux';
 import Scene from './Scene';
 import Pages from './Pages';
