@@ -5,16 +5,10 @@
 
 import React, { Component } from 'react';
 import './Editor.css';
-import createStore from './SimpleRedux';
 import Scene from './Scene';
 import Pages from './Pages';
 import Page from './Page';
 import Preview from './Preview';
-import Reducer from './Reducer';
-import UndoStack from './UndoStack';
-
-window.stack = new UndoStack();
-window.store = createStore(Reducer.reducer);
 
 class Editor extends Component {
   constructor() {
