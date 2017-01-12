@@ -4,7 +4,7 @@
 //
 
 import React, { Component } from 'react';
-import App from './App';
+import Editor from './Editor';
 import Page from './Page';
 import Selection from './Selection';
 import DragContext from './DragContext';
@@ -91,7 +91,7 @@ class Cursor extends Component {
       return <div></div>;
     }
 
-    const { leftWidth, rightWidth, scrollbarWidth } = App.windowSize();
+    const { leftWidth, rightWidth, scrollbarWidth } = Editor.windowSize();
     const elements = (this.state.pageIndex >= 0) ?
         Page.applyTransform(this.state.elements, this.state.pages[this.state.pageIndex])
       : this.state.elements;
